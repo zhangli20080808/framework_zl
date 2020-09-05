@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    hello
+    <button id="btn">点击</button>
+    <script>
+      // 没有跨域的时候可以直接访问服务端接口  跨域只在客户端的浏览器存在 协议 端口 域名
+      // get post 简单请求 你设置了header 那就是复杂请求了 就会发送 OPTIONS请求
+      btn.addEventListener('click', () => {
+        let xhr = new XMLHttpRequest();
+        xhr.open('POST', 'http://localhost:3001/user', true);
+        xhr.setRequestHeader('token', 'xxxx');
+        // 1.不需要设置 content-type: text/plain; charset=UTF-8（默认格式，没有格式的字符串）
+        // 2.content-type: application/x-www-form-urlencoded
+        // data必须是这种表单数据格式的字符串；否则服务器接受到数据，按照表单数据格式解析，实际发送的不是表单格式的数据，将会解析不出来
+        // 3.data必须是JSON字符串格式的，否则服务器接受到数据，按照JSON字符串格式解析，实际发送的不是JSON字符串，将会解析不出来
+
+        // xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
+        // xhr.setRequestHeader('content-type', 'application/json; charset=UTF-8');
+        // xhr.setRequestHeader('content-type', 'multipart/form-data');
+
+        xhr.withCredentials = 'true'; // 每次强制携带服务端设置的凭证 cookie
+        xhr.responseType = 'json'; // 设置服务器的响应类型
+        xhr.onload = function () {
+          // console.log(xhr.responseText);  eval JSON.parse
+          console.log(xhr.response);
+        };
+        xhr.send('a=1&b=2');
+      });
+    </script>
+  </body>
+</html>
