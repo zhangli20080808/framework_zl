@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div id="itemInfo">
+    <div id="name">
+        <h1 id='pname'>乐视TV（ Letv） S50 Air 全配版 50英寸2D智能LED液晶 超级电视</h1>
+        <div id="pdes">各地区货源已陆续到库，我们将在十月十号左右发货，对于此次延迟发货给您带来的不便表示致歉，望您谅解。</div>
+        <div >已售：<strong id="psales">6000</strong></div>
+        <div>原价：<strong id='pprice'>6000</strong>元</div>
+        <div>优惠价：<strong id='pyouhui'>5000</strong>元</div>
+        <div>折扣：<strong id='pzhekou'>6.0</strong>折</div>
+        <div>生产日期：<strong id='date'>2015-09-09</strong></div>
+    </div>
+</div>
+<button id='btn'>加入购物车</button>
+
+</body>
+</html>
+
+<script>
+
+    /*    给属性添加权限
+     比如 文件系统 我们可以设置只允许访问,不可以修改
+
+     如何设置某个属性可读
+
+     如何设置??*/
+    function dateFormat(date,format){
+        var o = {
+            "M+" : date.getMonth()+1, //month
+            "d+" : date.getDate(),    //day
+            "h+" : date.getHours(),   //hour
+            "m+" : date.getMinutes(), //minute
+            "s+" : date.getSeconds(), //second
+            "q+" : Math.floor((date.getMonth()+3)/3),  //quarter
+            "S" : date.getMilliseconds() //millisecond
+        }
+        if(/(y+)/.test(format)) format=format.replace(RegExp.$1,
+                (date.getFullYear()+"").substr(4- RegExp.$1.length));
+        for(var k in o)if(new RegExp("("+ k +")").test(format))
+            format = format.replace(RegExp.$1,
+                    RegExp.$1.length==1? o[k] :
+                            ("00"+ o[k]).substr((""+ o[k]).length));
+        return format;
+    }
+
+    //产品对象
+    /*对象内如何使用对象的属性和方法：this，对象外如何使用：先实例化，后用点语法*/
+    /*类 -- 抽象对象*/
+    function Product(name,price) {
+        /*属性 行为 可以为空或者给默认值*/
+        this.name=name
+        this.price=1000;
+        this.description = '';
+        this.zhekou = ''
+        this.sales = ''
+        this.produceDate
+        /*我们的需求：自动计算打折后的价格*/
+        Object.defineProperty(this, "price", {
+            value:5000000,
+            /*设置某个属性是否可写  默认是可写的  false是不能写的
+             */
+            writable: true,
+        });
+        Object.defineProperty(this, "produceDate", {
+            get: function () {
+                return dateFormat(produceDate,'yyyy年MM月dd日');
+            },
+            set: function (value) {
+                produceDate = value;
+            }
+        });
+    }
+
+    //定义对象的两种方式
+    Product.prototype={
+        getPrice:function() {
+            return this.price
+        },
+        addToCart:function(){
+            alert('将物品添加到购物车')
+        }
+
+    }
+
+
+    Product.prototype.buy=function(){
+
+    }
+    Product.prototype.addToCart=function(){
+
+    }
+
+
+
+
+
+
+    /*获取元素*/
+    var btn = document.getElementById('btn')
+    var name = document.getElementById('pname')
+    var price = document.getElementById('pprice')
+    var sum = document.getElementById('sum')
+    var des = document.getElementById('pdes')
+    var youhuijia = document.getElementById('pyouhui')
+    var zhekou = document.getElementById('pzhekou')
+    var sales = document.getElementById('psales')
+    var date = document.getElementById('date')
+
+    /*搭积木开发 -- 代码可读性极高*/
+    window.onload=function() {
+        /*实例化 -- 实例 -- 具体*/
+        //如何使用
+        //对象的使用必须先实例化，对象定义好之后，都是抽象的，必须实例化成具体
+        var iphone = new Product()
+
+        /*给对象的赋值赋值，也可以新增属性*/
+        iphone.name='iphone7'
+        iphone.price=6000
+        iphone.description='手机中的战斗机'
+        iphone.youhuijia=3000
+        iphone.zhekou=3.0
+        iphone.sales=40000
+        iphone.produceDate=new Date()
+
+        /*绑定元素*/
+        /*通过点语法访问对象中的属性或者方法*/
+        name.innerHTML=iphone.name
+        price.innerHTML=iphone.price
+        des.innerHTML=iphone.description
+        youhuijia.innerHTML=iphone.youhuijia
+        zhekou.innerHTML=iphone.zhekou
+        sales.innerHTML=iphone.sales
+        date.innerHTML=iphone.produceDate
+
+        /*绑定事件*/
+        btn.onclick = function(){
+            iphone.addToCart()
+        }
+    }
+
+
+</script>
+

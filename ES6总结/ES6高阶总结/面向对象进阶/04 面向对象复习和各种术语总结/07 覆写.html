@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    //    重写 重载 - override
+    //重写表示重写父对象的同名方法或者属性
+    function Person(name, sex) {
+        this.name = name;
+        this.sex = sex;
+        this.test='构造函数定义的属性'
+        this.add=function(){
+            alert('构造函数对象中定义的方法')
+        }
+    }
+
+
+    Person.prototype = {
+        test:'原型中定义的属性',
+        getName: function() {
+            return this.name;
+        },
+        getSex: function() {
+            return this.sex;
+        },
+        add:function(){
+            alert('原型对象中定义的方法')
+       }
+    }
+
+    var shukui=new Person('wangshukui','nan')
+    shukui.add();// 方法被重写
+    alert(shukui.test); // 属性被重写
+
+
+    Person.prototype.add();
+//
+//    Person.add();//报错
+//    person.prototype.add(); //报错
+
+
+
+
+
+
+
+//    高级语言的中的覆写 - 重写 - override
+//
+//    //声明一个超类的
+//    public class Parent{
+//        public void kick(){
+//            System.out.println(“kick football beeline.”);
+//        }
+//    }
+//    //声明一个子类
+//    public class Child extends Parent{
+//        public void kick(){
+//            System.out.println(“kick football arc.”);
+//        }
+//    }
+//    //执行代码
+//    public class test{
+//        public static void mian(String[] args){
+//        Child cld=new Child();
+//        cld.kick();//print kick football arc.
+//    }
+//    }
+</script>

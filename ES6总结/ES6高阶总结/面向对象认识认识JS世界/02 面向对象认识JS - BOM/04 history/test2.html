@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        div{
+            font-size:50px
+        }
+    </style>
+</head>
+<body>
+<div>页面2</div>
+<button id=btn>回退</button>
+</body>
+</html>
+<script>
+    document.getElementById('btn').onclick=function() {
+        /*改变当前窗口的地址，则会打开新的网页*/
+        history.back()
+    }
+</script>

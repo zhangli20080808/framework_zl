@@ -1,0 +1,12 @@
+{
+  "image":
+	[		  
+	   {"name":"ball","src":"images/ball.png"},
+	   {"name":"block","src":"images/block.png"},
+	   {"name":"racket","src":"images/racket.png"}
+	], 
+  "frame":         
+	[
+	  	 
+	]
+}

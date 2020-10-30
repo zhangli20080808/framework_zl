@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+/*    
+new Promise((resolve)=>{
+    setTimeout(()=>{
+        console.log(1);
+        resolve();
+    },1000);
+}).then(()=>{
+    return new Promise((resolve)=>{
+        setTimeout(()=>{
+            console.log(2);
+            resolve();
+        },1000);
+    });
+}).then(()=>{
+    return new Promise((resolve)=>{
+        setTimeout(()=>{
+            console.log(3);
+            resolve();
+        },1000);
+    });
+}).then(()=>{
+    console.log("执行完成")
+});
+*/
+
+// 这是一个异步函数
+async function fn(){
+    try{
+        
+        let n1 = await new Promise((resolve)=>{
+            setTimeout(()=>{
+                console.log(0);
+                resolve(1);
+            },1000);
+        });
+        let n2 = await new Promise((resolve)=>{
+            setTimeout(()=>{
+                console.log(n1);
+                resolve(2);
+            },1000);
+        });
+        let n3 = await new Promise((resolve)=>{
+            setTimeout(()=>{
+                console.log(n2);
+                resolve(3);
+            },1000);
+        });
+        console.log(n3);
+
+    }catch(err){
+        console.log(err);
+    }
+}
+fn();
+</script>    
+</body>
+</html>

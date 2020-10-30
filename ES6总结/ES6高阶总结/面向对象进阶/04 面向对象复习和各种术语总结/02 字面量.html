@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    //简单字面量 - 描述现实世界
+    var book ={name:'盗墓笔记',price:100}
+    var product={name:'iphone4s',price:6000}
+    console.log(product.name)
+
+    //复杂字面量
+    var book = {
+        name : "盗墓笔记",
+        "main title" : "悬疑类小说",
+        //当属性名中间有空格，或者“-”时，要用引号 把 属性名括起来
+        author : {
+            //对象的属性也可以是对象
+            name : "徐磊",
+            nickname : "南派三叔",
+            works:[{name:'盗墓笔记',data:'2010'},{name:'大漠苍狼',data:'2011'},{name:'怒江之战',data:'2012'}]
+        }
+    };
+    console.log(book.name)
+    console.log(book['main title'])
+    console.log(book.author.name)
+</script>

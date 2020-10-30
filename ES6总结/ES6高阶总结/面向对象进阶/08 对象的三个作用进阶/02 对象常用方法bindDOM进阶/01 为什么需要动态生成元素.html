@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .link{text-decoration: none;color:red;margin:5px}
+    </style>
+</head>
+<body>
+
+
+<div id="div">
+    <span id='span'>
+
+    </span>
+
+</div>
+
+</body>
+</body>
+</html>
+<script type="text/javascript">
+
+   window.onload=function(){
+       var isLogin=false;
+       if(isLogin){
+           Login()
+       }else{
+           noLogin2()
+       }
+   }
+
+
+
+//    未登录
+    function noLogin(){
+
+        var loginlink = document.createElement("a.text.json");
+        loginlink.setAttribute("id", "login");//设置属性
+        loginlink.setAttribute("name", "login");//设置属性
+        loginlink.setAttribute("class", "link");//设置class
+        loginlink.style.color="green";//设置样式
+        loginlink.href = ''; //赋值超链接网址
+        loginlink.innerHTML = '登录'; //超链接显示的文字内容
+
+
+
+        var rlink = document.createElement("a.text.json");
+        rlink.setAttribute("id", "register");//设置属性
+        rlink.setAttribute("name", "register");//设置属性
+        rlink.setAttribute("class", "link");//设置class
+        rlink.href = ''; //赋值超链接网址
+        rlink.innerHTML = '注册'; //超链接显示的文字内容
+
+
+//        添加到div中
+        var span = document.getElementById("span");
+        span.appendChild(loginlink);//添加到div元素中
+        span.appendChild(rlink);//添加到div元素中
+    };
+
+
+//    第二种方式  innerHTML
+    function noLogin2(){
+
+        var span = document.getElementById("span");
+        span.innerHTML = "<a href='' id='login' name='login' class='link'>登录2</a><a href='' id='register' class='link'>注册2</a>";
+
+    };
+
+    //登录成功后 -简单的绑定
+    function Login(){
+        var user={name:'书奎'}
+        var span = document.getElementById("span");
+        span.innerHTML = "欢迎"+user.name+'来到百度世界';
+
+    };
+</script>
+</script>

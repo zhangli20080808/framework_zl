@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script src='itcast.js'></script>
+<script>
+    /*去除空格*/
+    var str = '    传智播客'
+    console.log(str.trim())
+
+    /*首字母大写*/
+    var itcast = 'itcast'
+    console.log(itcast.capitalize())
+
+    /*下划线转成中划线*/
+    var str = '1_2_3_4'
+    console.log(str.dashString())
+
+    /*判断是否为空*/
+    str = ''
+    console.log(str.isEmpty())
+
+    /*判断是否包含指定字符串*/
+    str = '我们一起走，一起唱歌，你妹，祖宗'
+    console.log(str.contains('祖宗'))
+
+
+    /*html编码和解码*/
+    str = '<div>hello</div>'
+    console.log(str.escapeHTML())
+    console.log(str.unescapeHTML())
+
+    /*获取逆序*/
+    str = 'abcdefg'
+    console.log(str.reverse())
+</script>

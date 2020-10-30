@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #map {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            background: #000;
+        }
+    </style>
+</head>
+<body>
+<h1 id="grade">0</h1>    
+<div id="map"></div>
+<script type="module">
+import Game from "/js/game.js";    
+{
+    let map = document.querySelector("#map");
+    let game = new Game(map,10);
+    let gradeEl = document.querySelector("#grade")
+    game.on("changegrade",(grade)=>{
+        console.log(grade);
+    });
+    document.onclick = function(){
+        game.start();
+    };
+}
+// anywhere
+</script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    window.onload=function(){
+        //打开链接
+        document.getElementsByTagName('button')[0].onclick = function(){
+//        window.location = "http://www.baidu.com";
+            // location.href = "http://www.baidu.com";
+//        location.assign("http://www.baidu.com");
+            location.replace("http://www.baidu.com");
+//        replace和assign的区别
+//        replace()方法所做的操作与assign()方法一样，
+//        但它多了一步操作，即从浏览器的历史记录中删除了包含脚本的页面，
+//        这样就不能通过浏览器的后退按钮和前进按钮来访问它了，
+//        assign()方法却可以通过后退按钮来访问上个页面。
+        }
+        //刷新页面
+        document.getElementsByTagName('button')[1].onclick = function(){
+            location.reload(true);    //从服务器重载当前页面
+//        location.reload(false);   //从浏览器缓存中重载当前页面
+//        location.reload();        //从浏览器缓存中重载当前页面
+        }
+
+//    hash：如果URL中包含有“#”，该方法将返回该符号之后的内容
+//    （例如：http://www.itcast.cn/index.html#welcome的hash是“#welcome”）。
+
+//    host：服务器的名字，例如www.itcast.cn。
+
+//    hostname：通常等于host，有时会省略前面的www。
+
+//    href：当前页面载入的完整URL。
+
+//    pathname：URL中主机名之后的部分。例如：http://www.itcast.cn/html/js/index.html的pathname是“/html/js/index.html”。
+
+//    port：URL中声明的请求端口。默认情况下，大多数URL没有端口信息（默认为80端口），所以该属性通常是空白的。像http://www.itcast.cn:8080/index.html这样的URL的port属性为8080。
+
+//    protocol：URL中使用的协议，即双斜杠（//）之前的部分。例如http://www.itcast.cn中的protocol属性是http：
+//    ftp://www.itcast.cn的protocol属性等于ftp:。
+
+        //search：执行GET请求的URL中的问号?后的部分，又称查询字符串。
+        // 例如http://www.itcast.cn/search.html?name=shukui中的search属性为?name=shukui。
+
+        document.write(
+                "hash:"+location.hash+"<br>"+
+                "host:"+location.host+"<br>"+
+                "hostname:"+location.hostname+"<br>"+
+                "href:"+location.href+"<br>"+
+                "pathname:"+location.pathname+"<br>"+
+                "port:"+location.port+"<br>"+
+                "protocol:"+location.protocol+"<br>"+
+                "search:"+location.search
+        );
+    }
+
+</script>
+<button>打开链接</button>
+<button>重新加载当前页面 - 刷新</button>
+<hr>
+
+</body>
+</html>
+
+</script>

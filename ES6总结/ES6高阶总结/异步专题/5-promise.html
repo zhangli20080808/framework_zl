@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+// Promise 不解决异步问题，解决的是异步的写法
+
+let p = new Promise(function(resolve,reject){
+    let img = new Image();
+    img.src = `https://timgsa.babidu.com/timg?image&quality=80&size=b9999_10000&sec=1576855691894&di=b694b104df1eb0b53ee6b52d8ad6fb49&imgtype=0&src=http%3A%2F%2Fpic.vjshi.com%2F2018-10-30%2F26b945dcada739a37b4d1fecc1d10abb%2F00004.jpg%3Fx-oss-process%3Dstyle%2Fwatermark`;
+    img.onload = function(){
+        resolve("图片请求成功")
+    };
+    img.onerror = function(){
+        reject("图片请求失败");
+    };
+}).then((res)=>{
+    console.log(res);
+},(rej)=>{
+    console.log(rej);
+});
+/*
+    new Promise(promise的回调函数，在实例化时会直接执行function(resolve,reject){
+        // resolve 调用该 函数 resolve(传递给成功的执行函数的数据) 代表异步执行完成，并成功拿到结果
+        // reject 调用该函数 reject(传递给处理失败的执行函数的数据) 代表异步执行完成，但是没有成功拿到结果
+    }).then((成功之后传递过来的数据)=>{
+        console.log("成功之后的业务处理");
+    },(失败之后传递过来的数据)=>{
+        console.log("失败之后的业务处理");    
+    });
+*/
+</script>    
+</body>
+</html>

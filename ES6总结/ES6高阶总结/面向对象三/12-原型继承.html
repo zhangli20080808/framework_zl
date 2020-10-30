@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+function Person(name,age){
+    this.name = name;
+    this.age = age;
+}
+Person.prototype.sayName = function(){
+    console.log(this.name);
+};
+Person.prototype.sayAge = function(){
+    console.log(this.age);
+};
+function Child(name,age){
+    Person.call(this,name,age);
+}
+Child.prototype = new Person;
+// 构造函数的原型是一个对象，这是我们把 Person 实例放在这里，通过 Person 的实例对象就可以拿到Person 的prototype的所有方法
+var child = new Child("kkb",8);
+console.log(child);
+</script>    
+</body>
+</html>

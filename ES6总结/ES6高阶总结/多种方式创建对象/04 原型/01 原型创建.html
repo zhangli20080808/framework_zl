@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+
+<body>
+</body>
+</html>
+<script>
+
+   var Role =function() {}
+   /*姓名*/
+   Role.prototype.name='';
+	//生命值
+   Role.prototype.HP=100;
+	//魔法值
+   Role.prototype.MP=100;
+	//技能
+   Role.prototype.technologys=['普通攻击','横扫千军','地狱火','漫天飞雪'];
+	//跑起来
+   Role.prototype.run=function() {
+		alert('run');
+	}
+
+  //值类型没问题
+  var boy = new Role()
+  boy.name='剑侠客'
+   boy.technologys.push('降龙十八掌')
+  console.log(boy.name)
+  var girl = new Role()
+  girl.name = '可爱宝贝'
+   console.log(girl.technologys[3])
+   console.log(boy.name)
+  console.log(girl.name)
+   console.log(boy.technologys.length)
+   console.log(girl.technologys.length)
+
+
+   Role.prototype.HP=1000
+
+
+</script>

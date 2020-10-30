@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<SCRIPT>
+
+    //object的__proto__指向的是Function.prototype
+    console.log(Object.__proto__ ===Function.prototype)
+
+
+
+    /*null*/
+    console.log(Object.prototype.__proto__)
+
+
+    /*object*/
+    console.log(Function.prototype.__proto__ === Object) //false
+    console.log(Function.prototype.__proto__ === Object.prototype)  //ture
+
+
+    /*内置对象的__proto__指向*/
+    console.log(Number.__proto__ === Function.prototype)  // true
+    /*
+    Boolean.__proto__ === Function.prototype // true
+    String.__proto__ === Function.prototype  // true
+    Object.__proto__ === Function.prototype  // true
+    Function.__proto__ === Function.prototype //true
+    Array.__proto__ === Function.prototype   // true
+    RegExp.__proto__ === Function.prototype  // true
+    Error.__proto__ === Function.prototype   // true
+    Date.__proto__ === Function.prototype    // true*/
+
+
+
+    /*自定义对象的原型的__proto__指向*/
+    function Product(){}
+
+    Product.prototype={}
+
+    var iphone = new Product()
+
+
+    console.log(Product.prototype.__proto__)
+    console.log(Product.prototype.__proto__ === Object)  //false
+    console.log(Product.prototype.__proto__ === Object.prototype) //true
+
+
+
+
+    var obj = new Object()
+
+   /* Object.prototype.toString=function(){
+        alert('破坏之王')
+    }*/
+
+
+
+
+    console.log(obj.toString())
+    /*构造函数其实就是一个函数
+    函数都是Function实现的。都是它的一个实例*/
+
+   /* Function
+    Function.prototype
+    Object
+    Object.prototype*/
+
+    console.log(Product.__proto__ ===Function.prototype)
+
+
+    console.log(Array.prototype.__proto__  === Object.prototype )
+
+
+</SCRIPT>

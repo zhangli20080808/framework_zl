@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+let data = {
+    name: "mt",
+    age: 18,
+    price: 5000
+};
+let proxyData = new Proxy(data,{
+    get(target,key){
+        if(key == "price"){
+            return target[key]*.9;
+        }
+        return target[key];
+    },
+    set(target,key,newVal){ 
+        target[key] = newVal;
+    },
+    ownKeys(target){
+        return Object.keys(target)
+    }
+});
+console.log(Object.keys(proxyData));
+</script>    
+</body>
+</html>

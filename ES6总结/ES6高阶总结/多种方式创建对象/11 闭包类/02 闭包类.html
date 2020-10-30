@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+var Student = (function(){
+	var num = 0;	
+	return function(name, age){
+		num++;
+		var chineseAge;
+		this.name = name;
+		this.age = age;
+		chineseAge = age;
+		this.getChineseAge = function(){
+			return chineseAge;
+		}
+	};
+})();
+
+Student.prototype = {
+	lesson : 'javascript',
+	getTeacher : function(){
+		console.log('Mr Zhang');
+	}
+}
+var xiaoWang = new Student('wang', 20);
+var xiaoLi = new Student('li', 30);
+console.log(xiaoWang);
+console.log(xiaoLi);
+console.log(xiaoWang.name);
+xiaoWang.getTeacher();
+</script>
+</body>
+</html>

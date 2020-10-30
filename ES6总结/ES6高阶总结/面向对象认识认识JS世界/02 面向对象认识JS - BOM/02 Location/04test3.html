@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+测试页面
+</body>
+</html>
+<script src='itcast.js'> </script>
+<script>
+
+    var query = $$.querystring();//调用查询字符串函数
+    console.log(query.num)
+
+
+    for(var i in query){
+        console.log(i+"="+query[i]);
+    }
+</script>

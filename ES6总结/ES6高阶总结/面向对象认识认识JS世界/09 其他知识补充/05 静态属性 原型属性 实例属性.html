@@ -1,0 +1,29 @@
+﻿<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>测试</title>
+</head>
+<body>
+<script type="text/javascript"><!--
+function Man(name, age) {
+//定义实例属性
+    this.name = name;
+    this.age = age;
+}
+
+//定义静态属性。默认性别是男，不排除变性，^v^
+Man.sex = '男';
+//定义原型属性
+Man.prototype.phone = '123456';
+//除了name.sex和Man.prototype.phone其余全部是Undefined
+alert(Man.sex + "-----" + Man.prototype.phone + "--" + Man.name + "--" + Man.age + "--" + Man.phone);
+var man = new Man("Tom", 24);
+alert(Man.sex + "--" + man.name + "--" + man.age + "--" + man.phone);
+/**
+ * 通过例子说明：原型属性在实例化之后作为类的实例属性。
+ * 但是实例属性在实例化之后却不能作为原型属性。
+ */
+
+// --></script>
+</body>
+</html>

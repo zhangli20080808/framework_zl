@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+用户名：<input type="text" id="myText"   value="黑马" />
+</body>
+</html>
+<script>
+    var value="全局变量";
+    /*函数中默认this指向window*/
+    function Fun1(){
+        console.log(this.value);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*答案：全局变量*/
+
+
+
+
+
+
+
+
+
+
+
+    window.Fun1();
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*答案：window*/
+
+
+
+
+
+
+
+
+    Fun1.call(window);
+
+
+
+
+
+
+
+
+
+
+
+    /*答案：window*/
+    /*可以这么理解：先把fun1变成window对象的方法，同时改变Fun1中的this指向*/
+    /*这个时候this表示window*/
+
+
+
+
+
+
+
+    function Fun1(){
+        console.log(this.value);
+    }
+    Fun1.call(document.getElementById('myText'));
+
+
+
+
+
+
+    /*答案*/
+    /*这个时候this指向input元素对象*/
+    //黑马
+</script>

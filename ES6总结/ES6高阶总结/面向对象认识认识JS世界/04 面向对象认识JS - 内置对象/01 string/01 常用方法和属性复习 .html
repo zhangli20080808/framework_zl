@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    /******************************************************************************
+                                    string对象构造函数
+     *******************************************************************************/
+    console.log('字符串即对象')
+    //传统方式 - 背后会自动将其转换成对象
+    // 所以我们才可以访问string对象中方法
+    var zhangsan ='张三'
+    zhangsan.length
+    //通过对象形式
+    var lisi = new String('李四')
+    console.log(zhangsan)
+    console.log(lisi)
+
+    //使用对象中的方法
+    console.log(lisi.charAt(0))
+    console.log(lisi.concat(['张领','王占一']))
+
+
+
+/******************************************************************************
+ *************************字符串对象属性和方法概述*******************************
+
+            获取字符串长度Length属性
+            连接字符串：concat
+            获取索引值：indexOf()
+            根据索引值获取单个字符：charAt()
+
+ ******************************************************************************
+ *******************************************************************************/
+
+
+
+/******************************************************************************
+                                concat方法
+                                连接字符串
+ *******************************************************************************/
+
+console.log('concat用法')
+
+    var s1="a.text.json";
+    var s2="b";
+    var s3="c";
+    console.log(s1.concat(s2,s3));//abc
+//    等同于：result = s1 + s2 + ... + s
+//    关联记忆：数组中的concat
+    var arr = [1, 2, 3];
+    console.log(arr.concat(4, 5));//[1,2,3,4,5]
+
+
+
+
+
+
+/******************************************************************************
+                                    indexOf
+                        找到匹配项返回索引值，如果没找到返回-1
+*******************************************************************************/
+console.log('indexOf用法')
+
+//    获取索引值indexOf
+//    常用方法：找到匹配项返回索引值，如果没找到返回-1
+    var myString="JavaScript";
+    var a1=myString.indexOf("v");//2
+    var a2=myString.indexOf("S");//4
+    var a3=myString.indexOf("Script");//4
+    var a4=myString.indexOf("key");// 如果没有匹配项返回 -1
+    console.log(a1)//2
+    console.log(a2)//4
+    console.log(a3)//4
+    console.log(a4)//-1
+
+//    完整的indexof用法：
+//    可以传入第二个参数：indexOf（str，fromIndex）
+//    表示从索引位置fromIndex开始查找，如果fromIndex省略，则表示默认从起始索引0开始查找；
+//    若fromIndex为负，则从索引0开始查找。
+    var b1 = myString.indexOf("v",5);// 从下标5开始查找，而v在索引2，所以找不到，返回-1
+    var b2 = myString.indexOf("v",1);//-2
+    console.log(b1)//-1
+    console.log(b2)//-2
+
+
+
+
+/******************************************************************************
+                                    charAt
+                    返回指定索引位置的字符，若索引越界，返回空字符串。
+*******************************************************************************/
+console.log('charAt用法')
+
+//返回指定索引位置的字符
+//(因为Javascript中没有字符类型，所以返回的是长度为1的字符串)。
+    myString="JavaScript";
+    console.log(myString.charAt(1));//a
+    console.log(myString.charAt(10000000000000000));//若索引越界，返回空字符串
+    console.log(myString.charAt(-1));//若索引越界，返回空字符串  -- ""
+    console.log(myString.charAt(-10000000000000000000000));//若索引越界，返回空字符串
+
+
+
+
+
+/******************************************************************************
+                        substr(fromIndex,length)
+                                获取部分字符串
+                从起始索引fromIndex开始截取长度length的字符串
+ *******************************************************************************/
+console.log('substr用法')
+
+//从起始索引fromIndex开始截取长度length的字符串 - 正向截取
+    myString="JavaScript";
+    console.log(myString.substr(1,1));//a          表示从第1个索引值开始截取，截取1个字符
+    console.log(myString.substr(1,2));//av女忧     表示从第1个索引值开始截取，截取2个字符
+    console.log(myString.substr(1,3));//ava        表示从第1个索引值开始截取，截取3个字符
+    console.log(myString.substr(1,4));//avaS       表示从第1个索引值开始截取，截取4个字符
+
+    //若不指定length或者length超过可截取的最大长度，则截取到结尾。
+    console.log(myString.substr(1));//avaScript
+    console.log(myString.substr(1,4000000));//avaScript
+
+
+    //反向截取
+    //若起始索引为负，则从右往左开始截取 - -1表示倒数第一个， -2表示倒数第二个
+    myString="JavaScript";
+    console.log(myString.substr(-1,1));//t  表示从倒数第一个开始截取，截取1个字符
+    console.log(myString.substr(-2,1));//p  表示从倒数第二个开始截取，截取1个字符
+    console.log(myString.substr(-3,1));//i  表示从倒数第三个开始截取，截取1个字符
+    console.log(myString.substr(-4,1));//r  表示从倒数第四个开始截取，截取1个字符
+    console.log(myString.substr(-5,1));//c  表示从倒数第五个开始截取，截取1个字符
+    console.log(myString.substr(-6,1));//S  表示从倒数第六个开始截取，截取1个字符
+    console.log(myString.substr(-7,1));//a  表示从倒数第七个开始截取，截取1个字符
+
+    myString="JavaScript";
+    console.log(myString.substr(-6,1));//S  表示从倒数第6个开始截取，截取1个字符
+    console.log(myString.substr(-6,2));//Sc  表示从倒数第6个开始截取，截取2个字符
+    console.log(myString.substr(-6,3));//Scr  表示从倒数第6个开始截取，截取3个字符
+    console.log(myString.substr(-6,4));//Scri  表示从倒数第6个开始截取，截取4个字符
+    console.log(myString.substr(-6,5));//Scrip  表示从倒数第6个开始截取，截取5个字符
+    console.log(myString.substr(-6,6));//Script  表示从倒数第6个开始截取，截取6个字符
+
+    //男生的作业：
+    //从倒数的方式开始截取，获取av
+    myString="JavaScript";
+    console.log(myString.substr(-9,2));//Script  表示从倒数第6个开始截取，截取6个字符
+
+    //女生的作业：
+    //整数的方式获取曲线S
+    //首先思考 我要获取几个字符，则后面的参数就确定了
+    myString="JavaScript";
+    console.log(myString.substr(4,1));//S  表示从索引值4开始截取，截取1个字符
+    console.log(myString.substr(-6,1));//S  表示从倒数第6个开始截取，截取1个字符
+
+
+
+
+
+
+    /******************************************************************************
+                                substring(startIndex,endIndex)
+                                        获取部分字符串
+                    截取 起始索引startIndex  到  结束索引endIndex的子字符串，
+                    结果包含startIndex处的字符，不包含endIndex处的字符。
+     *******************************************************************************/
+    console.log('substring用法')
+    //男生的作业：获取av
+    myString="JavaScript";
+    console.log(myString.substring(1,3));
+
+    //女生的作业：获取曲线S
+    myString="JavaScript";
+    console.log(myString.substring(4,5));
+
+    //其他小点：
+    //如果省略个数,则自动获取后面所有
+     console.log(myString.substring(4));//Script
+    //若startIndex或者endIndex为负，则会被替换为0。
+    console.log(myString.substring(-1,1));//J
+    //若startIndex = endIndex，则返回空字符串。
+    console.log(myString.substring(3,3));//返回空
+    //若startIndex > endIndex，则执行方法时，两个值会被交换。
+    console.log(myString.substring(3,1));//等价于myString.substring(1,3)
+
+
+
+
+
+
+    /******************************************************************************
+                            slice(startIndex,endIndex)
+                                获取部分字符串
+                截取 起始索引startIndex  到  结束索引endIndex的子字符串，
+                    结果包含startIndex处的字符，不包含endIndex处的字符。
+     *******************************************************************************/
+    console.log('slice(startIndex,endIndex)用法')
+    myString="JavaScript";
+    console.log(myString.slice(1,3)) //av
+    console.log(myString.slice(4,5)) //S
+    console.log(myString.slice(4)) //Script  //如果省略个数,则自动获取后面所有
+
+    // 基本用法和substring用法一样，不同点如下：
+
+//    stringObj.slice(start, [end])
+//    如果 start 为负，将它作为 length + start处理，此处 length 为数组的长度。
+       console.log(myString.slice(-1,3))
+//    如果 end 为负，就将它作为 length + end 处理，此处 length 为数组的长度。
+       console.log(myString.slice(2,-3))
+//    如果省略 end ，那么 slice 方法将一直复制到 arrayObj 的结尾。
+//    如果 end 大于 start，不复制任何元素到新数组中。
+//
+//    strVariable.substring(start, end)
+//    如果 start 或 end 为 NaN 或者负数，那么将其替换为0。
+//    子字符串的长度等于 start 和 end 之差的绝对值。例如，在 strvar.substring(0, 3) 和 strvar.substring(3, 0) 返回的子字符串的的长度是 3。
+//    slice可以对数组操作，substring不行。。。
+
+
+
+
+    /******************************************************************************
+                                split()分割
+                    按给定字符串分割，返回分割后的多个字符串组成的字符串数组。
+     *******************************************************************************/
+    console.log('split()用法')
+    var s="a,bc,d";
+    console.log(s.split(","));//["a", "bc", "d"]
+    s="a1b1c1d1";
+    console.log(s.split("1"));//["a", "b", "c", "d", ""]
+
+
+
+
+
+
+    /******************************************************************************
+                                John()合并
+                        使用您选择的分隔符将一个数组合并为一个字符串
+     *******************************************************************************/
+    console.log('John用法')
+    var myList=new Array("jpg","bmp","gif","ico","png");
+    var imgString=myList.join("|");//结果是jpg|bmp|gif|ico|png
+    console.log(imgString)
+
+
+    //split()还可以结合正则表达式
+    myString = 'javascript is a good script language';
+    console.log(myString.split(/\s/)); //javascript,is,a,good,script,language
+    //传入\s表示要匹配空格，我们将字符串分割为一个数组，如果你要访问某一个，那么可以明确指出：
+    console.log(myString.split(/\s/)[3]); //good
+
+
+
+
+
+
+
+
+    /******************************************************************************
+                                字符串大小写转换
+                    使用您选择的分隔符将一个数组合并为一个字符串
+     *******************************************************************************/
+    console.log('字符串大小写转换')
+
+    myString="JavaScript";
+    myString = myString.toLowerCase();//javascript
+    console.log(myString)
+    myString = myString.toUpperCase();//JAVASCRIPT
+    console.log(myString)
+
+
+
+
+
+
+    /******************************************************************************
+                                    replace用法1 - 基础用法
+     最核心的易错点：如果要替换全部匹配项，需要传入一个 RegExp 对象并指定其 global 属性。
+     *******************************************************************************/
+    console.log('replace基本用法')
+
+    //基本用法：
+    myString = "javascript is a good script language";
+    //在此我想将字母a替换成字母A
+    console.log(myString.replace("a.text.json","A"));
+    //    我想大家运行后可以看到结果，它只替换了找到的第一个字符，如果想替换多个字符怎么办？
+    //    答案：结合正则表达式，这也是replace的核心用法之一！
+
+
+    //将字母a替换成字母A 错误的写法  少了/g
+    myString = "javascript is a good script language";
+    console.log(myString.replace(/a/,"A"));
+    //console.log(myString.replace(new RegExp('a','gm'),"A"));
+
+    //将字母a替换成字母A  正确的写法 /g表示匹配所有
+    myString = "javascript is a good script language";
+    console.log(myString.replace(/a/g,"A"));
+
+
+
+    /******************************************************************************
+                    replace用法2 - 高级用法 特殊标记$
+     *******************************************************************************/
+
+
+    //replace高级技巧 - 特殊标记$
+    console.log('replace功能4 - 特殊标记$')
+
+    //    对于正则replace约定了一个特殊标记符$：
+    //    1.$i (i:1-99) : 表示从左到右正则子表达式所匹配的文本。
+    //    2.$&:表示与正则表达式匹配的全文本。
+    //    3.$`(`:切换技能键)：表示匹配字符串的左边文本。
+    //    4.$'(‘:单引号)：表示匹配字符串的右边文本。
+    //    5.$$：表示$转移。
+
+
+//    $i (i:1-99) : 表示从左到右正则子表达式所匹配的文本
+
+    //案例1- 匹配后替换
+    console.log('replace功能1 - 匹配后替换')
+    //在本例中，我们将把所有的花引号替换为直引号：
+    myString = '"a", "b"';
+    myString = myString.replace(/"([^"]*)"/g, "'$1'");//寻找所有的"abb"形式字符串，此时组合表示字符串，，然后用'$1'替换
+    console.log(myString)
+
+
+
+    //案例2- 匹配后替换
+    myString= "javascript is a good script language";
+    console.log(myString.replace(/(javascript)\s*(is)/g,"$1 $2 fun. it $2"));
+
+
+
+    //案例3 - 分组匹配后颠倒
+    console.log('replace功能2 - 颠倒')
+    //在本例中，我们将把 "itcast,cn" 转换为 "cn itcast" 的形式：
+    myString = "itcast , cn";
+    myString = myString.replace(/(\w+)\s*, \s*(\w+)/, "$2 $1");
+    console.log(myString)
+
+
+    //案例4 - 分组匹配后颠倒
+    myString = "boy & girl";
+    myString.replace(/(\w+)\s*&\s*(\w+)/g,"$2 & $1") //girl & boy
+    console.log(myString)
+
+
+
+
+
+//    $&:表示与正则表达式匹配的全文本。
+    myString = "boy";
+    myString.replace(/\w+/g,"$&-$&") // boy-boy
+    console.log(myString)
+
+//    $`(`:切换技能键)：表示匹配字符串的左边文本。
+    myString = "javascript";
+    myString.replace(/script/,"$& != $`") //javascript != java
+    console.log(myString)
+
+//    $'(‘:单引号)：表示匹配字符串的右边文本。
+    myString = "javascript";
+    myString.replace(/java/,"$&$' is ") // javascript is script
+    console.log(myString)
+
+
+
+
+
+    /******************************************************************************
+            replace用法2 - 高级用法 第二个参数可以是函数 - 最常用 必考点
+     *******************************************************************************/
+
+     //无敌的函数 - replace第二个参数可以传递函数
+    //如果第二参数是一个函数的话，那么函数的参数是什么呢？
+    console.log('replace功能5 - 无敌的函数 - replace第二个参数可以传递函数')
+    myString = "bbabc";
+    myString.replace(/(a)(b)/g, function(){
+        console.log(arguments) // ["ab", "a", "b", 2, "bbabc"]
+    });
+//    参数将依次为：
+//    1、整个正则表达式匹配的字符。
+//    2、第一分组匹配的内容、第二分组匹配的内容…… 以此类推直到最后一个分组。
+//    3、此次匹配在源自符串中的下标（位置）。
+//    4、源自符串
+//    所以例子的输出是 ["ab", "a", "b", 2, "bbabc"]
+
+
+    //用法举例  首字母大写 -- 一个参数 表示匹配的整个字符串
+    console.log('replace功能3 - 将首字符转为大写')
+
+    //在本例中，我们将把字符串中所有单词的首字母都转换为大写：
+    myString = 'aaa bbb ccc';
+    myString=myString.replace(/\b\w+\b/g, function(word){
+                return word.substring(0,1).toUpperCase()+word.substring(1);}
+    );
+    console.log(myString)
+
+
+
+    //用法举例  首字母大写 -- 多个参数 - 第一个表示匹配的整个字符串，后面的表示分组中的内容
+    function capitalize(str){
+        return str.replace( /(^|\s)([a-z])/g , function(m,p1,p2){ return p1+p2.toUpperCase();
+        } );
+
+    };
+    myString = "i am a boy !"
+    console.log(capitalize(myString)) //I Am A Boy！
+
+
+
+
+
+
+
+
+
+
+//正则表达式基础知识
+
+    //星号(*) : 星号代表匹配它前面一个字符任意遍(0或任意次)
+
+    //加号(+): 加号是一个与星号(*)类似的通配符，它也是数量词，表示匹配前面的字符一次或多次（至少一次).
+                //它与星号的差别就在这里，星号可以匹配0次，加号则必须一次以上。
+
+    //问号(?): 问号也是一个数量词，它代表匹配前一个字符0或1次。
+
+
+    //中括号[]： 中括号用来表示一个字符集合，
+                //如果这个集合有很多元素，如26个字母，数字等，一个个地写在中括号里，未免太麻烦太蠢笨，
+                //这时可以用连字符(hyphen)来表示一个范围，
+                // 如:[a-z]表示小写字母的集合，
+                // [a-zA-Z]表示大小写字母的集合。
+                // 脱字符^ (caret).
+                // 这种写法表示，匹配任何不在该集合中的字符，与上面的用法刚好相反
+
+
+    //特殊字符：
+    //    \w -- (小写w) 表示字母或数字，等价于 [a-zA-Z0-9]
+    //    \W -- (大写W)非字母且非数字，与\w相反 等价于 '[^A-Za-z0-9_]'
+    //    \s  --  (小写s)匹配一个空格字符，包括：空格，换行，回车,tab,等价于[ \n\r\t\f]
+    //    \S --  (大写S)匹配非空格字符，\s的相反 等价于 [^ \f\n\r\t\v]。
+    //    \d -- 表示10进制数字，等价于 [0-9]
+    //    \D --	匹配一个非数字字符。等价于 [^0-9]。
+
+    //    \f	匹配一个换页符。等价于 \x0c 和 \cL。
+    //    \n	匹配一个换行符。等价于 \x0a 和 \cJ。
+    //    \r	匹配一个回车符。等价于 \x0d 和 \cM。
+    //    \t	匹配一个制表符。等价于 \x09 和 \cI。
+    //    \v	匹配一个垂直制表符。等价于 \x0b 和 \cK。
+
+
+
+    //    大括号:{}
+    //    大括号的作用是指定重复前面一个字符多少遍:
+    //    {N} 重复N遍
+    //    {n,m} 重复 n~m 遍
+    //    {n,}  至少重复n遍
+    //    {,m} 至多重复m遍
+
+
+//定位符：
+    //    ^	    匹配输入字符串的开始位置。
+    //    $	    匹配输入字符串的结束位置。
+    //   \b     匹配一个单词边界，也就是指单词和空格间的位置。//例如， 'er\b' 可以匹配"never" 中的 'er'，但不能匹配 "verb" 中的 'er'。
+    //    \B	和\b相反，匹配非单词边界。'er\B' 能匹配 "verb" 中的 'er'，但不能匹配 "never" 中的 'er'。
+
+
+
+
+</script>

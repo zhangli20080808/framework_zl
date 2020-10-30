@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+let a = 10;    
+let img = new Image();
+img.src = `https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1576855691894&di=b694b104df1eb0b53ee6b52d8ad6fb49&imgtype=0&src=http%3A%2F%2Fpic.vjshi.com%2F2018-10-30%2F26b945dcada739a37b4d1fecc1d10abb%2F00004.jpg%3Fx-oss-process%3Dstyle%2Fwatermark`;
+img.onload = function(){
+    a = 20;
+};    
+console.log(a);
+// 同步：上一件事做完了，才能做下一件事
+// 异步：上一件事没有做完，就可以做下件事
+
+/*
+    异步：事件、定时器、网络请求
+*/
+</script>    
+</body>
+</html>

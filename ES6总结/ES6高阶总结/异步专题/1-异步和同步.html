@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+  /*
+  同步和异步是一种消息通知机制
+
+  同步阻塞: A调用B，B处理获得结果，才返回给A。A在这个过程中，一直等待B的处理结果，没有拿到结果之前，需要A（调用者）一直等待和确认调用结果是否返回，拿到结果,然后继续往下执行。
+  在 JS 中，正常的代码执行，全部走的都是同步模式,必须拿到一行的执行结果，再去走下一行
+
+  异步非阻塞:
+  A调用B，无需等待B的结果，B通过状态，通知等来通知A或回调函数来处理。
+  调用结果返回时， 会以消息或回调的方式通知调用者
+  */
+
+  // 同步
+  // let a  = 10;
+  // function fn(){
+  //     a = 20;
+  // }
+  // fn(); // 比如等 fn 这个函数执行完毕，才会执行下边的 console
+  // console.log(a);
+
+  /*
+      异步
+  */
+  // let a = 10;
+  // setTimeout(function(){
+  //     a = 20;
+  // },1000);
+  // console.log(a);
+
+</script>
+</body>
+</html>

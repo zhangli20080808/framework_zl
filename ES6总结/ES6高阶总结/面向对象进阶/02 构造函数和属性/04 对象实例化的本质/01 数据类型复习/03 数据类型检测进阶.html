@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+
+
+
+    var num = 1
+    var str = '传智播客'
+    var bool=false;
+    var arr=[];
+    var obj={name:'传智播客'};
+    var date = new Date();
+    var fn = function(){}
+
+    /******************************************************************************
+     数据类型判断 - typeof
+     *******************************************************************************/
+    console.log('数据类型判断 - typeof')
+    console.log(typeof undefined)//'undefined'
+    console.log(typeof null) // object
+    console.log(typeof true) //'boolean'
+    console.log(typeof 123)  //'number'
+    console.log(typeof "abc")  //'string'
+    console.log(typeof function() {}) //'function'
+    var arr=[];
+    console.log(typeof {}) //'object'
+    console.log(typeof arr)//'object'
+    console.log(typeof unknownVariable) //'undefined'
+    //    在使用 typeof 运算符时采用引用类型存储值会出现一个问题，
+    //    无论引用的是什么类型的对象，它都返回 "object"。  所以说这就是个问题
+
+
+
+
+
+
+    /******************************************************************************
+     数据类型判断 - toString.call
+     通用但很繁琐的方法： prototype    Object.toString的一个方法
+     *******************************************************************************/
+    console.log('数据类型判断 - toString.call')
+    console.log(toString.call(123))          //[object Number]
+    console.log(toString.call('123'))        //[object String]
+    console.log(toString.call(undefined))    //[object Undefined]
+    console.log(toString.call(true))         //[object Boolean]
+    console.log(toString.call({}))           //[object Object]
+    console.log(toString.call([]))           //[object Array]
+    console.log(toString.call(function(){})) //[object Function]
+
+
+    console.log(Object.prototype.toString.call(str) === '[object String]')   //-------> true;
+    console.log(Object.prototype.toString.call(num) === '[object Number]')   //-------> true;
+    console.log(Object.prototype.toString.call(arr) === '[object Array]')    //-------> true;
+    console.log(Object.prototype.toString.call(date) === '[object Date]')     //-------> true;
+    console.log(Object.prototype.toString.call(fn) === '[object Function]') //-------> true;
+
+
+
+
+
+
+    /******************************************************************************
+     数据类型判断 - instanceof
+     *******************************************************************************/
+        //    判断已知对象类型的方法： instanceof
+    console.log('数据类型判断 - instanceof')
+
+    console.log(arr instanceof Array)     //---------------> true
+    console.log(date instanceof Date)     //---------------> true
+    console.log(fn instanceof Function)   //------------> true
+    //    alert(f instanceof function)        //------------> false
+    //    注意：instanceof 后面一定要是对象类型，并且大小写不能错，该方法适合一些条件选择或分支。
+
+
+
+
+
+
+
+    /******************************************************************************
+     数据类型判断 - 根据对象的constructor判断： constructor
+     *******************************************************************************/
+    //    根据对象的constructor判断： constructor  构造函数是谁  和那个instanceof有点相反
+    var arr=[];
+    console.log('数据类型判断 - constructor')
+    console.log(arr.constructor === Array)   //----------> true
+    console.log(date.constructor === Date)   //-----------> true
+    console.log(fn.constructor === Function) //-------> true
+
+
+</script>

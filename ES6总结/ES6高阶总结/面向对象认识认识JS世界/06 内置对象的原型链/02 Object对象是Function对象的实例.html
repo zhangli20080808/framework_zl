@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+
+
+    /*object的__proto__指向Function对象的原型*/
+    //Object对象是Function对象的一个实例
+    console.log(Object.__proto__ === Function.prototype)
+
+
+
+    /*Function.prototype对象的原型的__proto__属性指向Object.prototype*/
+    console.log(Function.prototype.__proto__ === Object.prototype)
+
+    /*object的原型的__proto__属性为null*/
+    console.log(Object.prototype.__proto__ )
+
+
+    /*总结*/
+    /*一个自定义对象可以访问到Function对象的所有属性和方法，也可以访问到Object对象的所有属性和方法*/
+</script>

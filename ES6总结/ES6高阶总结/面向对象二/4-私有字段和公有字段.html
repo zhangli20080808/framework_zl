@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box {
+            position: absolute;
+            left: 100px;
+            top: 100px;
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+        #box2 {
+            position: absolute;
+            left: 200px;
+            top: 200px;
+            width: 100px;
+            height: 100px;
+            background: green;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">文字</div>
+    <div id="box2">文字</div>
+<script>
+  
+
+/*
+    抽象:
+        拖动之后元素跟随移动
+    封装: 
+        封装成类
+*/
+class Drag {
+    startMouse = {};
+    startEl = {};
+    #el = null;
+    constructor(el){
+        this.#el = el;
+        this.start();
+    }
+    // 摁下时候要做的事情
+    start(){
+        let move = (e)=>{
+            this.move(e);
+        };
+       this.#el.addEventListener("mousedown",(e)=>{
+            //    console.log(this);// 实例化对象
+            //    console.log(this.el);
+            // 记录摁下时鼠标的位置
+            this.startMouse = {
+                x: e.clientX,
+                y: e.clientY
+            };
+            this.startEl= this.getOffset();
+            document.addEventListener("mousemove",move);
+            document.addEventListener("mouseup",()=>{
+                document.removeEventListener("mousemove",move);
+            },{once: true});
+       }); 
+    }
+    // 移动中要做的事情
+    move(e){
+        let nowMouse = {
+            x: e.clientX,
+            y: e.clientY
+        };
+        let disMouse = {
+            x: nowMouse.x - this.startMouse.x,
+            y: nowMouse.y - this.startMouse.y
+        };
+        this.setOffset(disMouse);
+    }
+    // 获取元素的位置
+    getOffset(){
+        return {
+            x: parseFloat(getComputedStyle(this.#el)["left"]),
+            y: parseFloat(getComputedStyle(this.#el)["top"])
+        }
+    }
+    // 设置元素的位置
+    setOffset(dis){
+        this.#el.style.left = dis.x + this.startEl.x + "px";
+        this.#el.style.top = dis.y + this.startEl.y + "px"
+    }
+}
+{
+    let box = document.querySelector("#box");
+    let box2 = document.querySelector("#box2");
+    let d = new Drag(box);
+    //d.el = box2;
+    // setTimeout(()=>{
+    //     console.log(d.startMouse);
+    // },3000);
+     console.log(d);   
+    /*
+        公有字段在实例化对象中也能正常使用,作为对象的一个普通属性存在
+        私有字段，只能在类中去用，不能在对象
+    */
+}
+</script>    
+</body>
+</html>

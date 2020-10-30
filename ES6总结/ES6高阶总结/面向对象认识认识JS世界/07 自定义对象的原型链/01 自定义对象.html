@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    function Product(){}
+    Product.prototype={
+
+    }
+
+    var iphone = new Product()
+
+    /*自定义对象的实例的__proto__指向其原型对象*/
+    console.log(iphone.prototype.__proto__)
+
+    /*object*/
+    /*自定义对象原型的__proto__指向object*/
+    console.log(Product.prototype.__proto__)
+
+    /*总结*/
+    /*一个自定义对象可以访问到Function对象的所有属性和方法，也可以访问到Object对象的所有属性和方法*/
+</script>

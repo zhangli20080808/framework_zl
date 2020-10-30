@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+
+
+
+
+<!--方法-->
+<div>
+    <input type="button" value="获得焦点"
+           onclick="document.getElementById('testInput').focus()" />
+    <input type="button" value="失去焦点"
+           onclick="document.getElementById('testInput').blur()" />
+    <input type="text" value="text" id="testInput"
+           onblur="alert('我已失去焦点')" />
+</div>
+
+<!--方法-->
+<div style="height:150%; width:150%; background-color:#ddd">
+    <input type="button" id="btn1" value="移动滚动条！"
+           onclick="window.scrollTo(100,100);" />　　
+    <!--//相当于设置绝对位置-->
+    <input type="button" id="btn2" value="移动滚动条！"
+           onclick="window.scrollBy(100,100);" />　　
+    <!--//相当于累加-->
+</div>
+
+<!--方法-->
+<a href="2.html" target="2">在新窗口打开连接</a>
+<a href="#" onclick="window.open('http://www.baidu.com');">在已建立连接的页面打开新地址</a>
+
+</body>
+</html>
+
+<script>
+    /*parseInt将其他类型数据转换成整数，转换失败就返回NaN*/
+    window.parseInt('123')      /*123*/
+    window.parseInt('abc123')   /*NaN*/
+    window.parseInt('123abc')   /*123*/
+
+    /*parseFloat将其他类型数据转换成小数，转换失败就返回NaN*/
+    window.parseInt('123')      /*123*/
+    window.parseInt('1.23')   /*1.23*/
+    window.parseInt('1.23abc')   /*1.23*/
+
+    /*inNaN 确定某个数值是否可以参与运算*/
+    isNaN(123)   /*123可以参与运算，不是NaN，返回false*/
+
+
+    /*eval 会将字符串当做js代码执行*/
+    eval('var num=2')
+    console.log(num+2)  /*结果是4*/
+</script>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+  /*
+  * 注意
+  * Object.assign 如果有对象嵌套  此时就不是深拷贝 原来拷贝对象的属性值改变
+  * 也会影响现在的新对象
+  *
+  * */
+  let obj = {
+    a: 1,
+    b: 2,
+    name: {
+      zl:'123'
+    }
+  }
+  let obj2 = {
+    c: 3,
+    d: 4
+  }
+  let f = null
+  let obj3 = Object.assign({}, obj, obj2, { f })
+  obj.a = 6
+  obj.name.zl='456'
+  // obj3 中的a没有改变 但是name的zl已经变成了456
+  console.log(obj, obj2, obj3)
+
+</script>
+</body>
+</html>

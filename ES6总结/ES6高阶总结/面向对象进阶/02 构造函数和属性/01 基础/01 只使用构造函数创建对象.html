@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    //该函数 用于创建对象 其除了是一个函数之外，我们又称之为构造对象的函数 - 简称构造函数 其实也就是普通函数生成的
+    function Product(name,description){
+    //属性
+   this.name=name;
+    // 属性
+    this.description = description
+    //方法 又称方法属性 万物皆属性
+    this.buy=function(){
+        alert('buy')
+    }
+ }
+
+    //会拷贝一份
+    var p1 = new Product()
+    var p2 = new Product()
+
+    console.log(p1.constructor)
+    console.log(p2.constructor)
+
+    /*如何判断某个实例是否是根据某个构造函数创建的*/
+    if(p1 instanceof Product){
+        alert('true')
+    }
+
+
+
+    /*存在的问题*/
+    //每个实例的name，描述确实不一样，需要单独的空间存储，但是buy方法是所有实例都一样的
+
+    /*为了避免内存浪费，所以出现了原型帮助我们解决这个问题*/
+
+    /*原型对象 不管你实例化多少次，都只生成一次*/
+
+</script>

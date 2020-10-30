@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<!--
+
+-->
+</body>
+</html>
+
+<script>
+    var num1; //这个时候不进行内存分配
+    var num2=9;//分配内存
+    var num3=9;//分配内存
+    var num4=num3;
+
+    //    我改变了num3的值  不会影响到num4  这就是值类型   而我们的引用类型都会改变
+
+
+    //  这里到底分配还是不分配内存？？
+    // 答案 --分配内存 彼此拥有独立的内存空间，互不影响
+    console.log(num1)
+    console.log(num2)
+    console.log(num3)
+    console.log(num4)
+    console.log(num3===num4)  //相同
+
+    num3=3333333;
+    num4=4444444;
+    console.log(num3)
+    console.log(num4) //当更改数据，值不一样的本质是这里分配两个空间独立存储
+
+
+</script>

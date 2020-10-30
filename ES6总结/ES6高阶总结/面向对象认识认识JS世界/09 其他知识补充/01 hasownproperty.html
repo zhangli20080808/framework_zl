@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+
+<body>
+</body>
+</html>
+<script>
+  var person= function(){
+	     age=1
+	  };
+  
+  person.prototype={
+	     name:'wangshukui'
+	  };
+
+
+var xiaowang = new person();
+//实例化之后 重新分配内存 系统会自动屏蔽原型同名 -- 原理 开辟新的空间
+
+  //
+ alert(xiaowang.hasOwnProperty("name"));//false --表明是原型属性
+
+ alert(xiaowang.hasOwnProperty("age")); //false --类属性
+ 
+ 
+ 
+ 
+ //当定义一个实例化属性之后，会自动屏蔽原型属性
+ xiaowang.name='小李';
+ alert(xiaowang.hasOwnProperty('name')) //true
+ 
+ xiaowang.sex='nan';
+  alert(xiaowang.hasOwnProperty('sex')) //true
+
+
+
+</script>

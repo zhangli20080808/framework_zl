@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    #box {
+      position: absolute;
+      left: 100px;
+      top: 100px;
+      width: 100px;
+      height: 100px;
+      background: red;
+    }
+
+    #box2 {
+      position: absolute;
+      left: 200px;
+      top: 200px;
+      width: 100px;
+      height: 100px;
+      background: green;
+    }
+  </style>
+</head>
+<body>
+<div id="box">文字</div>
+<div id="box2">文字</div>
+<script>
+
+
+  /*
+      抽象:
+          拖动之后元素跟随移动
+      封装:
+          封装成类
+  */
+  class Drag {
+    startMouse = {}
+    startEl = {}
+    #el = null
+
+    constructor (el) {
+      this.#el = el
+      this.start()
+    }
+
+    start () {
+      let move = (e) => {
+        this.move(e)
+      }
+      this.#el.addEventListener('mousedown', (e) => {
+        this.startMouse = {
+          x: e.clientX,
+          y: e.clientY
+        }
+        this.startEl = this.getOffset()
+        // console.log(this.ondragstart);
+        this.ondragstart && this.ondragstart(e)
+        document.addEventListener('mousemove', move)
+        document.addEventListener('mouseup', () => {
+          document.removeEventListener('mousemove', move)
+          this.end()
+        }, { once: true })
+        e.preventDefault()
+      })
+    }
+
+    move (e) {
+      let nowMouse = {
+        x: e.clientX,
+        y: e.clientY
+      }
+      let disMouse = {
+        x: nowMouse.x - this.startMouse.x,
+        y: nowMouse.y - this.startMouse.y
+      }
+      this.setOffset(disMouse)
+      this.ondrag && this.ondrag(e)
+    }
+
+    //拖拽结束
+    end (e) {
+      this.ondragend && this.ondragend(e)
+    }
+
+    // 获取元素的位置
+    getOffset () {
+      return {
+        x: parseFloat(getComputedStyle(this.#el)['left']),
+        y: parseFloat(getComputedStyle(this.#el)['top'])
+      }
+    }
+
+    // 设置元素的位置
+    setOffset (dis) {
+      this.#el.style.left = dis.x + this.startEl.x + 'px'
+      this.#el.style.top = dis.y + this.startEl.y + 'px'
+    }
+  }
+
+  {
+    let box = document.querySelector('#box')
+    let box2 = document.querySelector('#box2')
+    let d = new Drag(box)
+    let d2 = new Drag(box2)
+    let box2Clone = null
+    d2.ondragstart = function () {
+      //console.log("开始拖拽");
+      box2Clone = box2.cloneNode(true)
+      //console.log(box2Clone);
+      document.body.appendChild(box2Clone)
+      box2.style.opacity = .5
+    }
+    d2.ondrag = function () {
+      //console.log("拖拽中");
+    }
+    d2.ondragend = function () {
+      document.body.removeChild(box2Clone)
+      box2.style.opacity = 1
+    }
+  }
+</script>
+</body>
+</html>

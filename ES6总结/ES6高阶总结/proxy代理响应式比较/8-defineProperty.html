@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+let data = {
+    name: "mt",
+    age: 18,
+    price: 5000
+};
+let proxyData = new Proxy(data,{
+    get(target,key){
+        if(key == "price"){
+            return target[key]*.9;
+        }
+        return target[key];
+    },
+    set(target,key,newVal){ 
+        target[key] = newVal;
+    },
+    has(target,key){
+        if(key == "gf"){
+            return true;
+        }
+        return (key in target);
+    },
+    //有些数据比较铭感  我想单独走一些处理
+    defineProperty(target,key,descriptor){ // 当调用了 Object.defineProperty 时执行
+        //console.log(target,key,descriptor);
+        return Object.defineProperty(target,key,descriptor);
+    }
+});
+Object.defineProperty(proxyData,"child",{
+    configurable: true,
+    enumerable: true,
+    get(){
+        return "不要关心人家家事"
+    },
+    set(val){
+        console.log("这不是我的孩子",val);
+    }
+});
+//proxyData.child = 10;
+console.log(proxyData.child);
+</script>    
+</body>
+</html>

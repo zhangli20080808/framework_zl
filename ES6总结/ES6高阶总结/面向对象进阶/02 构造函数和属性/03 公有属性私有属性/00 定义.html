@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    /*其实init就有点类似接口，
+     当你写好代码之后，为了方便使用者，我们一般只需要告诉使用者简单的接口就可以了。。。
+     对方不用了解其他任何信息
+
+     还可以防止其他人员访问核心代码，以后我们对这个代码加密，别人就只能使用而无法了解代码是如何编写的了*/
+
+    //对象构造函数
+    // 私有属性好处： 安全 就类似闭包中的函数一样 减少污染
+    function Person(name) {
+        //私有属性，只能在对象构造函数内部使用
+        var className = "用户对象";
+        //公有属性,在对象实例化后调用
+        this.name = name;
+        //私有方法
+        var privateFunction = function () {
+            alert(this.name);
+        }
+        //公有方法
+        this.publicFunction = function () {
+            alert(this.name); //公有属性
+            alert(className); //正确 直接通过变量名访问
+            alert(this.className); //undefined 错误 不能这样访问
+        }
+        //公有属性
+        alert(className);
+        //正确 直接通过变量名访问
+        alert(this.className); //undefined 错误 不能这样访问
+    }
+
+    /*什么是公有属性：*/
+    /*使用象的人可以访问到对象内部的某个属性*/
+    var penson = new Person('xiaowang')
+
+    console.log(penson.className);
+    console.log(penson.name)
+    console.log(person.publicFunction())
+    console.log(person.privateFunction())
+
+    /*最小原则：*/
+    $('#tab').tab()
+</script>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    /*练习*/
+    /*将一个数组合并到另一个数组中*/
+    var arr1=new Array("1","2","3");
+    var arr2=new Array("4","5","6");
+    /*最终arr1["1","2","3","4","5","6"]*/
+
+
+
+
+
+
+
+
+
+
+
+
+    //传统写法
+    function PushArray(arr1,arr2){
+        var arrLen=arr2.length
+        for(var i=0;i<arrLen;i++){
+            arr1.push(arr2[i])
+        }
+        return arr1;
+    }
+    var result = PushArray(arr1,arr2);
+    console.log(result)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*使用apply写法*/
+     /*Array.prototype.push 可以实现两个数组合并
+     同样push方法没有提供push一个数组,但是它提供了push(param1,param,…paramN)
+     push（arr，2，3，3,3,3）
+     所以同样也可以通过apply来装换一下这个数组,即:*/
+    Array.prototype.push.apply(arr1,arr2);
+   /* Array.prototype.push.call(arr1,"4","5","6");*/
+   /*  push（arr1,"4","5","6"）*/
+    console.log(arr1)
+    console.log(arr2)
+</script>

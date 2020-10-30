@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+class Person {
+    sayName(){
+        console.log(this.name);
+    }
+}
+let p = {
+    name:"kkb"
+};
+// p.__proto__ = Person.prototype;  // 修改原型直接赋值  2种方式
+// 获取对象的原型
+// console.log(Object.getPrototypeOf(p),'1');
+//console.log(Object.prototype);
+Object.setPrototypeOf(p,Person.prototype); // 设置p的原型指向Person类
+// console.log(p);
+p.sayName();
+</script>    
+</body>
+</html>

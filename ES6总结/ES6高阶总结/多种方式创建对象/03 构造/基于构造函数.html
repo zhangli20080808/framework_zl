@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+
+<body>
+</body>
+</html>
+<script>
+
+   var Role =function(name) {
+		this.name=name;
+        this.name2={nickName:'剑侠客',accountName:'876791562@qq.com'}
+		this.age=1111;
+	   //存在的问题 -- 前面我们已经深刻讲解了
+		this.attack=function() {
+			 alert('11111');
+		}   
+	}
+	
+    var boy  = new Role('剑侠客')
+    console.log(boy.name)
+   var girl  = new Role('可爱宝宝')
+   console.log(girl.name)
+
+
+    /*修改*/
+   boy.name2.nickName='东方不败'
+   console.log(boy.name2.nickName)
+   girl.name2.nickName='西方失败'
+   console.log(boy.name2.nickName)
+   console.log(girl.name2.nickName)
+</script>

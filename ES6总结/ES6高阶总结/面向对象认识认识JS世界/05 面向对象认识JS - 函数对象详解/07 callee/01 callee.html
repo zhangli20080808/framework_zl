@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+
+//    返回正被执行的 Function 对象，也就是所指定的 Function 对象的正文.
+//     callee是arguments 的一个属性成员，它表示对函数对象本身的引用
+//        arguments.callee.length可以获取实参参数
+
+
+//callee用处1 用来判断实际参数跟行参是否一致
+function calleeLengthDemo(arg1, arg2) {
+//    callee表示当前正在执行的函数对象，其实是函数的一个实例化
+    alert(arguments.callee.toString());
+    if (arguments.length == arguments.callee.length) {
+        window.alert("验证形参和实参长度正确！");
+        return;
+    } else {
+        alert("实参长度：" + arguments.length);
+        alert("形参长度： " + arguments.callee.length);
+    }
+}
+//当函数被执行的时候，生成一个实例
+calleeLengthDemo(1);
+
+
+</script>

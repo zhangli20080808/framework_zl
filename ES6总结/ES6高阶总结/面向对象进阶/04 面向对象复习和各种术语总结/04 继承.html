@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+
+<script>
+    //    前面讲过js中的面向对象其实是两个对象，一般构造函数对象中放置属性，原型对象中放置所有实例共享的方法
+    //    构造函数创建的实例为什么能访问原型对象的方法属性 -- 继承
+    //    构造函数对象
+    function Person(name, sex) {
+        this.name = name;
+        this.sex = sex;
+    }
+    //    定义Person的原型，原型中的属性可以被自定义对象引用
+    //    两个对象的本质关系：原型对象继承了构造函数对象，因而可以访问构造函数对象的一切方法，属性
+
+    Person.prototype = {
+        getName: function() {
+            return this.name;
+        },
+        getSex: function() {
+            return this.sex;
+        }
+    }
+</script>

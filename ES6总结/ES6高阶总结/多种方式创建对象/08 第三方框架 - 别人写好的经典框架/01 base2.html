@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script src='base2.js'></script>
+<script>
+    var Animal = Base.extend({
+        constructor: function(name) {
+            this.name = name;
+        },
+        name: "",
+        eat: function() {
+            this.say("Yum!");
+        },
+        say: function(message) {
+            alert(this.name + ": " + message);
+        }
+    });
+
+
+    var product = Base.extend({
+        constructor:function(name,price){
+            this.name=name;
+            this.price=price;
+        },
+        buy:function(){},
+        addCart:function(){}
+
+    });
+
+
+
+    //成员变量和方法的创建都比原来简单吧。
+    //使用就是这样：
+    new Animal("cats").say("fish");
+    //如果
+    ani = new Animal();
+    //那么ani.name 就是 undefined 了
+
+
+    //继承：
+    var Cat = Animal.extend({
+        eat: function(food) {
+            if (food instanceof Mouse) this.base();
+            else this.say("Yuk! I only eat mice.");
+        }
+    });
+
+</script>

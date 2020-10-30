@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+// function: function 的 this 谁调用的 this 指向谁  
+    
+
+// 箭头函数: 箭头函数本身没有this，其this继承声明时所在作用域的this 在哪里声明的this就是谁 不管被谁调用
+
+/*
+    function 的this 指向
+        - 直接调用
+        - 作为对象的属性调用，this 指向该对象
+*/
+function fn(){
+    console.log(this);
+}
+fn();//直接执行函数  this 默认情况指向 window
+
+document.onclick = fn;
+document.onclick(); // document
+
+let obj = {
+    fn
+};
+obj.fn();
+
+class Drag {
+    constructor(){
+        // 类中的 this 指向其实例化对象
+        this.fn = fn;
+    }
+}
+
+new Drag().fn();
+
+/*
+    全局作用域 - （window）
+    函数作用域
+    块级作用域
+*/
+
+</script>    
+</body>
+</html>

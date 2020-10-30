@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    function message()
+    {
+        adddlert('欢迎来到传智播客')
+    }
+//    onerror函数的三个参数用于确定错误确切的信息，代表的意思依次为：
+//    错误信息；
+//    发生错误的文件；
+//    发生错误的行号。
+
+    window.onload=function(){
+        message();
+    }
+    window.onerror = function(msg, file, line) {
+        alert("错误信息: " + "\n"+ msg + "\n" + '出错行数' + ":" + line+'\n'+'报错的文件'+file);
+        return true;
+    }
+</script>

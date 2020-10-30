@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>  
+Object.prototype.sayAge = function(){
+    console.log(this.age);
+};   
+function Person(name,age){
+    this.name = name;
+    this.age = age;
+}
+// 功能空间原型
+Person.prototype.sayName = function(){
+    console.log(this.name);
+}
+// 原型的固有属性 constructor 系统帮我们定义好的
+
+// class Person {
+//     constructor(name,age){
+//         this.name = name;
+//         this.age = age;
+//     }
+//     sayName(){
+//         console.log(this.name);
+//     }
+// }
+// 这样写 我们的  constructor 会被覆盖掉  通过constructor去判断 实例化对象是通过哪个构造器构造的
+// Person.prototype = {
+//     constructor: Person,
+//     sayAge: function () {
+//         console.log()
+//     }
+// }
+// console.log(Person.prototype.constructor === Object) //指向 Object了
+// Person.prototype.constructor === Person  // 我们也可以设置一下
+let kkb = new Person("kkb",8);
+let miaov = new Person("miaov",8);
+console.log(kkb);
+console.log(miaov);
+console.log(Person.prototype.constructor === Person) //true
+console.log(miaov.constructor === Person) //true
+// kkb.sayName();
+kkb.sayAge();
+/*
+    一些可以在实例化对象中可以通用的数据或方法，如果我们都直接写在对象中，那每示例化一个对象，都多一堆数据，这样的话，比较占用内存
+
+    在 JS 中,每个函数都有一个属性叫做 prototype（原型）, prototype本身是一个对象,在该对象我们可以定义一些该函数的实例化对象的公用方法
+
+    在 JS 中，每个对象都有一个属性叫做 __proto__(原型链)， __proto__ 属性，指向该对象构造函数的原型
+
+    原型链: 
+        当我们调用对象的某个方法（属性）时，会先在该对象自身查找, 找不到，就通过对象的 __proto__ 属性，找到其构造函数的prototype对象，
+        从这里找这个方法,如果还找不到就找 prototype (object) 的构造函数（Object）中prototype, 如果还找不到就undefined.
+*/    
+</script>    
+</body>
+</html>

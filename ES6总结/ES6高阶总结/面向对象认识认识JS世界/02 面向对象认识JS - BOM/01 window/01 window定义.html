@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<button id="btn">打开一个新的窗口</button>
+<button id="btn2">打开一个新的窗口2</button>
+<button id="btn3">打开星座的详细信息</button>
+</body>
+</html>
+<script>
+    document.getElementById('btn').onclick=function() {
+        window.open('http://www.baidu.com')
+    }
+
+    document.getElementById('btn2').onclick=function() {
+        window.open ('http://www.baidu.com','newwindow','height=500,width=500,top=100,left=100,toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no')
+    }
+
+//    我们可以控制窗口的各种属性：
+//    宽为100，高为400，距屏顶0象素，屏左0象素，无工具条，无菜单条，无滚动条，
+//    不可调整大小，无地址栏，无状态
+
+
+    document.getElementById('btn3').onclick=function() {
+        window.open ('detail.html')
+    }
+</script>

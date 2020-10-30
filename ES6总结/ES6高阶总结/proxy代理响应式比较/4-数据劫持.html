@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+let data = {
+    name: "kkb",
+    age: 8
+};
+
+// 方法直接在一个对象上定义新的属性或修改现有属性，并返回该对象  Object.defineProperties(obj, props)  props 要定义其可枚举属性或修改的属性描述符的对象
+// 定义了data对象上props的可枚举属性相对应的所有属性
+Object.defineProperties(data,{
+    name:{
+        set(newVal){
+            console.log(newVal);
+        },
+        get(){
+            return "怎么好意思问人家的名字"
+        }
+    },
+    age: {
+        set(newVal){
+            console.log(newVal);
+        },
+        get(){
+            return "怎么好意思问人家的年龄"
+        }
+    }
+});    
+console.log(data);
+</script>    
+</body>
+</html>

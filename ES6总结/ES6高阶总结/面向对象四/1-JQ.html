@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/Jquery.js"></script>
+    <style>
+        .active {
+            background: red;
+        }
+    </style>
+    <script>
+        // $(function(){
+        //     console.log($("button"));
+        // });
+    </script>
+</head>
+<body>
+    <a>链接</a>   
+    <button>按钮1</button>
+    <button style="width:100px;">按钮2</button>
+    <button style="width:100px;">按钮3</button style="width:100px;">
+    <button style="width:100px;">按钮4</button style="width:100px;">
+<script>
+//console.log($("button"));   
+let btns = document.querySelectorAll("button");
+
+// js中不能同时操作一组元素
+// btns.onclick = function(){
+//     console.log(11);
+// }
+
+//let a = document.querySelector("a");
+// $(a).click(function(){
+//     console.log(this);
+// });
+// $(function(){
+//     $("button").click(function(){
+//         $("button").removeClass("active").eq($(this).index()).addClass("active");
+//     });
+// });  
+
+// $("button").css("background","red").eq(0).css("background","yellow");
+// console.log($("button").end());
+
+// css(css方法) hooks 回调
+
+/*
+    一旦对哪条样式，设置了 hooks，JQ 就不会帮我们设置 或者 获取该条样式
+*/
+
+/*
+    set 方法，当我们设置样式时触发的回调,
+    get 方法，当我们获取样式时触发的回调
+*/
+
+// $.cssHooks.width = {
+//     set(el,val){ // 设置 width 会触发的方法
+//         console.log("你想要设置width吗",el,val);
+//     },
+//     get(el){
+//         console.log("你想要获取width呀");
+//         return "200px"; // get返回值就是我们调用 get 方法会获取到的结果
+//     }
+// }
+console.log($("button").css("width"));
+// $("button").css({
+//     width:"100px",
+//     height: 100
+// });
+
+
+</script>    
+</body>
+</html>

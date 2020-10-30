@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+
+    //随机选取
+    function getRandom (begin,end){
+        return Math.floor(Math.random()*(end-begin))+begin;
+    }
+
+
+    function getRandomList(){
+        var iArray = [];
+        for(var i=0; i<10; i++){
+            iArray.push(getRandom(10,100));
+        }
+        iArray.sort();
+        return iArray
+
+    }
+
+   var arr = getRandomList()
+    console.log(arr)
+</script>

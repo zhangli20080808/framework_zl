@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+   /* 我们先从Math.max()函数说起，
+    Math.max后面可以接任意个参数，最后返回所有参数中的最大值。
+    比如*/
+   console.log(Math.max(5,8)) //8
+   console.log(Math.max(5,7,9,3,1,6)) //9
+
+
+
+
+
+   /*问题：如何获取一个数组的最大值*/
+   /*遍历*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   /* 但是在很多情况下，我们需要找出数组中最大的元素。*/
+   /* var arr=[5,7,9,1]
+    alert(Math.max(arr)) // 这样却是不行的。一定要这样写*/
+
+
+    /*传统方式写法*/
+    function getMax(arr){
+        var arrLen=arr.length;
+        for(var i=0,ret=arr[0];i<arrLen;i++){
+            ret=Math.max(ret,arr[i]);
+    }
+    return ret;
+    }
+   console.log(getMax([1,2,3,4,5,6,7]))
+
+
+
+
+
+    /*这样写麻烦而且低效。如果用 apply呢，看代码：*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   /*参数数组拆分法则*/
+   /*传递一个数组，其实会将其拆成很多个参数*/
+
+
+   /*适用场景：函数可以接受不限个数的参数*/
+   /*这样我们只能使用arguments来管理可变参数*/
+   /*比如max min push join split replace*/
+   /*在js中有很多这样支持可变参数的函数
+   大家还记得我们前面写的extend，也是支持可变参数*/
+
+   /*这也是为什么apply这么流行，这么重要的原因*/
+
+   /*广泛运用在框架，算法中*/
+
+   /*巧用apply虽然传递的是数组，但是使用的时候是把数组拆开的。。
+   等价于  return Math.max.call(null,1,2,3,4,5);*/
+   /*所以等价于：Math.max(5,7,9,3,1,6)*/
+    function getMax2(arr){
+        return Math.max.apply(null,arr);
+       /* return Math.max.call(null,1,2,3,4,5);*/
+    }
+   console.log(getMax2([1,2,3,4,5,6,7]))
+</script>

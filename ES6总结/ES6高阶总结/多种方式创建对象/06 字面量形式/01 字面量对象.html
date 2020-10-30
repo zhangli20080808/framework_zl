@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+
+<body>
+</body>
+</html>
+<script>
+    var boy = {
+        name:'剑侠客'
+        ,image:'男性头像'
+        ,age:20
+        ,sex:'男'
+        ,HP:100
+        ,MP:100
+        ,technologys:['普通攻击','横扫千军','地狱火','漫天飞雪']
+    };
+
+//将对象转换成字符串
+console.log(JSON.stringify(boy));
+
+
+//将字符换转换成json对象
+var sboy='{"name":"剑侠客","sex":"男","HP":100}';
+
+var div = $$.$id('div')
+div.innerhtml = sboy.name;
+
+
+var objBoy = JSON.parse(sboy);
+console.log(objBoy.name);
+
+</script>

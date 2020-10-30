@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    #box {
+      position: absolute;
+      left: 100px;
+      top: 100px;
+      width: 100px;
+      height: 100px;
+      background: red;
+    }
+  </style>
+</head>
+<body>
+<div id="box">文字</div>
+<div id="box2">文字</div>
+<script src="drag.js"></script>
+<script>
+  {
+    let box = document.querySelector('#box')
+    let boxDrag = new DragEl(box)
+    boxDrag.on('dragstart', (e) => {
+      e.preventDefault()
+      box.style.background = 'green'
+    })
+    boxDrag.on('dragend', (e) => {
+      box.style.background = 'red'
+    })
+
+    let arr = new Array(3, 4, 5, 1, 2)
+    //console.log(arr);
+    document.addEventListener('click', () => {
+      console.log(1)
+    }, { once: true })
+  }
+</script>
+</body>
+</html>

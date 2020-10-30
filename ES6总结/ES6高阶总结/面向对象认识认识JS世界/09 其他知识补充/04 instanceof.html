@@ -1,0 +1,52 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>无标题文档</title>
+    <script>
+
+        //instanceof : 对象与构造函数在原型链上是否有关系
+
+        function Aaa(){
+        }
+
+        var a1 = new Aaa();
+
+        //alert( a1 instanceof Object );  //true
+
+
+        var arr = [];
+
+        alert( arr instanceof Array );
+
+        /*
+        *
+        * Object.prototype.toString.call()  //判断对象类型   如果 toString 方法没有重写的话，会返回 [Object type]，其中 type 为对象的类型
+        *
+        * 其他类型直接使用 toString 方法时，会直接返回都是内容的字符串，所以我们需要使用call或者apply方法来改变toString方法的执行上下文。
+        *
+        *
+        *
+        *
+        * instanceof  内部机制是通过判断对象的原型链中是不是能找到类型的 prototype。
+        * 使用 instanceof判断一个对象是否为数组，instanceof 会判断这个对象的原型链上是否会找到对应的 Array 的原型，找到返回 true，否则返回 false。
+        *
+        *
+        * Array.isArray()
+        *
+        * 当检测Array实例时，Array.isArray 优于 instanceof ，因为 Array.isArray 可以检测出 iframes
+        * */
+
+        const an = ['Hello','An'];
+        an.toString(); // "Hello,An"
+        Object.prototype.toString.call(an); // "[object Array]"
+
+
+
+    </script>
+</head>
+
+<body>
+</body>
+</html>

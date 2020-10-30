@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+let obj = {
+    name: "kkb",
+    age: 8
+};
+Object.defineProperty(obj,"name",{
+    configurable: true, //配置是否允许被删除 true(默认值) 可以被删除，false 不能被删除
+    enumerable: true, //配置是否允许被枚举 true(默认值) 可以被枚举，false 不能被枚举
+    set(newVal){
+        console.log("这个想要设置的新值",newVal);
+    },
+    get(){
+        return "你猜名字是啥";
+    }
+});
+// for(let s in obj){
+//     console.log(s);
+// }
+obj.name = "小明";
+console.log(obj.name);
+//console.log(obj);
+</script>        
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+    // document.onclick = function () {
+    //     let fn = (a, ...arg) => {
+    //         console.log(this);
+    //     };
+    //     fn();
+    // };
+    // 箭头函数本身没有 this
+    // 箭头 this 指向，箭头函数定义时所在的作用域的this
+
+    // document.onclick = function () {
+    //     console.log(this); // #document
+    // };
+
+    // document.onclick = () => {
+    //     console.log(this); // window
+    // };
+
+    let fn
+    let fn2 = function () {
+        console.log(this) //window
+        fn = () => {
+            console.log(this) //在哪里声明
+        }
+    }
+    fn2 = fn2.bind(document.body)
+    fn2()
+    fn()
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    var a = {"x": 1};
+    var b = a;
+    a.x = 2;
+    console.log(b.x);  //2
+    /*解析*/
+    /*将a赋值给b b中保存的只是地址，也就是a变量，b变量指向同一个对象*/
+    /*修改a.x 同时也修改了b.x - 以为修改的都是同一块内存区域*/
+
+
+
+    a = {"x":3};
+    console.log(b.x);
+    /*解析*/
+    /*这里又定义了一个新的对象，重新分配内存空间，这个时候a变量中存储的是新地址，而b还是指向老对象*/
+    /*所以这里b.x还是2*/
+
+
+    a.x = 4;
+    console.log(b.x);
+    /*解析*/
+    /*a b这个时候分别指向不同的对象，所以修改a不会影响b*/
+    /*所以这里b.x还是2*/
+
+
+
+
+</script>

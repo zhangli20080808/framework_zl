@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+        // JS 中一切皆对象
+        // console.log(Function);
+        // console.log(Object);
+        // console.log(String);
+        // console.log(Array);
+
+        let obj = {};
+        console.log(obj.toString());
+
+        function Person(name, age) {
+          this.name = name;
+          this.age = age;
+        }
+        Person.prototype = {
+          constructor: Person,
+          sayName() {
+            console.log(this.name);
+          },
+        };
+        let p = new Person('kkb', 8);
+        console.log(p.toString());
+        console.dir(Object);
+        // console.dir(p);
+        // 包装对象  一般我们理解只有对象才有 属性和方法 对于字符串 当我们访问属性或者方法的时候 会把原有的属性和方法
+        // 暴露出来  给我们返回来
+        // var str = new String("123");
+        // var str2 = 123;
+        // console.log(str);
+        // 对象的__proto__ === 构造函数的 prototype
+        /* 1.对象本身找 --> 2. 对象构造函数的 prototype --> 3. Object 的 prototype */
+    </script>
+  </body>
+</html>

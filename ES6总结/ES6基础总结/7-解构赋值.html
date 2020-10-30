@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+    let obj = {
+        a: 1,
+        b: 2,
+        c: 3
+    };
+    // 交互对象的 a,c两个属性
+    // let a = obj.a;
+    // let c = obj.c;
+    // obj.a = c;
+    // obj.c = a;
+
+    // 对象的解构赋值
+    let {a, c} = obj;
+    console.log(a, c);
+    // let {a} = obj   ==> let a = obj.a;
+    let {d} = obj;
+    console.log(d);
+
+    //如何快速的交换a b的值
+    let a = 1
+    let b = 2
+
+        // let c = a
+        // a = b
+        // b = c
+
+        [a, b] = [b, a]  //a 2  b 1
+</script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+let data = {
+    name: "mt",
+    age: 18,
+    price: 5000
+};
+let proxyData = new Proxy(data,{
+    get(target,key){
+        if(key == "price"){
+            return target[key]*.9;
+        }
+        return target[key];
+    },
+    set(target,key,newVal){ 
+        target[key] = newVal;
+    },
+    has(target,key){
+        if(key == "gf"){
+            return true;
+        }
+        return (key in target);
+    },
+    defineProperty(target,key,descriptor){ // 当调用了 Object.defineProperty 时执行
+        return Object.defineProperty(target,key,descriptor);
+    },
+    deleteProperty(target,key){
+        //console.log(target,key);
+        if(key == "name"){
+            throw "name属性不能删除";
+        }
+        delete target[key];
+    },
+    getOwnPropertyDescriptor(target,key){
+        return Object.getOwnPropertyDescriptor(target,key);
+    },
+    setPrototypeOf(target,prototype){
+        return Object.setPrototypeOf(target,prototype);
+    }
+});
+console.log(Object.getOwnPropertyDescriptor(proxyData,"name"));
+</script>    
+</body>
+</html>

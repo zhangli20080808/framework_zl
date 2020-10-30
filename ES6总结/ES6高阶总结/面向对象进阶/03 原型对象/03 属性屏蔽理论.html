@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+<!--
+    属性访问搜索法则
+    首先遍历自己的属性（从构造函数拷贝过来的属性），如果找到就返回
+    如果没找到，就根据铁链寻找到原型对象，依次遍历原型对象中的属性，如果找到同名的属性就返回，就这么简单。
+
+-->
+</body>
+</html>
+<script>
+    //该函数 用于创建对象 其除了是一个函数之外，我们又称之为构造对象的函数 - 简称构造函数
+    function Product() {
+        //属性
+        this.name = '神仙';
+        // 属性
+        this.description = ''
+        this.buy = function () {
+            alert('构造函数对象')
+        }
+    }
+
+    Product.prototype = {
+        name: '王书奎',
+        buy: function () {
+            alert('原型对象')
+        }
+    }
+
+
+    var product = new Product()
+    /*原型属性屏蔽理论 -- 乌云蔽日  先从自身找  找到了ok 原型中的没被删除 只是被屏蔽掉了*/
+    console.log(product.buy())
+
+    /*清除乌云*/
+    delete product.buy
+    console.log(product.buy())   //del 之后  访问原型中的buy方法
+    /*
+    * 属性屏蔽理论
+    * 如果原型对象中有和构造函数中相同的属性
+    * 1.要回用属性搜索机制，寻找出访问属性的链条
+    * 2.如果想要访问原型中被屏蔽的属性 方法
+    * */
+
+
+    /*被屏蔽之后如何获取 */
+    //console.log(Product.prototype.buy())
+
+</script>

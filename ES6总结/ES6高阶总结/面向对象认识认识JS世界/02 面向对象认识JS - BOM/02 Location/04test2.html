@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+测试页面
+</body>
+</html>
+<script>
+    /*var json={num:1,id:1}*/
+    var querystring = function() {//获取URL查询字符串参数值的通用函数
+        var str = window.location.search.substring(1);//获取查询字符串，即"id=1&name=location"的部分
+        var arr = str.split("&");//以&符号为界把查询字符串分割成数组
+        var json = {};//定义一个临时对象
+        //遍历数组
+        for(var i=0;i<arr.length;i++) {
+            var c = arr[i].indexOf("=");//获取每个参数中的等号小标的位置
+            if(c==-1) continue;//如果没有发现测跳到下一次循环继续操作
+
+
+            var d = arr[i].substring(0,c);  //截取等号前的参数名称，这里分别是id和name
+            var e = arr[i].substring(c+1);  //截取等号后的参数值
+            json[d] = e;//以名/值对的形式存储在对象中
+        }
+        return json;//返回对象
+    }
+
+    var f = querystring();//调用查询字符串函数
+    for(var i in f) {
+        alert(i+"="+f[i]);
+    }
+</script>

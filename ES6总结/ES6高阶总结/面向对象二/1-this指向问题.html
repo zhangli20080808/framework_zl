@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+<!--this 是在执行的时候-->
+  let f1 = function () {
+    console.log(this)
+  }
+  let f2 = () => {
+    console.log(this) // this 指向声明时的作用域里的this
+  }
+  document.onclick = f1
+  document.body.onclick = f2
+
+  class Drag {
+    constructor (f) {
+      this.f = f
+    }
+  }
+
+  f1() // window
+  f2() // window
+  document.onclick() // docuemnt
+  document.body.onclick() // window
+  new Drag(f1).f() // Drag{}
+  new Drag(f2).f() //window
+
+</script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        div{
+            height: 100px;
+            width: 100px;
+            background: red;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+<div>122</div>
+<div>122</div>
+<div>122</div>
+</body>
+</html>
+<script>
+    /*什么叫伪数组*/
+    /*伪数组：只有数组的部分功能：length，下标，无法访问数组对象中的方法*/
+
+
+    /*Array.prototype.slice.call(arguments)能将具有length属性的对象转成数组*/
+    /*这是一种固定用法*/
+
+    /*为什么需要学习伪数组*/
+   /*js中常见的伪数组：通过document获取的dom集合*/
+    /*最为常用的arguments*/
+
+    /*这些伪数组无法使用Array对象中的方法，因为他们不是数组对象，就是普通的含有length属性的json对象而已*/
+  /*  比如：var json = {1:'',2:'',length:2}*/
+
+
+
+    var divs = document.getElementsByTagName("div")
+    console.log(divs.length)
+    /*说明他不是一个数组，无法访问里面的方法*/
+    divs.pop().style.background='green'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*我们通过如下方式将其转换成数组*/
+    /* slice ： 截取数组，返回的还是数组，这里我们截取全部  */
+    var domNodes =  Array.prototype.slice.call(divs);
+    /*这样domNodes就可以应用Array下的所有方法了。*/
+
+
+
+    domNodes.pop().style.background='green'
+
+
+</script>
+

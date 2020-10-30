@@ -1,2 +1,14 @@
-.idea
-.node_modules
+dist/
+dist_*/
+.temp/
+.rn_temp/
+node_modules/
+.DS_Store
+.idea/
+todo/
+*.yml
+*.log
+project.config.json
+.webpackrc.js
+dist_weapp/
+src/index.html

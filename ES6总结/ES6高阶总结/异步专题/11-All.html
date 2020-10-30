@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+let p = new Promise((resolve)=>{
+    setTimeout(()=>{
+        console.log(1);
+        resolve();
+    },10);
+});
+let p2 = new Promise((resolve)=>{
+    setTimeout(()=>{
+        console.log(2);
+        resolve();
+    },1000);
+});
+let p3 = new Promise((resolve)=>{
+    setTimeout(()=>{
+        console.log(3);
+        resolve();
+    },3000);
+});
+// Promise.all([p,p2,p3]).then(()=>{
+//     console.log(4);
+// });
+Promise.race([p,p2,p3]).then(()=>{
+    console.log(4);
+});
+</script>    
+</body>
+</html>

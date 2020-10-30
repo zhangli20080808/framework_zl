@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+let fn = (a,...arg)=>{
+    //console.log(arguments);
+    console.log(a,arg);  // 注意 arg 是个数组
+};
+
+fn(1,2,3,4);
+
+// 箭头函数本身没有不定参   没有 arguments 这东西 要拿到不定参 我们用 rest
+// rest 参数 剩余参数  名字可以随便
+</script>    
+</body>
+</html>

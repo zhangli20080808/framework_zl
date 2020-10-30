@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <script src='../09%20使用format改造案例/template.js'></script>
+    <script src='../09%20使用format改造案例/itcast.js'></script>
+</head>
+
+<body>
+<h1>最新上映电影：</h1>
+<div id='mydiv'></div>
+</body>
+</html>
+
+<!--模板王者演示-->
+<script id="arttemplate" type="text/html">
+    <strong>电影名称：</strong>{{name}}<br>
+    <strong style='color:red'>导演</strong>{{lead}}<br>
+    <strong style='color:green'>主演:</strong>{{role}}
+</script>
+<script>
+
+    //标准json定义-- 必须有标题，必须有双引号
+    var film = {
+        name: "没人鱼",
+        lead: "周星驰",
+        role: "邓超",
+    };
+
+
+    $$.BindTemplate(film,'mydiv','arttemplate')
+</script>

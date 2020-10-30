@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="js/Jquery.js"></script>
+  <style>
+    .active {
+      background: red;
+    }
+  </style>
+</head>
+<body>
+<a>链接</a>
+<button class="active">按钮1</button>
+<button>按钮2</button>
+<button>按钮3</button>
+<button>按钮4</button>
+<script>
+  // 类中的this 指向我们的实例化对象
+  class 央央 {
+    constructor (arg) {
+      // 判断参数类型
+      if (typeof arg === 'string') { //如果是一个字符串类型，就先获取元素然后通过 setElement 把元素都绑定在 this 上
+        let ele = document.querySelectorAll(arg)
+        this.setElement(ele)
+      } else if (typeof arg === 'object.create.js') { //如果是一个对象类型，就通过 setElement 把元素都绑定在 this 上
+        this.setElement(arg)
+      } else if (typeof arg === 'function') {//如果传入的是一个 function 就在文档读完之后执行这个函数
+        // DOMContentLoaded 文档读完
+        // onload 资源也都加载完
+        window.addEventListener('DOMContentLoaded', arg)
+      }
+    }
+
+    setElement (eles) {
+      if (eles.length === undefined) { // 当 eles 只是一个元素的时候
+        this[0] = eles
+        this.length = 1
+        // 把这个元素加 this 上，并被给 this 加length 变成一组元素，方便后续的逻辑处理
+      } else {
+        // 如果 eles 一组元素，就把每一个都加在 this 上
+        for (let i = 0; i < eles.length; i++) {
+          this[i] = eles[i]
+        }
+        this.length = eles.length
+        // 给this加 length，方便后边循环
+      }
+    }
+
+    click (fn) { // 给 JQ 对象上所有元素添加一个点击的处理
+      for (let i = 0; i < this.length; i++) {
+        this[i].addEventListener('click', fn)
+      }
+    }
+  }
+
+  function $ (...arg) {
+    return new 央央(...arg)
+  }
+
+  let btns = document.querySelector('button')
+  $(btns[0]).click(function () {
+    console.log(this)
+  })
+</script>
+</body>
+</html>

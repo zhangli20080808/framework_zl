@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="js/Jquery.js"></script>
+  <style>
+    .active {
+      background: red;
+    }
+  </style>
+</head>
+<body>
+<a>链接</a>
+<button class="active">按钮1</button>
+<button>按钮2</button>
+<button>按钮3</button>
+<button>按钮4</button>
+<script>
+  class 央央 {
+    constructor (arg) {
+      if (typeof arg === 'string') {
+        let ele = document.querySelectorAll(arg)
+        this.setElement(ele)
+      }
+    }
+
+    setElement (eles) {
+
+    }
+
+    click () {
+      console.log('click')
+    }
+  }
+
+  function $ () {
+    return new 央央()
+  }
+
+  console.log($('button'))
+</script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+  'use strict'
+  // a = 10
+  // console.log(a)
+
+  let a = {name:'123'}
+  let b = Object.assign({}, a, { zl: 123 })
+  // a.name = '456'  //不会修改
+  b.name = '456'
+  console.log(a,b)
+
+</script>
+</body>
+</html>

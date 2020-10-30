@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+  var obj = {
+    name: 'kkb',
+    vip: {
+      '前端': [1, 2, 3]
+    },
+    child: [
+      {
+        haha: 123
+      }
+    ]
+  }
+  /*
+
+  */
+
+  // 深拷贝
+  function copy (data) {
+    if (typeof data === 'object.create.js') { // 对象类型 要进行拷贝
+      if (Array.isArray(data)) {
+        var arr = [] // 数组复制数组的每一项
+        for (var i = 0; i < data.length; i++) {
+          arr[i] = copy(data[i])
+        }
+        return arr
+      } else {
+        var obj = {} //对象类型复制对象的每一项
+        for (var s in data) {
+          obj[s] = copy(data[s])
+        }
+        return obj
+      }
+    } else { // 基本类型数据直接返回
+      return data
+    }
+
+  }
+
+  var newObj = copy(obj)
+  //console.log(newObj == obj);
+  newObj['vip']['java'] = [2, 3, 4]
+  //console.log(newObj["vip"] == obj["vip"]);
+  console.log(obj)
+  console.log(newObj)
+</script>
+</body>
+</html>

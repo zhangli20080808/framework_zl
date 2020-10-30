@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script src='itcast.js'></script>
+<script>
+
+    //游戏随机生成名字
+    var boy = {
+        name:'无忌'
+        ,image:'男性头像'
+        ,age:20
+        ,sex:'男'
+    };
+
+    //技能名称，等级，伤害值，需要的魔法
+    var shaolin = {
+        damo:{
+            name:'达摩棍法',
+            attack:function(){
+                alert('达摩棍法')
+            }
+        },
+        WXQ:{
+            name:'少林五行拳',
+            attack:function(){
+                alert('少林五行拳')
+            }
+        },
+        DLJGS:{
+            name:'大力金刚手',
+            attack:function(){
+                alert('大力金刚手')
+            }
+        },
+        JJ72:{
+            name:'少林七十二绝技',
+            attack:function(){
+                alert('少林七十二绝技')
+            }
+
+        },
+        XSJ:{
+                name:'洗髓经',
+                level:10,
+                strength:3000,
+                magic:30,
+                attack:function(){
+                    alert('洗髓经')
+                }
+            },
+        YJJ:{
+            name:'易筋经',
+            level:10,
+            strength:3000,
+            magic:30,
+            attack:function(){
+                alert('易筋经')
+            }
+        }
+    };
+
+    var gaibang = {
+        xiaoYao:{
+            name:'逍遥游',
+            attack:function(){
+                alert('穆念慈 逍遥游')
+            }
+        },
+        bitDog:{
+            name:'打狗棍法',
+            attack:function(){
+                alert('打狗棍法')
+            }
+
+        },
+        XL18:{
+            name:'释放降龙十八掌',
+            level:10,
+            strength:3000,
+            magic:30,
+            attack:function(){
+                alert('释放降龙十八掌')
+            }
+        }
+    };
+
+
+
+
+    //第一种用法  醉侠客加入丐帮之后学到的技能
+    var zuixiake = $$.extendMany({}, gaibang,shaolin);
+    zuixiake.name='醉侠客';
+    console.log(zuixiake.name);
+    zuixiake.XL18.attack()
+    zuixiake.DLJGS.attack()
+
+    //第二种用法  无忌加入丐帮
+    $$.extendMany(boy,gaibang,shaolin);
+    console.log(boy.name);
+    boy.XL18.attack()
+    boy.DLJGS.attack()
+
+</script>

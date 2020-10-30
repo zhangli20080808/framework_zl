@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+  function Person (name = 'kkb', age = 8) {
+    this.name = name
+    this.age = age
+    this.sayName = function () {
+      console.log(this.name)
+    }
+    /*
+        在构造函数中，this 指向实例化对象
+    */
+    // return 123;
+    /*
+        如果 return 的是一个基本类型的数据，会被实例化对象覆盖 拿不到123 这些基本类型都会被覆盖掉
+    */
+   // return {
+   //     name: "miaov"
+   // }
+    /*
+        如果返回的是一个对象，会覆盖掉实例化对象
+        !!! 在构造函数中，不要使用return;
+    */
+  }
+
+  let p = new Person()
+  console.log(p)
+</script>
+</body>
+</html>

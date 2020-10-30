@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    //    字符串
+    var str1; //这个时候不进行内存分配
+    var str2 = '传智播客'; //分配内存
+    var str3=str2; //问题，这里str3 会不会分配内存？？  答案：会
+    console.log(str1)
+    console.log(str2)
+    console.log(str3)
+    console.log(str2===str3) //比较的是指针指向的内存空间中存储的值
+
+    str2 ='传智播客222222222'
+    str3 ='传智播客333333333'
+    console.log(str2)
+    console.log(str3)
+</script>

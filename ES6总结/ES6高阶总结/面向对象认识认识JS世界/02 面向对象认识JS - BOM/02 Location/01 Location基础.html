@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<button id="btn">打开一个新的窗口</button>
+<button id="btn2">打开一个新的窗口2</button>
+<button id="btn3">打开一个新的窗口Location</button>
+</body>
+</html>
+<script>
+    document.getElementById('btn').onclick=function() {
+        window.open('http://www.baidu.com')
+    }
+
+    document.getElementById('btn2').onclick=function() {
+        window.open ('http://www.baidu.com','newwindow','height=100,width=400,top=0,left=0,toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no')
+    }
+
+    //    我们可以控制窗口的各种属性：
+    //    宽为100，高为400，距屏顶0象素，屏左0象素，无工具条，无菜单条，无滚动条，
+    //    不可调整大小，无地址栏，无状态
+
+
+    document.getElementById('btn3').onclick=function() {
+        /*改变当前窗口的地址，则会打开新的网页*/
+        window.location ='test.html'
+        console.log(location.href)
+        console.log(location.port)
+        console.log(location.protocol)
+    }
+</script>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+
+<script>
+//     apply实现继承
+//    学生类本来不具备任何方法，
+//    但是在 Person.apply(this,arguments)  后，
+//    他就具备了 Person类的sayhello方法和 所有属性。
+//    在 Print.apply(this,arguments) 后就自动得到了  show() 方法。
+
+
+    //人对象
+    function Person(name,age){
+        this.name=name     //名字
+        this.age=age       //年龄
+        this.sayhello=function(){
+            console.log("人对象方法")
+        }
+    }
+    Person.prototype={
+        buy:function(){
+            console.log('测试是否能够继承原型中的方法')
+        }
+    }
+
+    //输出打印对象
+    function Print(){            //显示类的属性
+        this.funcName="我是打印对象"
+        this.show=function(){
+           console.log ('打印对象方法')
+        }
+    }
+
+    //学生对象
+    function Student(name,age,grade,school){    //学生类
+        Person.apply(this,arguments)
+        Print.apply(this,arguments)
+        this.grade=grade                  //年级
+        this.school=school                    //学校
+    }
+
+
+
+    /*子类继承两个父类*/
+   /* 也就是通俗一点讲就是:
+    用student去执行Person这个类里面的内容,
+    在Person这个类里面存在this.name等之类的语句,
+    这样就将属性创建到了student对象里面*/
+    var lisi=new Student("tom",13,6,"清华小学")
+    //学生继承了人和打印对象，则拥有了人的属性和方法
+    /*打印父类*/
+    lisi.show()
+    /*人父类*/
+    lisi.sayhello()
+    /*无法继承原型对象中的方法*/
+    alert(lisi.buy())
+</script>

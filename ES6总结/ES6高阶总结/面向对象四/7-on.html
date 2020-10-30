@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/Jquery.js"></script>
+    <style>
+        .active {
+            background: red;
+        }
+    </style>
+</head>
+<body>
+<a>链接</a>    
+<button class="active">按钮1</button>
+<button>按钮2</button>
+<button>按钮3</button>
+<button>按钮4</button>
+<script>
+// root 在操作当前次的时候，传入上一次的操作对象    
+class 央央{
+    constructor(arg,root){
+        root = root||$(document,{});
+        this["prevObject"] = root;// 把上一次的操作对象存入 this 的  prevObject 属性
+        if(typeof arg === "string"){ 
+            let ele = document.querySelectorAll(arg);
+            this.setElement(ele);
+        } else if(typeof arg === "object.create.js"){
+            this.setElement(arg);
+        } else if(typeof arg === "function"){
+            window.addEventListener("DOMContentLoaded",arg);
+        }
+    }
+    // 调用 end 方法，返回我们上一次的操作对象
+    end(){
+        return this["prevObject"];
+    }
+    eq(index){
+        // 注意当用户调用 eq 方法之后，这会 操作对象会进行改变,返回把上一次的this 传入
+        return $(this[index],this);
+    }
+    setElement(eles){
+        if(eles.length === undefined){
+            this[0] = eles;
+            this.length = 1;
+        } else {
+            for(let i = 0; i < eles.length;i++){
+                this[i] = eles[i];
+            }
+            this.length = eles.length;
+        }
+    }
+    click(fn){ 
+       for(let i = 0; i < this.length; i++){
+            this[i].addEventListener("click",fn);
+       }
+       return this; 
+    }
+    // 添加事件
+    on(eventNames,fn){
+        // eventNames eventNames 中可以存放多个 事件名称，每个事件名称中间用 空格 隔开
+        eventNames = eventNames.trim().split(" ");
+        eventNames = eventNames.filter(item=>item); // "" --> false 非空字符 true
+        for(let i = 0; i < this.length; i++){
+            for(let j = 0; j < eventNames.length; j++){
+                this[i].addEventListener(eventNames[j],fn);
+            }
+       }
+    }
+}    
+function $(...arg){
+    return new 央央(...arg);
+} 
+
+$("button").on(" click  mouseout ",function(){
+    console.log("11");
+});
+</script>    
+</body>
+</html>

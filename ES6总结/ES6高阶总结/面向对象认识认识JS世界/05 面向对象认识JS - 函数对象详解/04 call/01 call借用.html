@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+
+<script>
+
+    //对象1
+   var myclass={
+       getAllStudentsNumbers:function(){
+           return 130}
+   };
+    //对象2
+    var student={
+       getDetail:function(){
+           return {name:'莉莉',aihao:'唱歌跳舞'}
+       }
+   };
+    //借用 -- 供爷法则
+    console.log(myclass.getAllStudentsNumbers.call(student))
+
+</script>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    /******************************************************************************
+                                判断变量是不是数值型
+     *******************************************************************************/
+    function isNumber0(val){
+         return typeof val === 'number';
+         }
+
+//    但有些情况就不行，比如：
+//    1 var a;
+//    2 alert(isNumber(parseInt(a)));
+//    但实际上变量a是NaN，它是不能用于数值运算的。
+//    所以上面的函数可以修改为：
+
+     function isNumber(val){
+        return typeof val === 'number' && isFinite(val);
+        }
+
+//    顺便介绍一下JavaScript isFinite() 函数，isFinite() 函数用于检查其参数是否是无穷大，
+//    如果 number 是有限数字（或可转换为有限数字），
+//    那么返回 true。否则，如果 number 是 NaN（非数字），或者是正、负无穷大的数，则返回 false。
+
+
+
+
+    /******************************************************************************
+                                判断变量是不是布尔类型
+     *******************************************************************************/
+    function isBooleanType(val) {
+        return typeof val ==="boolean";
+    }
+
+
+
+
+    /******************************************************************************
+                                判断变量是不是字符串类型
+     *******************************************************************************/
+    function isStringType(val) {
+        return typeof val === "string";
+    }
+
+
+
+    /******************************************************************************
+                                    判断变量是不是Undefined
+     *******************************************************************************/
+    function isUndefined(val) {
+        return typeof val === "undefined";
+    }
+
+
+    var a;//a是undefined
+    var s = "strType";
+    alert("变量a是Undefined的判断结果是："+isUndefined(a));
+    alert("变量s是Undefined的判断结果是："+isUndefined(s));
+
+
+
+
+    /******************************************************************************
+     判断变量是不是对象
+     *******************************************************************************/
+    function isObj(str){
+        if(str === null || typeof str === 'undefined'){
+            return false;
+        }
+        return typeof str === 'object.create.js';
+    }
+
+    var a;
+    var b = null;
+    var c = "str";
+    var d = {};
+    var e = new Object();
+    alert("变量a是Object类型的判断结果是："+isObj(a));//false
+    alert("变量b是Object类型的判断结果是："+isObj(b));//false
+    alert("变量c是Object类型的判断结果是："+isObj(c));//false
+    alert("变量d是Object类型的判断结果是："+isObj(d));//true
+    alert("变量e是Object类型的判断结果是："+isObj(e));//true
+
+
+
+
+    /******************************************************************************
+     判断变量是不是null
+     *******************************************************************************/
+    function isNull(val){
+        return  val === null;
+    }
+    /*测试变量*/
+    var a;
+    var b = null;
+    var c = "str";
+    //弹出运行结果
+    alert("变量a是null的判断结果是："+isNull(a));//false
+    alert("变量b是null类型的判断结果是："+isNull(b));//true
+    alert("变量c是null类型的判断结果是："+isNull(c));//false
+
+
+
+    /******************************************************************************
+     判断变量是不是数组
+     *******************************************************************************/
+    //数组类型不可用typeof来判断。因为当变量是数组类型是，typeof会返回object。
+   //方法1
+    function isArray1(arr) {
+        return Object.prototype.toString.call(arr) === '[object Array]';
+    }
+   //方法2
+    function isArray2(arr) {
+        if(arr === null || typeof arr === 'undefined'){
+            return false;
+        }
+        return arr.constructor === Array;
+    }
+</script>
+
+

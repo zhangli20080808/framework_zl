@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+function fn(){
+    console.log(this,111,arguments);
+}
+// fn.apply(1);
+// 我们的proxy不光能代理我们的对象  而且还能代理函数
+// Proxy 执行的是一个严格模式所以我们的  thisArg this指向是undefined
+
+fn = new Proxy(fn,{
+    apply(target,thisArg,...arg){
+        console.log(target,thisArg,...arg);
+        //throw "该函数是一个类，不能直接调用";
+        //console.log(thisArg);
+        if(typeof thisArg !== "object.create.js"){
+            throw "该函数只支持事件和对象的方法调用，请勿直接调用";
+        }
+        target.apply(thisArg,arg);
+        //target(arg);
+    }
+});
+
+// apply 在函数执行的时候，进行一个拦截, （通过 new 调用这个函数，不会触发 apply 的代理）
+//document.onclick = fn;
+fn.call(document,"a.text.json","b","c");
+fn.call({},"a.text.json","b","c");
+// new fn;
+//fn();
+
+
+</script>    
+</body>
+</html>

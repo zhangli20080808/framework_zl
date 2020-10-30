@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+// 展开运算符
+let arr = [1,2,3,4,5];
+let arr2 = ["a",...arr,"b","c"];
+// 把 arr 中的数据放入 arr2 中，从 第 1 位开始排列
+// ["a",1,2,3,4,5,"b","c"]
+console.log(arr2);
+
+// 剩余参数
+let arr3 = [1,2,3,4,5];
+let [a,...b] = arr3;
+console.log(a,b);
+</script>    
+</body>
+</html>

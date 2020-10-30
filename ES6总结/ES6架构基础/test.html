@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class My{}
+        let my = new My();
+        // WeakMap key只能是对象 弱引用  
+        let map = new WeakMap(); // 二维数组  {a:1,b:2}
+        map.set(my,1);
+        my = null;   //当我们 设置了 null 虽然 set 过  但是 还是会一起释放掉 不会造成内存泄漏 这是弱应引用的好处
+     </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+let arr = [1,2,3,4,1,3,5,2,"c"];
+let data = new Set(arr);
+//console.log(data.add("a").add("b"));
+// console.log(data.delete("b"));
+//console.log(data.has(2));
+data.clear();
+console.log(data.size,data);
+/*
+    size 数据长度
+
+    Set.add() 添加子项  返回 set 数据本身
+    Set.delete() 删除子项 返回 true | false 
+    Set.has() 是否包含子项
+    Set.get() 得到某一项
+
+*/
+</script>    
+</body>
+</html>

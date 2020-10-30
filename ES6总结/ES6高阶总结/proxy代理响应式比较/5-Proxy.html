@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+let data = {
+    name: "mt",
+    age: 18,
+    price: 5000
+};
+
+// 回调对象  不是描述对象了
+let proxyData = new Proxy(data,{
+    get(target,key){ // 获取的时候拦截
+        //console.log(arg);
+        // 三个参数  要操作的data，目标对象  操作的属性  proxy
+        if(key == "price"){
+            return target[key]*.9;
+        }
+        return target[key];
+    },
+    set(target,key,newVal){  // 设置的时候拦截
+        // if(key == "price"){
+        //     if(newVal > target[key]){
+        //         throw "败家媳妇给家里余钱吧";
+        //     }
+        // }
+        // if(key == "price"){
+        //     if(isNaN(newVal)){
+        //         throw "对不起请给现金"
+        //     }
+        // }
+        target[key] = newVal;
+    },
+    has(target,key){ //判断某个值存不存
+        //console.log(target,key);
+        if(key == "gf"){
+            return true;
+        }
+        return (key in target);
+    }
+});
+console.log(proxyData);
+// console.log(proxyData.price);
+// console.log(proxyData.age);
+/*
+  Proxy.get 在对数据进行获取操作的时候，进行拦截 
+*/
+// proxyData.price = 600;
+// proxyData.price = 700;
+//console.log("gf" in proxyData);
+</script>    
+</body>
+</html>

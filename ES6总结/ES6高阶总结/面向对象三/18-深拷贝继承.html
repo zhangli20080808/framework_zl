@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+    function copy(data) {
+        if (typeof data === "object.create.js") { // 对象类型 要进行拷贝
+            if (Array.isArray(data)) {
+                var arr = []; // 数组复制数组的每一项
+                for (var i = 0; i < data.length; i++) {
+                    arr[i] = copy(data[i]);
+                }
+                return arr;
+            } else {
+                var obj = {}; //对象类型复制对象的每一项
+                for (var s in data) {
+                    obj[s] = copy(data[s]);
+                }
+                return obj;
+            }
+        }
+        return data;
+    }
+
+    function Person(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    Person.prototype.sayName = function () {
+        console.log(this.name);
+    };
+    Person.prototype.sayAge = function () {
+        console.log(this.age);
+    };
+
+    function Child(name, age) {
+        Person.call(this, name, age);
+    }
+
+    //Child.prototype = Person.prototype;
+    // 注意 prototype 本身是一个对象，对象是传址的,如果把父类的 Person.prototype 直接赋值给 Child，我们修改了 Child.prototype 之后， Person.prototype 也有改变
+
+    // 浅拷贝
+    // for(var s in Person.prototype){
+    //     Child.prototype[s] = Person.prototype[s];
+    // }
+    // 浅拷贝只考虑第一层的引用问题
+    // 深拷贝考虑每一层的引用问题
+    Child.prototype = copy(Person.prototype);
+
+    Child.prototype.sayAge = function () {
+        console.log("就不告诉你年龄");
+    }
+
+    var miaov = new Person("miaov", 9)
+    var kkb = new Child("kkb", 8);
+    miaov.sayAge();
+    kkb.sayAge();
+</script>
+</body>
+</html>

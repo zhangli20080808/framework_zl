@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+var num = 12211212;
+num.tostring()
+date.tostring ();
+    //原型对象
+//    原型对象里面的属性  -- 简称原型属性
+// 上侠  --  上天入地 的的丰富的非地方大侠。。。。
+Product.prototype.age = 12;
+//    原型方法
+Product.prototype.add=function(){}
+
+//实例化  抽象 具体 实例  ---  new Product ---类名
+//使用的使用 需要先实例化：
+var  product = new Product(); //实例对象 实例
+//如何访问对象里面的方法属性 -- 点语法
+console.log(product.name)
+product.add();
+
+
+
+//上面两个对象如何联系在一起的。。。
+
+
+
+
+    /******************************************************************************
+                            构造函数和构造函数对象
+                            属性 方法 语法规范
+     *******************************************************************************/
+    console.log('构造函数和构造函数对象')
+    //构造函数语法规范
+    //该函数 用于创建对象 其除了是一个函数之外，我们又称之为构造对象的函数 - 简称构造函数
+    function Product(name,description){
+        //属性
+        this.name=name;
+    }
+
+    //访问语法规范 先实例化后点语法访问
+    var phone = new Product('手机','手机中的战斗机')
+    console.log(phone.name)
+    console.log(phone.buy())
+
+
+
+
+    /******************************************************************************
+                                    原型对象
+                                原型对象属性 原型对象方法 语法规范
+     *******************************************************************************/
+    console.log('原型对象')
+    //原型对象
+    //原型对象名字：构造函数名称.prototype
+
+    //原型对象的属性语法规范
+    Product.prototype.date = '2015/10/01'
+
+    //原型对象的方法语法规范
+    Product.prototype.getDetail = function(){
+       return {name:'IPhone7s',price:100,description:'手机中的战斗机'};
+    }
+
+    //访问语法规范： 静态模式访问 实例模式访问
+    //静态模式访问
+    console.log(Product.prototype.date)
+
+    //实例模式访问
+    phone = new Product('手机','手机中的战斗机')
+    console.log(phone.date)
+
+
+
+
+    /******************************************************************************
+                        构造函数对象的属性和原型对象的属性区别
+                        原型对象属性 原型对象方法 语法规范
+     *******************************************************************************/
+
+    console.log('构造函数对象的属性和原型对象的属性区别')
+    //构造函数对象的属性和原型对象的属性
+    //构造函数对象属性不共享 原型对象属性共享
+    var iphone =new Product('iphone')
+    var android =new Product('android')
+
+    //构造函数对象属性不共享
+    console.log(iphone.name)    //iphone
+    console.log(android.name)   //android
+
+
+
+    //原型对象属性被所有实例共享
+    console.log(iphone.date)    //2015/10/0
+    console.log(android.date)   //2015/10/0
+
+</script>

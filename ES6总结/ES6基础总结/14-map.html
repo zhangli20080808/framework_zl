@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+let data = new Map([["leo",40],["zmouse",30],["reci",20]]);
+data.set("刘伟",41);
+data.delete("leo");
+console.log(data.get("zmouse"));
+console.log(data);
+/*
+    size 数据长度
+
+    data.set() 添加子项  返回 set 数据本身
+    Set.delete() 删除子项 返回 true | false 
+    Set.has() 是否包含子项
+
+*/
+</script>    
+</body>
+</html>

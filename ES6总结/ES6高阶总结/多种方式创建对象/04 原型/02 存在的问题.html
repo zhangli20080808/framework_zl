@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+</head>
+
+<body>
+</body>
+</html>
+<script>
+
+
+    //原型方式主张将一切都放在原型中
+    //  存在的缺点：name是每个实例不一样的
+    var Role =function() {}
+    /*姓名*/
+    Role.prototype.name={nickName:'剑侠客',accountName:'876791562@qq.com'};
+    //生命值
+    Role.prototype.HP=100;
+    //魔法值
+    Role.prototype.MP=100;
+    //技能
+    Role.prototype.technologys=['普通攻击','横扫千军','地狱火','漫天飞雪'];
+    //跑起来
+    Role.prototype.run=function() {
+        alert('run');
+    }
+
+    /*引用类型有问题*/
+    var boy = new Role()
+    boy.name.nickName='剑侠客'
+    console.log(boy.name.nickName)
+    var girl = new Role()
+    girl.name.nickName = '可爱宝贝'
+    console.log(boy.name.nickName)
+    console.log(girl.name.nickName)
+
+
+
+
+</script>

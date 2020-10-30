@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+let obj = {
+    // name:'123' 该属性定义过
+};
+/*
+ defineProperty 的默认值问题：
+    情况一，该属性已经在对象定义过:
+        configurable: true
+        enumerable: true
+        value: "kkb"
+        writable: true
+
+    情况二，该属性在对象未定义过:
+        configurable: false
+        enumerable: false
+        value: undefined
+        writable: false
+
+*/    
+Object.defineProperty(obj,"name",{
+
+});
+console.log(Object.getOwnPropertyDescriptor(obj,"name"));
+/*
+    getOwnPropertyDescriptor 获取该对象相关的描述
+*/
+</script>    
+</body>
+</html>

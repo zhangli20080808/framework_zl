@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+  // new 运算符
+  function Person (name = 'kkb', age = 8) {
+    /*
+    调用 new 方法之后
+        1. 执行该函数
+        2. 隐式创建一个对象
+        3. 把该对象 和 函数的this进行绑定
+        4. 把加在 this 上的属性 和 方法 都加到 该对象上
+        5. 函数执行完毕,返回该对象
+    */
+    this.name = name
+    this.age = age
+    this.sayName = function () {
+      console.log(this.name)
+    }
+  }
+
+  let p = new Person()
+  console.log(p)
+  // new fnName
+  /*
+     new 运算符创建一个用户定义的对象类型的实例或具有构造函数的内置对象的实例。
+     创建一个空的简单JavaScript对象（即{}）；
+     链接该对象（即设置该对象的构造函数）到另一个对象 ；
+     将步骤1新创建的对象作为this的上下文 ；
+     如果该函数没有返回对象，则返回this。
+
+     构造函数（Person）:  new 后边跟的这个函数，叫做构造函数，当我们 new 函数后，会执行构造函数，
+     并根据构造函数的结构生成一个对象(实例化)，并返回;
+
+     构造函数 ，是一种特殊的方法。主要用来在创建对象时初始化对象，
+     即为对象成员变量赋初始值，总与new运算符一起使用在创建对象的语句中。
+  */
+</script>
+</body>
+</html>

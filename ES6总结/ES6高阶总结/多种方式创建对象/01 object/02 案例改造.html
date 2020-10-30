@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div id="itemInfo">
+    <div id="name">
+        <h1 id='pname'>乐视TV（ Letv） S50 Air 全配版 50英寸2D智能LED液晶 超级电视</h1>
+        <div id="pdes">各地区货源已陆续到库，我们将在十月十号左右发货，对于此次延迟发货给您带来的不便表示致歉，望您谅解。</div>
+        <div id="p-ad-phone"></div>
+        <div>价格：<strong id='pprice'>6000</strong></div>
+    </div>
+</div>
+<button id='btn'>加入购物车</button>
+
+
+<!--购物车：-->
+
+<!--产品列表 -->
+<!--产品的总价格-->
+<div>购物车价格：<strong id='sum'>0</strong></div>
+
+</body>
+</html>
+
+<script>
+    window.onload=function() {
+        var btn=document.getElementById('btn')
+        var name= document.getElementById('pname')
+        var price= document.getElementById('pprice')
+        var sum= document.getElementById('sum')
+        var des= document.getElementById('pdes')
+
+
+        //如何使用
+        //对象的使用必须先实例化，对象定义好之后，都是抽象的，必须实例化成具体
+        //var iphone = new Product('iphone',6000,'手机中的战斗机')
+        //产品对象 - json格式
+
+        /*xml  字符串 json 二进制数据*/
+
+
+        /*js语言特有的。。。*/
+
+        var iphone  = new Object()
+        iphone.name = 'iphone'
+        iphone.price = 6000
+        iphone.description = '手机中的战斗机'
+        iphone.addToCart = function(product){
+            cart.products.push(product)
+            cart.sum+=product.price;
+            sum.innerHTML=cart.sum
+        }
+
+        //定义一个购物车json对象
+        var cart ={products:[],sum:0}
+
+        name.innerHTML=iphone.name
+        price.innerHTML=iphone.price
+        des.innerHTML=iphone.description
+
+
+        //购物车
+        sum.innerHTML=cart.sum;
+
+        btn.onclick = function(){
+            iphone.addToCart(iphone)
+        }
+    }
+
+
+
+
+
+</script>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+
+let mynames = '极客时间'
+    {
+        console.log(mynames) //极客时间 词法环境  没有 再去变量环境找
+        console.log(myname)// 报错
+        let myname = '极客邦'
+    }
+
+    /*
+    * 最终打印结果
+    *
+    * VM6277:3 Uncaught ReferenceError: Cannot access 'myname' before initialization
+    *
+    * 分析原因
+    *
+    * 在块作用域内，let声明的变量被提升，但变量只是创建被提升，初始化并没有被提升，在初始化之前使用变量，就会形成一个暂时性死区。
+    *
+    * 拓展
+    *
+    * var的创建和初始化被提升，赋值不会被提升。
+      let的创建被提升，初始化和赋值不会被提升。
+      function的创建、初始化和赋值均会被提升。
+
+    * */
+    
+// let 允许声明一个在作用域限制在块级中的变量、语句或者表达式
+// var a = 1;
+// 全局作用域 函数作用域
+{
+    let a = 1;
+    var b = 1;
+    console.log(a);
+}
+//console.log(a);
+</script>    
+</body>
+</html>

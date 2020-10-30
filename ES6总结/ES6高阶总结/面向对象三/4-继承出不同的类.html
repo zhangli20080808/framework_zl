@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box {
+            position: absolute;
+            left: 100px;
+            top: 100px;
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+        #box2 {
+            position: absolute;
+            left: 200px;
+            top: 200px;
+            width: 100px;
+            height: 100px;
+            background: green;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">文字</div>
+    <div id="box2">文字</div>
+<script>
+class BaseDrag {
+    constructor(el){
+        this.el = el;
+        this.startMouse = {};
+        this.start();
+    }
+    start(){
+        let move = (e)=>{
+            this.move(e);
+        };
+        this.el.addEventListener("mousedown",(e)=>{
+            this.startMouse = {
+                x: e.clientX,
+                y: e.clientY
+            };
+            this.ondragstart&&this.ondragstart();
+            document.addEventListener("mousemove",move);
+            document.addEventListener("mouseup",(e)=>{
+                document.removeEventListener("mousemove",move);
+                this.end(e);
+            },{once:true});
+            
+            /*
+                拖拽： 
+                    获取元素的初始位置
+                框选:
+                    创建画框的元素
+            */
+        });
+    }
+    move(e){
+        let nowMouse = {
+            x: e.clientX,
+            y: e.clientY
+        };
+        let disMouse = {
+            x: nowMouse.x - this.startMouse.x,
+            y: nowMouse.y - this.startMouse.y
+        };
+        /*
+            拖拽： 
+                计算元素的现有位置： start元素的坐标 + disMouse
+            框选:
+                计算元素的现有位置和大小:
+                    let l = Math.min(nowMouse.x,startMouse.x);
+                    let t = Math.min(nowMouse.y,startMouse.y);
+                    let w = Math.abs(disMouse.x);
+                    let h = Math.abs(disMouse.y);
+        */
+    }
+    end(e){
+        /*
+            拖拽： 
+                无操作
+            框选:
+                删除元素
+        */
+    }
+}
+
+class Drag extends BaseDrag {
+    constructor(el){
+        super(el);
+        this.ondragstart = ()=>{
+            console.log("呵呵");
+        };
+        this.ondragstart = ()=>{
+            console.log("哈哈");
+        };
+    }
+}
+{
+    let box = document.querySelector("#box");
+    let boxDrag = new Drag(box);
+}
+</script>    
+</body>
+</html>

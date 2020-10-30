@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<!--
+高级语言构造函数是没有return的
+而js比较特殊，js构造函数本身就是一个函数，所以拥有函数的一切的特性
+如果return一个对象，则new的时候返回的是return的对象-->
+</body>
+</html>
+<script>
+    /*构造函数如果有return的话  就当作普通函数处理 就不必走构造函数的机制了*/
+    var fun1 = function(){
+        this.name = 'peter';
+        return {
+            name: 'jack'
+        };
+    }
+    var p1 = new fun1();
+    console.log(p1.name)
+
+
+
+    var fun2 = function(){
+        this.name = 'peter';
+        return 'jack';
+    }
+    var p2 = new fun2();
+    console.log(p2.name)
+</script>

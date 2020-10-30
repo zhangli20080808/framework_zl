@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css" />
+</head>
+
+<body>
+    <section id="wrap">
+        <h2 class="title">百度音乐榜单</h2>
+        <nav class="collect_state">
+            <a href="javascript:;">已收藏</a>
+            <a href="javascript:;">未收藏</a>
+            <a href="javascript:;">默认</a>
+        </nav>
+        <nav class="checked_state">
+            <a href="javascript:;">已选中</a>
+            <a href="javascript:;">未选中</a>
+            <a href="javascript:;">默认</a>
+        </nav>
+        <ul id="list">
+            <!-- <li>
+          <input type="checkbox" />
+          <span>第一条信息</span>
+          <a href="javascript:;" class="collect">收藏</a>
+          <a href="javascript:;" class="cancelCollect">取消收藏</a>
+          <a href="javascript:;" class="remove">删除</a>
+        </li> -->
+        </ul>
+        <footer class="footer">
+            <label><input type="checkbox" id="checkAll" />全选/全不选</label>
+            <a href="javascript:;" id="remove">删除</a>
+            <input type="text" id="newInfo" />
+            <a href="javascript:;" id="add">添加</a>
+        </footer>
+    </section>
+    <script>
+        let data = [
+            {
+                id: 0,
+                txt: "残酷月光 - 费启鸣",
+                collect: true,
+                checked: false
+            },{
+                id: 1,
+                txt: " 兄弟 - 艾热",
+                collect: false,
+                checked: true
+            }
+        ];
+        {
+            let list = document.querySelector("#list");
+            let checkAll = document.querySelector("#checkAll");
+
+            /* 收藏状态切换 */
+            let collectStateBtn = document.querySelectorAll(".collect_state a");
+            let collectState = 2; // 0 已收藏 1 未收藏 2 默认
+            let collectFn = [
+                item=>item.collect,
+                item=>(!item.collect),
+                item=>true
+            ];
+            collectStateBtn.forEach((item,index)=>{
+                item.onclick = ()=>{
+                    collectState = index;
+                    render();
+                }
+            });
+
+            /*选中状态切换*/
+            let checkedStateBtn = document.querySelectorAll(".checked_state a");
+            let checkedState = 2; // 0 已选中 1 未选中 2 默认
+            let checkedFn = [
+                item=>item.checked,
+                item=>(!item.checked),
+                item=>true
+            ];
+            checkedStateBtn.forEach((item,index)=>{
+                item.onclick = ()=>{
+                    checkedState = index;
+                    render();
+                }
+            });
+
+            // 事件委托，把元素的事件利用冒泡原理，委托在父祖级处理
+            // 根据数据渲染结构
+            let render = () => {
+                //  list.innerHTML  操作了元素的innerHTML 之后，元素中的内容会重新生成，之前添加给 list 的子元素的事件 都会失效.
+                let nowData = data.filter(collectFn[collectState]);
+                nowData = nowData.filter(checkedFn[checkedState]);
+                list.innerHTML = nowData.map(item => {
+                    return `
+                    <li data-id="${item.id}">
+                       <input type="checkbox" ${item.checked ? "checked" : ""} />
+                       <span>${item.txt}</span>
+                       ${item.collect?`<a href="javascript:;" class="cancelCollect">取消收藏</a>`:`<a href="javascript:;" class="collect">收藏</a>`}
+                       <a href="javascript:;" class="remove">删除</a>
+                    </li>
+                    `;
+                }).join("");
+                checkAll.checked = data.every(item => item.checked);
+            };
+            render();
+            /* 数据的操作方法 */
+            // 添加一条数据
+            let add = (txt) => {
+                data.push({
+                    id: Date.now(),
+                    txt,
+                    checked: false,
+                    collect: false
+                });
+                render();
+            };
+            
+            let newInfo = document.querySelector("#newInfo");
+            let addBtn = document.querySelector("#add");
+            addBtn.onclick = ()=>{
+                 add(newInfo.value);
+                 // newInfo.value="";
+            };
+            
+            // 修改选中状态
+            let changeChecked = (id,checked)=>{
+                data.forEach(item=>{
+                    if(item.id == id){
+                        item.checked = checked;
+                    }
+                });
+                render();
+            };
+            // 如果元素的内容会动态更新，我们最好用事件代理
+            list.onchange = ({target})=>{
+                //let {target} = e;
+                let li = target.parentNode;
+               //console.log(target.checked,li.dataset.id);
+               changeChecked(li.dataset.id,target.checked);
+            };
+
+            // 事件代理(事件委托)：利用事件冒泡，把事件放在父祖上进行处理
+
+            //删除单项
+            let remove = (id)=>{
+                // data.forEach(item=>{
+                //     if(item.id == id){
+                //         item.checked = checked;
+                //     }
+                // });
+                data = data.filter(item=>item.id!=id);
+                render();
+            };
+
+            // list.onclick = ({target})=>{
+            //    //console.log(target);
+            //    if(target.className == "remove"){
+            //       // console.log("该执行删除了");
+            //       remove(target.parentNode.dataset.id);
+            //    }
+            // };
+            list.addEventListener("click",({target})=>{
+               //console.log(target);
+               if(target.className == "remove"){
+                  // console.log("该执行删除了");
+                  remove(target.parentNode.dataset.id);
+               }
+            })
+            
+            // 全选全不选
+            let checkedAll = (checked)=>{
+                data.forEach(item=>{
+                    item.checked = checked;
+                });
+                render();
+            } 
+
+            checkAll.onchange = ()=>{
+                checkedAll(checkAll.checked);
+            };
+            
+            // 收藏 和 取消收藏
+            function collect(id){
+                data.forEach(item=>{
+                    if(item.id == id){
+                        item.collect = true;
+                    }
+                });
+                render();
+            }
+            function cancelCollect(id){
+                data.forEach(item=>{
+                    if(item.id == id){
+                        item.collect = false;
+                    }
+                });
+                render();
+            }
+            list.addEventListener("click",({target})=>{
+                if(target.className === "cancelCollect"){
+                    cancelCollect(target.parentNode.dataset.id);
+                } else if(target.className === "collect"){
+                    collect(target.parentNode.dataset.id);
+                }
+            });
+
+            // 删除选中项
+            let removeCheckedBtn = document.querySelector("#remove");
+            let removeChecked = ()=>{
+                data = data.filter(item=>!item.checked);
+                render();
+            };
+            removeCheckedBtn.onclick = function(){
+                removeChecked();
+            };
+        }
+    </script>
+</body>
+
+</html>

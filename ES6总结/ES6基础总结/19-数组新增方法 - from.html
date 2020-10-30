@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<ul id="list">
+  <li>li1</li>
+  <li>li2</li>
+  <li>li3</li>
+  <li>li4</li>
+</ul>
+<script>
+    (function () {
+        let list = document.getElementById("list");
+        let lists = list.getElementsByTagName("li");
+        // //lists = [...lists];
+        // lists = Array.from(lists);
+        // // lists.forEach(item => {
+        // //     console.log(item);
+        // // });
+        // console.log(lists);
+
+        //Array.from  把一个类数组转化成真正的数组  类数组  有下标 有length
+        // let datas = {
+        //     0: "a",
+        //     1: "b",
+        //     2: "c",
+        //     length: 3
+        // };
+        // datas = Array.from(datas);
+        // datas = Array.from(datas, function (item, index) {
+        //     console.log(item, index, this);
+        //     return item.toUpperCase();
+        // }, document);
+        //
+        // console.log(datas);
+
+        list = [...lists]
+        console.log(list)
+    })();
+
+    // 注意哪些方法 是 构造函数下面的  哪些是对象本身的
+
+    // new Date().getTime()
+    // Date.now()
+</script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<ul id="list">
+  <li>li1</li>
+  <li>li2</li>
+  <li>li3</li>
+  <li>li4</li>
+</ul>
+<script>
+  /*
+  * Array.of() 方法创建一个具有可变数量参数的新数组实例，而不考虑参数的数量或类型。
+
+  Array.of(7) 创建一个具有单个元素 7 的数组
+  而 Array(7) 创建一个长度为7的空数组
+  （注意：这是指一个有7个空位(empty)的数组，而不是由7个undefined组成的数组）。
+  *
+  * */
+  (function () {
+    let arr = Array.of(1, 2, 3, 4, 5, 5, 6)
+    console.log(arr)
+    let arr2 = [].of(12, 23)
+    // 千万注意 字面量数组没有of方法
+    // Uncaught TypeError: [].of is not a function
+    console.log(arr2)
+  })()
+</script>
+</body>
+</html>

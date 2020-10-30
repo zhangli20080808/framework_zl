@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="js/Jquery.js"></script>
+  <style>
+    .active {
+      background: red;
+    }
+  </style>
+</head>
+<body>
+<a>链接</a>
+<button class="active">按钮1</button>
+<button>按钮2</button>
+<button>按钮3</button>
+<button>按钮4</button>
+<script>
+  class 央央 {
+    constructor (arg) {
+      if (typeof arg === 'string') {
+        let ele = document.querySelectorAll(arg)
+        this.setElement(ele)
+      } else if (typeof arg === 'object.create.js') {
+        this.setElement(arg)
+      } else if (typeof arg === 'function') {
+        window.addEventListener('DOMContentLoaded', arg)
+      }
+    }
+
+    eq (index) {
+      return $(this[index])
+    }
+
+    setElement (eles) {
+      if (eles.length === undefined) {
+        this[0] = eles
+        this.length = 1
+      } else {
+        for (let i = 0; i < eles.length; i++) {
+          this[i] = eles[i]
+        }
+        this.length = eles.length
+      }
+    }
+
+    click (fn) {
+      for (let i = 0; i < this.length; i++) {
+        this[i].addEventListener('click', fn)
+      }
+      // 类的原型中的方法， this 指向 实例化对象
+      return this // 把这个实例化对象接着返回
+    }
+  }
+
+  function $ (...arg) {
+    return new 央央(...arg)
+  }
+
+  //console.log($("button").eq(1));
+  // $("button").click(function(){
+  //     console.log(12);
+  // }).eq(0).click(function(){
+  //     console.log("这是0");
+  // });
+  console.log($('button').eq(0))
+</script>
+</body>
+</html>

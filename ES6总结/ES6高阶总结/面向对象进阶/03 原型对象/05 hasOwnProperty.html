@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>无标题文档</title>
+    <script>
+
+        //hasOwnProperty : 看是不是对象自身下面的属性
+        function Product(){
+            this.name='iphone'
+        }
+
+        Product.prototype={
+            age:100
+        }
+
+        var iphone = new Product()
+        console.log(iphone.hasOwnProperty('name'))
+        console.log(iphone.hasOwnProperty('age'))
+
+    </script>
+</head>
+
+<body>
+</body>
+</html>

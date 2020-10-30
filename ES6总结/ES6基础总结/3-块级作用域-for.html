@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+    // for (var i = 0; i < 5; i++) {
+    //     setTimeout(function () {
+    //         console.log(i);
+    //     }, 100);
+    // }
+    // // 输出5次5
+    //
+    // for (let i = 0; i < 5; i++) {
+    //     setTimeout(function () {
+    //         console.log(i);
+    //     }, 100);
+    // }
+    // 其实走了5个代码块
+    // 每次循环会生成一个代码块  循环几次 就相当于开辟了几个代码块
+    // {
+    //     let i = 0
+    //
+    // }
+    // {
+    //     let i = 1
+    // }
+    //
+    // {
+    //     let i = 2
+    // }
+
+    // let i;
+    // for(i = 0; i < 5; i++ ){
+    //    setTimeout(function(){
+    //        console.log(i);
+    //    },100);
+    // }
+
+    // for(var i = 0; i < 5; i++ ){
+    //   (function(i){
+    //     setTimeout(function(){
+    //         console.log(i);
+    //     },100);
+    //   })(i);
+    // }
+    //
+    // 利用 setTimeout 函数的第三个参数，会作为回调函数的第一个参数传入
+    // 利用 bind 函数部分执行的特性
+
+    // for (var i = 0; i < 10; i++) {
+    //     setTimeout(console.log, 1000, i)
+    // }
+
+    for (let i = 0; i < 5; i++) {
+        setTimeout(i => {
+            console.log(i)
+        }, 1000, i)
+    }
+</script>
+</body>
+</html>

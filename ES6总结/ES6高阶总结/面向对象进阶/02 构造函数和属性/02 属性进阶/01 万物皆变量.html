@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+<!--
+    所有的数据都是通过变量来保存（管理）的
+    var str = ‘’
+    var fn = function(){}
+    var product=function() {}
+    function Product(){}
+    var json={}
+    函数声明和函数表达式的区别
+    函数声明是可以提升的，而函数表达式不可以提升。
+    当我们定义一个函数表达式，在这个表达式前面是访问不到的。
+-->
+</body>
+</html>
+<script>
+    var str = ''
+    var num = 1
+    var bool = true
+    var date = new Date()
+    console.log(fn())
+    console.log(fn2())//无法访问到
+
+    //函数声明，变量fn以及其实现被提升到顶部
+    function fn() {
+        console.log('函数')
+    }
+
+    //函数表达式,仅变量fn2被提升到顶部，实现没有被提升
+    var fn2 = function () {
+        console.log('函数变量形式')
+    }
+
+
+    /*万物皆变量*/
+    var Product = function () {
+        this.name = 'iphone'
+        this.add = function () {
+        }
+    }
+
+
+    Product.prototype = {
+        buy: function () {
+
+        }
+    }
+
+    var iphone = new Product();
+    console.log(iphone.name)
+</script>

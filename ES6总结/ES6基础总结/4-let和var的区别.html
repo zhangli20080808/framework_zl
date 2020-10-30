@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+// console.log(a);
+// var a = 1;
+
+// let 不会被预解析，必须先声明后使用
+//console.log(a);
+//let a = 1;
+
+// 我们的与解析 会造成代码混乱  比如我在下面写的代码 上面都能用了  必须遵守先声明再使用 这样代码在维护起来就好很多了
+
+let fn = function(){
+    console.log("一定先声明，在使用");
+};
+fn();
+</script>    
+</body>
+</html>

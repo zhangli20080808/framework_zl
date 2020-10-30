@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<h2>测试页面</h2>
+</body>
+</html>
+<script>
+
+    function simpleQuery(){
+        var params= window.location.search;//params:?id,date
+        var arr = params.substring(1).split(",");
+        return arr;
+    }
+
+    console.log(simpleQuery())
+</script>

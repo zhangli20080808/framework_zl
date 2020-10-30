@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+// Promise 不解决异步问题，解决的是异步的写法
+
+let p = new Promise(function(resolve,reject){
+    // 这个函数会被 Promise
+    setTimeout(()=>{
+        resolve("传参");// 当我们调用了 resolve 就代表该异步完成，并且成功拿到结果
+    },2000);
+});
+p.then(function(res){
+    console.log("拿到异步的处理结果");
+});
+/*
+    new Promise(promise的回调函数，在实例化时会直接执行function(resolve,reject){
+        // resolve 调用该 函数 resolve(传递给成功的执行函数的数据) 代表异步执行完成，并成功拿到结果
+        // reject 调用该函数 reject(传递给处理失败的执行函数的数据) 代表异步执行完成，但是没有成功拿到结果
+    })
+
+*/
+console.log(p);
+</script>    
+</body>
+</html>

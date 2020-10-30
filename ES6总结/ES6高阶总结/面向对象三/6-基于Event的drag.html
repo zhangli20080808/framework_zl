@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box {
+            position: absolute;
+            left: 100px;
+            top: 100px;
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+        #box2 {
+            position: absolute;
+            left: 200px;
+            top: 200px;
+            width: 100px;
+            height: 100px;
+            background: green;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">文字</div>
+    <div id="box2">文字</div>
+<script>
+/*
+    帮助我们实现了一套事件机制
+*/    
+class Event { 
+    events = {} //事件池:记录所有的相关事件及处理函数
+    on(eventName,fn){//添加一个事件处理
+        if(!this.events[eventName]){
+            this.events[eventName] = [];
+        }
+        if(!this.events[eventName].includes(fn)){
+            this.events[eventName].push(fn);
+        }
+    }
+    off(eventName,fn){ //删除一个事件处理
+        if(!this.events[eventName]){
+            return ;
+        }
+        this.events[eventName] = this.events[eventName].filter(item=>item!=fn);
+    }
+    dispatch(eventName,...arg){ //触发事件
+        if(!this.events[eventName]){
+            return ;
+        }
+        this.events[eventName].forEach(item => {
+            item.call(this,...arg);
+        });
+    }
+} 
+/*
+    dragstart 开始拖拽
+    drag 拖拽中
+    dragend 拖拽结束
+*/   
+class BaseDrag extends Event{
+    constructor(el){
+        super();// 在子类里，书写constructor,必须要加 super
+        this.el = el;
+        this.startMouse = {};
+        this.start();
+    }
+    start(){
+        let move = (e)=>{
+            this.move(e);
+        };
+        this.el.addEventListener("mousedown",(e)=>{
+            this.startMouse = {
+                x: e.clientX,
+                y: e.clientY
+            };
+            this.dispatch("dragstart");//触发 dragstart
+            document.addEventListener("mousemove",move);
+            document.addEventListener("mouseup",(e)=>{
+                document.removeEventListener("mousemove",move);
+                this.end(e);
+            },{once:true});
+        });
+    }
+    move(e){
+        let nowMouse = {
+            x: e.clientX,
+            y: e.clientY
+        };
+        let disMouse = {
+            x: nowMouse.x - this.startMouse.x,
+            y: nowMouse.y - this.startMouse.y
+        };
+        this.dispatch("drag"); //触发 drag
+    }
+    end(e){
+        this.dispatch("dragend"); //触发 dragend
+    }
+}
+{
+    let box = document.querySelector("#box");
+    let boxDrag = new BaseDrag(box);
+    console.log([]);
+    boxDrag.on("dragstart",function(){
+        console.log("开始拖拽");
+    });
+    boxDrag.on("drag",function(){
+        console.log("拖拽中",this);
+    });
+    boxDrag.on("dragend",function(){
+        console.log("拖拽结束",this);
+    });
+    //console.log(boxDrag);
+}
+</script>    
+</body>
+</html>

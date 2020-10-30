@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+测试页面
+</body>
+</html>
+<script>
+    var str = window.location.search.substring(1);//获取查询字符串，即"id=1&name=location"的部分
+    var arr = str.split("&");//以&符号为界把查询字符串分割成数组
+    console.log(arr)
+</script>

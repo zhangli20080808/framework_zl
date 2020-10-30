@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+
+/******************************************************************************
+                                    四种构造函数重载方法
+ *******************************************************************************/
+
+//什么是方法重载？？
+
+
+//构造函数 - 第一种重载方法：基本 当前时间
+console.log('构造函数 - 第一种重载方法：基本 当前时间')
+date = new Date(); //返回时间对象 以调用getDate()，内容为当前时间
+console.log(date); //Thu Sep 24 2015 14:01:53 GMT+0800 (中国标准时间)
+
+date = Date(); //返回时间字符串 没有getDate等日期对象方法，内容为当前时间
+console.log(date); //Thu Sep 24 2015 14:01:53 GMT+0800 (中国标准时间)
+
+date = +new Date(); //返回时间毫秒数字
+console.log(date);
+//一个静态方法 返回当前时间与1970-01-01的时间间隔，毫秒单位
+console.log('静态方法')
+console.log(Date.now());　 //1443085759316
+
+
+
+//构造函数 - 第二种重载 - 传递毫秒值
+console.log('构造函数 - 第二种重载 - 传递毫秒值')
+//距离起始时间1970年1月1日的毫秒数
+date = new Date(1238129999999);
+console.log(date.toLocaleString()); //2015年3月27日 12:59:59
+
+
+
+//构造函数 - 第三种重载 - 传递零散的年月日时间等日期时间参数
+console.log('构造函数 - 第三种重载 - 传递零散的年月日时间等日期时间参数')
+/*  分散的时间数值型构造函数  -  构造函数有 2-7 个参数时, 将是根据 "年, 月, 日, 时, 分, 秒, 毫秒" 建立时间 */
+date = new Date(2015, 2, 27, 12, 59, 59);
+console.log(date.toLocaleString()); //2015年3月27日 12:59:59
+
+date = new Date(2015, 2, 27, 12, 59);
+console.log(date.toLocaleString()); //2015年3月27日 12:59:00
+
+date = new Date(2015, 2, 27, 12);
+console.log(date.toLocaleString()); //2015年3月27日 12:00:00
+
+date = new Date(2015, 2, 27);
+console.log(date.toLocaleString()); //2015年3月27日 0:00:00
+
+date = new Date(2015, 2);
+console.log(date.toLocaleString()); //2015年3月1日 0:00:00
+
+
+
+//构造函数 - 第四种重载 - 传递一个日期形式的字符串
+console.log('构造函数 - 第四种重载 - 传递一个日期形式的字符串')
+//date = new Date("month dd,yyyy hh:mm:ss");
+//date = new Date(yyyy,mth,dd);
+//month:用英文表示月份名称，从January到December
+//mth:用整数表示月份，从（１月）到１１（１２月）
+//dd:表示一个月中的第几天，从1到31
+//yyyy:四位数表示的年份
+//hh:小时数，从0（午夜）到23（晚11点）
+//mm:分钟数，从0到59的整数
+//ss:秒数，从0到59的整数
+date =  new Date('2014/12/25');                 // yyyy/MM/dd格式
+console.log(date);                              //2014/12/25 00:00:00
+
+date = new Date('2014/12/25 12:00:00');         // yyyy/MM/dd HH:mm:ss格式
+console.log(date);                              //2014/12/25 12:00:00
+
+date = new Date('2014-12-25');                  // yyyy-MM-dd格式
+console.log(date);                              // 2014-12-25 08:00:00
+date = new Date('2014-12-25 12:00:00');         // yyyy-MM-dd HH:mm:ss
+console.log(date);                              // 2014-12-25 12:00:00
+
+date  = new Date("December 31, 2015 23:59:59"); //month dd,yyyy hh:mm:ss格式
+console.log(date);                              //Thu Dec 31 2015 23:59:59
+console.log(date.toLocaleString());             //2015/12/31 下午11:59:59
+
+date  = new Date("January 12,2015");            //month dd,yyyy格式
+console.log(date)                               //Mon Jan 12 2015 00:00:00
+console.log(date.toLocaleString());             //2015/1/12 上午12:00:00
+
+
+
+
+
+
+/******************************************************************************
+                            将日期对象转换成字符串
+ *******************************************************************************/
+
+//转换成本地格式 -- 智能识别操作系统语言设置或者浏览器语言设置
+console.log('转化成本地格式')
+date = new Date();
+console.log(date.toString())           //转换为字符串
+console.log(date.toLocaleTimeString())  //获取当前   时间        下午5:09:19
+console.log(date.toLocaleDateString())  //获取当前   日期        2015/9/24
+console.log(date.toLocaleString())      //获取当前   日期与时间  2015/9/24 下午5:09:19
+
+
+
+
+
+
+
+/******************************************************************************
+                    将一个字符串转换为Date对象的写法
+ *******************************************************************************/
+
+//为什么需要将其转换成Date对象：因为我如果需要获取日期，或者设置日期时间等都需要在对象的基础上
+
+console.log('将一个字符串转换为Date对象的写法 -构造函数重载4方法')
+
+
+//方法1  构造函数重载4
+var str = "2015-12-12";
+date  = new Date(str);　　//字符串转换为Date对象
+console.log(date.toLocaleString()); //2015/12/12 上午8:00:00
+
+
+//方法2 Date.parse
+console.log('将一个字符串转换为Date对象的写法 -Date.parse方法')
+//把字符串转换为Date对象
+//然后返回此Date对象与'1970/01/01 00:00:00'之间的毫秒值(北京时间的时区为东8区，起点时间实际为：'1970/01/01 08:00:00')
+date = Date.parse("Jul 8, 2005")
+console.log(date)
+
+date = "2015-12-30";
+console.log(Date.parse(date));
+//将字符串包装成对象之后，我们就可以使用接下来该对象拥有的属性和方法了。。。
+console.log("<br/>" + da.getFullYear() + "-" + da.getMonth() + "-" + da.getDate());　　
+
+
+
+
+
+
+
+
+/******************************************************************************
+                                获取
+                        具体的某个日期或者时间
+ *******************************************************************************/
+
+//当使用构造函数实例化一个日期对象之后，接下来我们可以从其中获取具体的日期，时间等各种数字
+
+
+//获取日期 -  年（1970-????） 月(0-11） 日（0-31） 星期（0-6）
+console.log('获取日期')
+date = new Date();
+console.log(date.getFullYear())  //获取完整的年份(4位,1970-????)
+console.log(date.getYear())      //获取当前年份(2位，不准确，已淘汰) 从 ECMAScript v3 开始，JavaScript 的实现就不再使用该方法，而使用 getFullYear() 方法取而代之
+console.log(date.getMonth())     //获取当前月份(0-11,0代表1月)
+console.log(date.getDate());　　 //获取几号   - 0 - 31 比如25
+console.log(date.getDay());　　  //获取星期几 - 比如星期3的3
+
+
+//获取时间 - 小时（0-23）  分（0-59）  秒（0-659） 毫秒值(0-999)  比如：12:23:45 375
+console.log('获取时间')
+date = new Date();
+console.log(date.getHours())            //获取小时                      12
+console.log(date.getMinutes());         //获取分                        23
+console.log(date.getSeconds());         //获取秒                        45
+console.log(date.getMilliseconds());　　// 获取毫秒     　　             375
+console.log(date.getTime());　　        // 获取相对于1970-01-01的毫秒值   1443085759313
+
+
+
+
+
+
+
+/******************************************************************************
+                                    设置
+                            具体的某个日期或者时间
+ *******************************************************************************/
+
+
+//使用方法：创建一个日期对象，然后自定义具体的日期，时间
+
+
+//setFullYear(year, opt_month, opt_date) ：设置Date对象的年份值；4位年份。
+//setMonth(month, opt_date) ：设置Date对象的月份值。0表示1月，11表示12月。
+//setDate(date) ：设置Date对象的月份中的日期值；值的范围1~31 。
+//setHours(hour, opt_min, opt_sec, opt_msec) ：设置Date对象的小时值。
+//setMinutes(min, opt_sec, opt_msec) ：设置Date对象的分钟值。
+//setSeconds(sec, opt_msec) ：设置Date对象的秒数值。
+//setMilliseconds(msec) ：设置Date对象的毫秒值。
+
+
+//比如根据太阳的衰变动态计算太阳消失的时间
+
+date = new Date();
+date.setFullYear(9999); // => 9999年
+date.setMonth(11); // => 11：月；实际为12月份(月份从0开始计算)
+date.setDate(25); // => 25：日
+date.setHours(15); // => 15：时
+date.setMinutes(30); // => 30：分
+date.setSeconds(40); // => 40：秒
+date.setMilliseconds(333); // => 333：毫秒
+console.log(date); // =>  9999年12月25日 15点30分40秒 333毫秒
+
+</script>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+// 继承
+// 多态
+
+class Person {
+    constructor(name,age){
+        this.name = name;
+        this.age = age;
+    }
+    say(){
+        console.log(this.name);
+    }
+}
+class Teacher extends Person {
+    constructor(name,age){
+        // 如果在子类中重新定义constructor，一定在这里调用 super
+        super(name,age);
+        this.speciality = "讲课";
+    }
+    say(){
+        console.log(this.age);
+    }
+    skill(){
+        console.log("连续上课24小时");
+    }
+}
+let p = new Person("小明",18);
+let p2 = new Teacher("小红",58);
+p.say();
+p2.say();
+</script>    
+</body>
+</html>

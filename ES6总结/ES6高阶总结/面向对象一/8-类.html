@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+  class Person {
+    constructor (name, age) {
+      this.name = name
+      this.age = age
+      this.sayName = function () {
+        console.log(this.name)
+      }
+    }
+  }
+
+  let p = new Person('kkb', 8)
+  console.log(p)
+  console.log(p.constructor === Person) //true
+
+  /*
+      抽象:抽取相似的功能，归为一类
+
+      类：专业点说法就是一组具有相同属性和行为的对象的抽象，只看这个貌似不太好理解，怎么理解这个类呢？以我们前边的代码为例
+      function Person 这个就是一个类，我们把拖拽所需要的常用功能都封装在这个类中，
+      每次需要需要使用到拖拽这个功能的时候，就实例化这个类，它会给我生成 一个 drag 对象，通过该对象我们就实现了拖拽这个功能。
+
+      类：构造函数和原型的集合体
+  */
+
+  /*
+      在 ES6 中，虽然有了 class 的语法，但是还是有别于传统语言(Java) 中的类。
+      ES6 中的类，只是语法糖(糖衣语法)
+
+      构造函数 静态属性和方法 属于类本身
+  */
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let arr = [1, 2, 3, 4];
+      arr.push(5);
+      console.dir(Array.isArray(arr));
+      class Person {
+        constructor(name) {
+          this.name = name;
+        }
+
+        sayName() {
+          console.log(this.name);
+        }
+
+        static 物种 = '哺乳类';
+        //静态方法
+        static defaultProps = {
+          apple: '1',
+        };
+
+        static eat() {
+          console.log('吃饭饭', this);
+        }
+      }
+
+      let p = new Person('kkb');
+      p.sayName();
+      //console.log(p.sayName);
+      /*
+        加了 static 之后的方法(属性)，就是一个静态方法，静态方法注意要通过类来调用
+        在实例上不能使用，并且 静态方法 this 指向类
+      */
+      Person.eat(); // 吃饭饭
+      console.log(Person.defaultProps); // {apple: "1"}
+    </script>
+  </body>
+</html>

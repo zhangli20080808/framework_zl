@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+
+<script>
+
+    function Product(){
+        this.name='iphone8'
+        this.description='手机中的战斗机'
+        this.price=7777
+        this.add = function(){}
+    }
+
+    Product.prototype={
+        date:'2017-8-8',
+        buy:function(){}
+    }
+    var iphone = new Product()
+//    通过hasOwnProperty过滤掉原型中的属性
+    for(var i in iphone) {
+        if (iphone.hasOwnProperty(i)) {
+            console.log(i);
+        }
+    }
+
+</script>

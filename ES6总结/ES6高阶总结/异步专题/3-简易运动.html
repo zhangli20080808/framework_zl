@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+<div id="box"></div>    
+<script>
+/*
+    el 元素
+    attr 样式
+    val 目标点
+    cb 动画结束之后，要做的事情
+*/    
+function move(el,attr,val,cb){
+    let now = parseFloat(getComputedStyle(el)[attr]);
+    let speed = (val - now)/Math.abs(val - now)*2;
+    clearInterval(el.timer);
+    el.timer = setInterval(() => {
+        if(Math.abs(now - val) <= 0 ){
+            clearInterval(el.timer);
+            cb&&cb();
+        } else {
+            now += speed;
+            el.style[attr] = now + "px";
+        }
+    }, 16);
+}
+{
+    let box = document.querySelector("#box");
+    // 异步的回调地狱
+    function boxMove(){
+        move(box,"left",200,()=>{
+        //console.log("动画完了");
+            move(box,"top",200,()=>{
+                move(box,"left",0,()=>{
+                    move(box,"top",0,boxMove)
+                });
+            });
+        });
+    }
+    boxMove();
+    
+}
+</script>    
+</body>
+</html>

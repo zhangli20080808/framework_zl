@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+
+<script>
+
+    /*新增一个方法*/
+    String.prototype.alertSelf=function(){
+        alert(this)
+    }
+
+    /*trim是ES5新增的，以前的版本不支持，一般我们在编程的时候不会直接使用ES5，所以必须自己扩充*/
+    String.prototype.trim = function() {
+        return this.replace(/(^\s*)|(\s*$)/g, "");
+    }
+
+
+
+    var str = '传智播客'
+    str.alertSelf()
+
+
+</script>

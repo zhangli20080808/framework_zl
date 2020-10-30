@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+  /*
+  * Object.values()方法返回一个给定对象自身的所有可枚举属性值的数组，
+  * 值的顺序与使用for...in循环的顺序相同 ( 区别在于 for-in 循环枚举原型链中的属性 )。
+  *
+  * */
+  let obj = {
+    a: 1,
+    b: 2,
+    c: 3
+  }
+  obj[Symbol.iterator] = function () {
+    // 迭代协议  也可以拿key值去做
+    let values = Object.values(obj)
+    let index = 0
+    console.log(values) //[1,2,3]
+    return {
+      next () {
+        if (index >= values.length) {
+          return {
+            done: true
+          }
+        } else {
+          return {
+            done: false,
+            value: values[index++]
+          }
+        }
+      }
+    }
+  }
+  let values = obj[Symbol.iterator]()
+  console.log(values.next())  //{done: false, value: 1}
+  console.log(values.next())  //{done: false, value: 2}
+  console.log(values.next())  //{done: false, value: 3}
+  console.log(values.next())  //{done: true}
+  console.log(obj, 'values')
+  // for (let val of obj) {
+  //   console.log(val)
+  // }
+</script>
+</body>
+</html>

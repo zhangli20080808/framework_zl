@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<!--document 对象集合-->
+<!--document 对象集合得到的是一个数组，他们提供了对全体 HTML 元素或特定元素的访问-->
+<form></form>
+<form></form>
+<form></form>
+<form></form>
+<a href="http://www.baidu.com">百度</a>
+<a href="#">未知</a><br />
+
+</body>
+</html>
+
+<script>
+//    对象集合属性
+    document.write("文档包含："+document.forms.length+"个表单"+"<br />");//forms[]对象集合统计表单个数
+    document.write(document.all.length+"<br />");//15
+    document.write(document.links[0]);//输出：http://www.baidu.com/
+</script>

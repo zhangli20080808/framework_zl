@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+// let obj = {
+//     name: "kkb",
+//     age: 9
+// };
+// console.log(obj.name); // 如果想要在获取对象的属性的时候做一些别的操作
+// obj.name = 10; // 如果想要在设置对象的属性的时候做一些别的操作
+//let name = "kkb";
+let obj = {
+    $name: "kkb",
+    get name(){ // 获取 name 属性时触发
+        //console.log("想要获取name属性");
+        return this.$name;// 想要让 obj 在获取name 属性时，拿到的值
+    },
+    set name(newVal){ // 设置 name 属性时 触发
+        console.log(newVal); // 给 name 设置的新值
+        this.$name = newVal;
+    }
+};
+//console.log(obj.name);
+obj.name = "小明集团";
+// console.log(obj.name);
+// console.log(obj);
+</script>        
+</body>
+</html>

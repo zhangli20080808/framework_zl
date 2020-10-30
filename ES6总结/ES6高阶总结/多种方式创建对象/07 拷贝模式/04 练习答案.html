@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script src='itcast.js'></script>
+<script>
+
+    //extend2实现的功能：extend(target,obj1,obj2,obj3)
+    //游戏随机生成名字
+    var boy = {
+        name:'醉侠客'
+        ,image:'男性头像'
+        ,age:20
+        ,sex:'男'
+    };
+
+
+    //技能名称，等级，伤害值，需要的魔法
+    var technology = {tname:'亡灵复活',tlevel:10,tstrength:3000,tmagic:30};
+
+    var shenqi = {sname:'霜之哀伤',slevel:30,sstrength:3000}
+    //当这个人有了穿上盔甲，圣衣，六神合体，戴上魔法戒指之后，自动也拥有一个技能
+
+
+    //第一种用法
+    var zuixiake = $$.extendMany({}, technology,shenqi);
+    zuixiake.name='醉侠客';
+    console.log(zuixiake.name);
+    console.log(zuixiake.tname);
+    console.log(zuixiake.sname);
+
+
+    //第二种用法
+    $$.extend(boy,technology);
+    console.log(boy.name);
+    console.log(boy.tname);
+
+
+</script>

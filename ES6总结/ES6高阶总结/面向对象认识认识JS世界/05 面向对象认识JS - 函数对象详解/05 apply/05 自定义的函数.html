@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+
+<script>
+    /*有的同学说 这样的函数也不多，apply应该也就使用部分函数而已，。。。。大打错了。
+    下面看下高手的编程
+    工作中70%用不好apply
+    50%都不理解apply
+    后台开发人员也做部分前端 80%都不知道这个用法*/
+    function add(a, b) {
+        return a + b;
+    }
+
+    function add(){
+        var sum=0;
+        for(var i=0;i<arguments.length;i++){
+            sum+=arguments[i]
+        }
+        return sum;
+    }
+
+    var sum = add(1,2,3,4,5)
+
+    console.log(sum)
+
+    /*如何计算数组的和*/
+    var sum2 =  add.apply(null,[1,2,3,4,5])
+
+    console.log(sum2)
+</script>

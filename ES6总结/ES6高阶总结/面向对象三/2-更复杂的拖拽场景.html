@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .select {
+            position: fixed;
+            border: 1px solid #000;
+            background: rgba(0, 0, 0, .1);
+        }
+    </style>
+</head>
+<body>
+<script>
+let select = null;
+let startMouse = {};
+let move = (e)=>{
+    // 画框中
+    let nowMouse = {
+        x: e.clientX,
+        y: e.clientY
+    };
+    
+    let disMouse = {
+        x: nowMouse.x - startMouse.x,
+        y: nowMouse.y - startMouse.y
+    };
+    // 计算 left/top/width/height
+    let l = Math.min(nowMouse.x,startMouse.x);
+    let t = Math.min(nowMouse.y,startMouse.y);
+    let w = Math.abs(disMouse.x);
+    let h = Math.abs(disMouse.y);
+    select.style.width = w + "px";
+    select.style.height = h + "px";
+    select.style.left = l + "px";
+    select.style.top = t + "px";
+    /*
+        left和top是元素的左上角坐标
+        left：如果 start.x > move.x？move.x:start.x --> Math.min();
+        top: 如果 start.y > move.y?move.y:start.y --> Math.min()
+        width: start.x-move.x
+    */
+
+};
+document.addEventListener("mousedown",(e)=>{ 
+    // 准备画框
+    startMouse = {
+        x: e.clientX,
+        y: e.clientY
+    }
+    select = document.createElement("div");
+    select.className = "select";
+    document.body.appendChild(select);
+    document.addEventListener("mousemove",move);
+    document.addEventListener("mouseup",()=>{
+        // 结束画框
+        document.body.removeChild(select);
+        document.removeEventListener("mousemove",move);
+    },{once:true});
+});
+</script>    
+</body>
+</html>

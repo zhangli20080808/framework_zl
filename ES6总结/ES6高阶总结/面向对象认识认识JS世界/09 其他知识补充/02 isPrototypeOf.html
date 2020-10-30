@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+
+<!--isPrototypeOf  方法用于测试一个对象是否存在于另一个对象的原型链上-->
+
+<script>
+
+    function Product(){
+        this.name='iphone8'
+        this.description='手机中的战斗机'
+        this.price=7777
+        this.date=new Date()
+        this.add = function(){}
+    }
+
+    Product.prototype={
+        test:11111,
+        buy:function(){}
+    }
+    var iphone = new Product()
+    console.log(Product.prototype.isPrototypeOf(iphone))
+
+</script>

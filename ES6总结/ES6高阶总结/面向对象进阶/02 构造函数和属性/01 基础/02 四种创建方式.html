@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>使用构造函数创建属性的四种方式
+    </title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+
+    /*传参形式*/
+    function Product(name){
+        this.name = name
+    }
+    Product.prototype={}
+
+
+    var iphone = new Product('iphone8s')
+
+
+    /*默认值*/
+    function Product(){
+        this.name = ''
+        this.price=0
+    }
+    Product.prototype={}
+
+
+    var iphone = new Product()
+    /*动态添加形式*/
+    iphone.description='XXXXXXXXXX'
+    iphone.images=[]
+
+
+
+
+    /*混合模式*/
+    function Product(name,price){
+        this.name = name
+        this.price=price
+        this.version=1.0
+        this.add=function(){}
+    }
+    Product.prototype={}
+
+
+    var iphone = new Product()
+    /*动态添加形式*/
+    iphone.description='XXXXXXXXXX'
+    iphone.images=[]
+
+
+    console.log(iphone instanceof Product)//true
+
+
+</script>
