@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Title</title>
+  <style>
+    .model {
+      border: 1px solid black;
+      position: fixed;
+      width: 300px;
+      height: 300px;
+      top: 20%;
+      left: 50%;
+      margin-left: -150px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+<div id="loginBtn">点我</div>
+</body>
+<script>
+  /*
+  * 单例模式
+  * 定义呢？ 保证一个类只有一个实例，并提供一个全局访问他的访问点
+
+  * 实现的方法？
+  * 先判断实例是否存在，如果存在则直接返回，不存在，那么先创建然后再返回，这就
+  * 确保了一个类只有一个实例对象
+  *
+  * 适用场景？
+  * 一个单一对象: 比如 弹窗，无论点击多少次，弹窗只应该被创建一次，实现起来也很简单
+  * 用于变量缓存即可
+  *
+  * 应用场景
+  * element中的弹窗代码中，可以看到单例模式的实际案例 保证全局唯⼀性
+  * https://github.com/ElemeFE/element/blob/dev/packages/message-box/src/main.js#L79
+  * */
+
+  let getSingle = function (fn) {
+    let result
+    //第一次不存在 创建 下一次再访问 返回结果 不用再实例化第二次
+    return function () {
+      return result || (result = fn.apply(this, arguments))
+    }
+  }
+
+  let createLoginLayer = function () {
+    let div = document.createElement('div')
+    div.innerHTML = '我是弹窗'
+    div.className = 'model'
+    div.style.display = 'none'
+    document.body.appendChild(div)
+    return div
+  }
+  let createSingleLoginLayer = getSingle(createLoginLayer)
+  document.getElementById('loginBtn').onclick = function () {
+    let loginLayer = createSingleLoginLayer()
+    // console.log(loginLayer)
+    loginLayer.style.display = 'block'
+  }
+</script>
+
+</html>

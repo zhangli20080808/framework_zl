@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Title</title>
+</head>
+<body>
+<input type="checkbox" id="1">
+<input type="checkbox" id="2">
+</body>
+<script>
+    /*
+    * 中介者模式
+    * 定义呢？
+    *
+    * 通过⼀个中介者对象，其他所有的相关对象都通过该中介者对象来通信，⽽不是相
+      互引⽤，当其中的⼀个对象发⽣改变时，只需要通知中介者对象即可。通过中介者模式可以解除对象与
+      对象之间的紧耦合关系。
+    *
+    * 目的？减少耦合
+
+    * 应用场景
+    * 例如：现实⽣活中，航线上的⻜机只需要和机场的塔台通信就能确定航线和⻜⾏状态，⽽不需要和所有
+      ⻜机通信。同时塔台作为中介者，知道每架⻜机的⻜⾏状态，所以可以安排所有⻜机的起降和航线安
+      排。
+
+    * 购物⻋需求，存在商品选择表单、颜⾊选择表单、购买数量表单等
+    * 都会触发change事件，那么可以通过中介者来转发处理这些事件，实现各个事件间的解耦，仅仅维护中介者对象即可。
+    *
+    * redux，vuex 都属于中介者模式的实际应⽤，我们把共享的数据，抽离成⼀个单独的store， 每个都通
+      过store这个中介来操作对象
+    * */
+
+    let imgFunc = (function () {
+        let imgNode = document.createElement('img');
+        document.body.appendChild(imgNode);
+        return {
+            setSrc: function (src) {
+                imgNode.src = src;
+            }
+        }
+    })();
+    let proxyImage = (function () {
+        let img = new Image();
+        img.onload = function () {
+            imgFunc.setSrc(this.src);
+        }
+        return {
+            setSrc: function (src) {
+                imgFunc.setSrc('./loading,gif');
+                img.src = src;
+            }
+        }
+    })();
+    proxyImage.setSrc('./pic.png');
+
+
+    /*
+    * 假设我们在做⼀个⽂件同步的功能，当我们选中⼀个 checkbox 的时候，它对应的⽂件就会被同 步到另
+      外⼀台备⽤服务器上⾯。当⼀次选中过多时，会产⽣频繁的⽹络请求。将带来很⼤的开销。可以通过⼀
+      个代理函数 proxySynchronousFile 来收集⼀段时间之内的请求， 最后⼀次性发送给服务器
+    * */
+
+    let synchronousFile = function (id) {
+        console.log('开始同步⽂件，id 为: ' + id);
+    };
+    let proxySynchronousFile = (function () {
+        let cache = [], // 保存⼀段时间内需要同步的 ID
+            timer; // 定时器
+        return function (id) {
+            cache.push(id);
+            if (timer) { // 保证不会覆盖已经启动的定时器
+                return;
+            }
+            timer = setTimeout(function () {
+                synchronousFile(cache.join(','));
+                clearTimeout(timer); // 清空定时器
+                timer = null;
+                cache.length = 0; // 清空 ID 集合
+            }, 2000);
+        }// 2 秒后向本体发送需要同步的 ID 集合
+    })();
+
+    let checkbox = document.getElementsByTagName('input');
+    for (let i = 0, c; c = checkbox[i++];) {
+        c.onclick = function () {
+            if (this.checked === true) {
+                proxySynchronousFile(this.id);
+            }
+        }
+    }
+
+
+</script>
+
+</html>

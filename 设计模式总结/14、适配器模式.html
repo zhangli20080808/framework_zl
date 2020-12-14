@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+</body>
+<!--适配器模式的作⽤是解决两个软件实体间的接⼝不兼容的问题。使⽤适配器模式之后，原本 由于
+接⼝不兼容⽽不能⼯作的两个软件实体可以⼀起⼯作。 适配器的别名是包装器(wrapper)，这是⼀
+个相对简单的模式。在程序开发中有许多这样的 场景:当我们试图调⽤模块或者对象的某个接⼝
+时，却发现这个接⼝的格式并不符合⽬前的需求。 这时候有两种解决办法，第⼀种是修改原来的
+接⼝实现，但如果原来的模块很复杂，或者我们拿 到的模块是⼀段别⼈编写的经过压缩的代码，
+修改原接⼝就显得不太现实了。第⼆种办法是创建 ⼀个适配器，将原接⼝转换为客户希望的另⼀
+个接⼝，客户只需要和适配器打交道。-->
+
+<script>
+    var googleMap = {
+        show: function () {
+            console.log('开始渲染⾕歌地图');
+        }
+    };
+    var baiduMap = {
+        display: function () {
+            console.log('开始渲染百度地图');
+        }
+    };
+    var baiduMapAdapter = {
+        show: function () {
+            return baiduMap.display();
+        }
+    };
+    renderMap(googleMap); // 输出:开始渲染⾕歌地图
+    renderMap(baiduMapAdapter); // 输出:开始渲染百度地图
+
+
+    /* 适配器模式主要⽤来解决两个已有接⼝之间不匹配的问题，它不考虑这些接⼝是怎样实 现的，也不考虑
+       它们将来可能会如何演化。适配器模式不需要改变已有的接⼝，就能够 使它们协同作⽤。
+    装饰者模式和代理模式也不会改变原有对象的接⼝，但装饰者模式的作⽤是为了给对象 增加功能。装饰
+    者模式常常形成⼀条⻓的装饰链，⽽适配器模式通常只包装⼀次。代理 模式是为了控制对对象的访问，
+    通常也只包装⼀次。
+    我们设计很多插件，有默认值，也算是适配器的⼀种应⽤， vue的prop校验，default也算是适配器的
+    应⽤了外观模式的作⽤倒是和适配器⽐较相似，有⼈把外观模式看成⼀组对象的适配器，但外观模式最显著的
+    特点是定义了⼀个新的接⼝。*/
+</script>
+
+
+</html>

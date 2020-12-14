@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Title</title>
+</head>
+<body>
+</body>
+<script>
+    /*
+    * 建造者模式
+    * 定义呢？
+    * 和⼯⻓模式相⽐，参与了更多创建的过程 或者更复杂
+    * */
+
+    var Person = function (name, work) {
+        // 创建应聘者缓存对象
+        var _person = new Human();
+        // 创建应聘者姓名解析对象
+        _person.name = new Named(name);
+        // 创建应聘者期望职位
+        _person.work = new Work(work);
+        return _person;
+    };
+    var person = new Person('xiao ming', 'code');
+    console.log(person)</script>
+
+</html>

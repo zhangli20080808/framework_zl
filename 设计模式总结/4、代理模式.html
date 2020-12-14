@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Title</title>
+</head>
+<body>
+<input type="checkbox" id="1">
+<input type="checkbox" id="2">
+</body>
+<script>
+    /*
+    * 代理模式
+    * 定义呢？
+    * 为⼀个对象提供⼀个代⽤品或占位符，以便控制对它的访问。
+    *
+    * 常⽤的虚拟代理形式？
+    * 某⼀个花销很⼤的操作，可以通过虚拟代理的⽅式延迟到这种需要它的时候才去
+    * 创建（例：使⽤虚拟代理实现图⽚懒加载）
+
+    * 应用场景
+    * 图⽚懒加载的⽅式
+    * 先通过⼀张loading图占位，然后通过异步的⽅式加载图⽚，等图⽚加载好了再把完成的图⽚加载到img标签⾥⾯。
+    * */
+
+    let imgFunc = (function () {
+        let imgNode = document.createElement('img');
+        document.body.appendChild(imgNode);
+        return {
+            setSrc: function (src) {
+                imgNode.src = src;
+            }
+        }
+    })();
+    let proxyImage = (function () {
+        let img = new Image();
+        img.onload = function () {
+            imgFunc.setSrc(this.src);
+        }
+        return {
+            setSrc: function (src) {
+                imgFunc.setSrc('./loading,gif');
+                img.src = src;
+            }
+        }
+    })();
+    proxyImage.setSrc('./pic.png');
+
+
+    /*
+    * 假设我们在做⼀个⽂件同步的功能，当我们选中⼀个 checkbox 的时候，它对应的⽂件就会被同 步到另
+      外⼀台备⽤服务器上⾯。当⼀次选中过多时，会产⽣频繁的⽹络请求。将带来很⼤的开销。可以通过⼀
+      个代理函数 proxySynchronousFile 来收集⼀段时间之内的请求， 最后⼀次性发送给服务器
+    * */
+
+    let synchronousFile = function (id) {
+        console.log('开始同步⽂件，id 为: ' + id);
+    };
+    let proxySynchronousFile = (function () {
+        let cache = [], // 保存⼀段时间内需要同步的 ID
+            timer; // 定时器
+        return function (id) {
+            cache.push(id);
+            if (timer) { // 保证不会覆盖已经启动的定时器
+                return;
+            }
+            timer = setTimeout(function () {
+                synchronousFile(cache.join(','));
+                clearTimeout(timer); // 清空定时器
+                timer = null;
+                cache.length = 0; // 清空 ID 集合
+            }, 2000);
+        }// 2 秒后向本体发送需要同步的 ID 集合
+    })();
+
+    let checkbox = document.getElementsByTagName('input');
+    for (let i = 0, c; c = checkbox[i++];) {
+        c.onclick = function () {
+            if (this.checked === true) {
+                proxySynchronousFile(this.id);
+            }
+        }
+    }
+
+
+</script>
+
+</html>

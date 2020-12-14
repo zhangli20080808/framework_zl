@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    const arr = [11, 2, 4, 232, 3213, 23, 23123, 213]
+    // arr.sort() 只能处理10以内的数字排序
+    arr.sort(function (a, b) {
+        // a 每一次执行匿名函数的时候 找到的数组的当前项
+        // b 当前项的后一项
+        // return a - b  // 升序 每一次都拿当前项和后一项进行比较  a>b 返回>0 交换位置 a<b 不动
+        // return b - a // 降序 如果b>a 返回>0 a和b交换位置
+        // return 的值不是固定的
+        return a - b
+    })
+
+    const ary = [
+        {name: '田喜', age: 29},
+        {name: '小明', age: 30},
+        {name: '刘杰', age: 28}
+    ];
+    // ary.sort(function (a, b) {
+    //     //a b 是里面的对象 {name : 'tx',age : 29}
+    //     return (a.age - b.age) * -1;  // 大 -> 小
+    // });
+    // console.log(ary);
+    //但是我们按照name去排序呢?
+
+    /*
+    * stringObject.localeCompare(target)
+    * 说明比较结果的数字。如果 stringObject 小于 target，则 localeCompare() 返回小于 0 的数。
+    * 如果 stringObject 大于 target，则该方法返回大于 0 的数。如果两个字符串相等，
+    * 或根据本地排序规则没有区别，该方法返回 0
+    * */
+
+    // 按照姓名进行排序  localeCompare
+    ary.sort(function (a, b) {
+        //  判断 tianxi  lijie   t 和  i 的位置  如果第一个相同接着比较第二个
+        return a.name.localeCompare(b.name); //用汉字排序也换成了拼音
+        // return a.name.charCodeAt(0)  - b.name.charCodeAt(0)
+    });
+
+
+    // 字母排序 charCodeAt
+    let list = [{name: '11', title: 'B'}, {name: '1', title: 'A'}]
+    list.sort(function (a, b) {
+        return a.title.charCodeAt(0) - b.title.charCodeAt(0)
+    });
+    console.log(list);
+
+    //->一维数组:一个数组中的每一项都是基本的数据类型值
+    //    var ary = [12, 12.5, "小明", true];
+
+    //->多维数组:一个数组中的每一项比较复杂,每一项还可以具体的分出其他的项...
+
+    //    var ary = [
+    //        {
+    //            code: 0,
+    //            message: "数据正确~~"
+    //        },
+    //        {
+    //            name: "小明",
+    //            age: 7,
+    //            teacher: ["耿大大", "周大帅", "王大美女", "刘姐"]
+    //        }
+    //    ];
+
+    //    var ary = [12, 45, 56, 23];
+    //    ary.sort(function (a, b) {
+    //        return (a - b) * -1;//->由大到小进行排序 ==>b-a
+    //    });
+
+    //->ary找到Array.prototype上的sort方法,让sort方法执行的时候,给它传递了一个值,这个值是一个匿名函数  ->sort方法中的this是ary(当前的要操作的那个数组)
+
+    //->在sort方法执行的过程中,我们让匿名函数执行多次,并且给这个匿名函数传递了两个值:a,b   ->匿名函数执行,匿名函数中的this是window
+
+    //->a是数组中的当前项  b当前项的后一项
+    //->return a-b; 让当前项的值和后一项的值进行相减,如果返回的是一个"大于零"的值,说明当前项比后一项要大,我们就让他们交换位置；如果返回的是"小于等于零"的值,不需要交换位置;  ->不一定非要a-b/b-a,只要返回的是一个>0的值,让当前项和后一项交换位置即可;
+    //    ary.sort(function (a, b) {
+    //        //console.log(this);
+    //        return 1;
+    //    });
+
+    //->回调函数:把一个方法A当做一个值传递给另外一个方法B,然后在B执行的时候,把A也执行了
+    //    function A() {
+    //        console.log(A.name);//->函数名
+    //    }
+    //
+    //    function B(callback) {//->callback = A
+    //        console.log(B.length);//->函数形参的个数
+    //
+    //        for (var i = 0; i < 5; i++) {
+    //            typeof callback === "function" ? callback() : null;
+    //        }
+    //    }
+    //
+    //    B(A);
+
+    //->回去后可以重写sort方法
+    //    Array.prototype.sort = function sort(callBack) {
+    //
+    //    };
+
+
+    var ary = [
+        {name: "宫之晓", age: "48岁", score: 84},
+        {name: "张琦飞", age: "43岁", score: 34},
+        {name: "李曈检", age: 102, score: 21},
+        {name: "刘二娜", age: 19, score: 91}
+    ];
+    //    //->按照年龄由小到大
+    //    ary.sort(function (a, b) {
+    //        return parseFloat(a.age) - parseFloat(b.age);
+    //    });
+
+    //    //->按照分数由大到小
+    //    ary.sort(function (a, b) {
+    //        return (parseFloat(a.score) - parseFloat(b.score)) * -1;
+    //    });
+
+    //->按照姓名排序
+    ary.sort(function (a, b) {
+        return a.name.localeCompare(b.name);
+    });
+</script>
+</html>

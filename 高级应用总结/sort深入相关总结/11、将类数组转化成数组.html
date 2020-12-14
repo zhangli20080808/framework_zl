@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div id="div">
+  <p></p>
+</div>
+<div name="zl"></div>
+<p name="zl"></p>
+<span name="zl"></span>
+</body>
+<script>
+    //HTMLCollection元素集合类的一个实例
+    const oDiv = document.getElementsByTagName('div')
+    console.log(oDiv) //HTMLCollection
+
+
+    //节点集合
+    const oLi = document.getElementsByName('zl')
+    console.log(oLi)  // [div,p]
+
+    function listToArray(likeArray) {
+        let arr = []
+        //浏览器异常信息捕获 try catch
+        try {
+            // 标准 考虑兼容性  6-8不支持  但是可以接住 arguments 来实现转化
+            arr = Array.prototype.slice.call(likeArray)
+
+        } catch (e) {
+            // 非标准浏览器
+            for (let i = 0; i < likeArray.length; i++) {
+                arr[arr.length] = likeArray[i]
+            }
+        }
+        return arr
+    }
+
+    const result = listToArray(oLi)
+    console.log(result instanceof Array,result,'result')
+
+
+    // try catch  报错不影响下面代码执行
+    try {
+        //jscode
+        console.log(num)
+    } catch (e) {
+        //出错了 会默认执行 catch中的代码
+        //手动抛出一条错误信息
+        // throw new Error('当前网络繁忙，请稍后再试')
+        // Error 中有几个小类
+        // new ReferenceError() //引用错误
+        // new TypeError()   //类型错误
+        // new RangeError() //范围错误
+
+    } finally {
+        //一般不用  不管 try中的代码是否报错 都要执行  finally中的代码
+    }
+    console.log('ok')
+
+    //有时候有想捕获到 错误信息 又不想让下面的代码继续执行
+
+</script>
+</html>
