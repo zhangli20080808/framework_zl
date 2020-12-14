@@ -12,3 +12,4 @@ project.config.json
 .webpackrc.js
 dist_weapp/
 src/index.html
+
