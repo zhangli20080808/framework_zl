@@ -2,7 +2,7 @@
 
 //观察者  被观察者 (被观察者需要收集所有的观察者)  把观察者放到被观察者中 小宝宝不开心->通知爸爸妈妈
 
-class Subject {  //被观察者
+class Subject {  //被观察者 小宝宝
   constructor (name) {
     this.name = name
     this.observers = []
@@ -19,13 +19,14 @@ class Subject {  //被观察者
   }
 }
 
-class Observer { //观察者
+class Observer { //观察者 我
   constructor (name) {
     this.name = name
   }
 
   update (baby) {
-    console.log(baby + '知道了' + baby.name + '状态' + baby.state)
+    // console.log(baby)
+    console.log(this.name + '知道了' + baby.name + '状态' + baby.state)
   }
 }
 

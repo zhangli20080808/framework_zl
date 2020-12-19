@@ -18,7 +18,6 @@ fs.readFile('./a.text', 'utf-8', function (err, data) {
   // console.log(data)
   out('name', data)
 })
-
 fs.readFile('./a.text', 'utf-8', function (err, data) {
   // console.log(data)
   out('age', data)

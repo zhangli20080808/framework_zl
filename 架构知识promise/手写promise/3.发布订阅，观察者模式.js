@@ -1,5 +1,5 @@
 // 发布 订阅模式
-
+// 订阅 就是先将要做的事情储存好  稍后发布的时候让订阅好的事情一次执行
 let fs = require('fs')
 // 发布和订阅没有 任何的关系
 let event = {
@@ -20,6 +20,7 @@ event.on(function () {
     console.log(obj)
   }
 })
+// node中异步方法  都有回调 可以热内他是一个高阶函数  并发的  同时去读取文件  读取完毕的时间不一样
 fs.readFile('./name.txt', 'utf-8', (err, data) => {
   obj.name = data
   event.off(); //发布
