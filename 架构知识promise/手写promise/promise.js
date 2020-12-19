@@ -69,6 +69,10 @@ class Promise {
     this.onResolvedCallbacks = [] //存储成功的的所有的回调 只有pending的时候才存储
     this.onRejectedCallbacks = [] //存储失败的的所有的回调
     const resolve = value => {
+      // 考虑传递进来的值还是 promise 知道解析出来的值是一个普通值
+      if (value instanceof Promise) {
+        return value.then(resolve, reject)
+      }
       // 只有状态是 pending 才能改变状态
       if (this.state === ENUM.PENDING) {
         this.value = value
@@ -94,11 +98,13 @@ class Promise {
 
   then (onFulfilled, onRejected) { //默认看一下状态  调用对应的函数
     // console.log(onFulfilled, onRejected)
+    // 可选参数的处理
+    onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : val => val
+    onRejected = typeof onRejected === 'function' ? onRejected : err => {throw  err}
     // 我们要拿到成功的或者失败的返回结果 看看这个结果是什么类型？
     let promise2
     promise2 = new Promise((resolve, reject) => {
       if (this.state === ENUM.FULFILLED) {
-        console.log(1)
         setTimeout(() => {
           try {
             //调用当前then方法的结果，来判断当前这个promise2是成功还是失败
@@ -120,27 +126,25 @@ class Promise {
             let x = onRejected(this.reason)
             resolvePromise(promise2, x, resolve, reject)
           } catch (e) {
-            console.log(e)
+            // console.log(e)
             reject(e)
           }
         })
       }
       if (this.state === ENUM.PENDING) {
-        console.log('pending state') // 等会成功的时候 再让他执行 分别将成功和失败的回调存起来
+        // console.log('pending state') // 等会成功的时候 再让他执行 分别将成功和失败的回调存起来
         this.onResolvedCallbacks.push(() => {
-          console.log(11)
           setTimeout(() => {
             try {
               let x = onFulfilled(this.value)
               resolvePromise(promise2, x, resolve, reject)
             } catch (e) {
-              console.log(e)
+              // console.log(e)
               reject(e)
             }
           })
         })
         this.onRejectedCallbacks.push(() => {
-          console.log(12)
           setTimeout(() => {
             try {
               let x = onRejected(this.reason)
@@ -154,8 +158,20 @@ class Promise {
       }
     })
     return promise2
-
   }
+
+  catch (callback) { //就是一个成功的then
+    return this.then(null, callback)
+  }
+}
+
+Promise.deferred = function () {
+  let dfd = {}
+  dfd.promise = new Promise((resolve, reject) => {
+    dfd.resolve = resolve
+    dfd.reject = reject
+  })
+  return dfd
 }
 
 module.exports = Promise

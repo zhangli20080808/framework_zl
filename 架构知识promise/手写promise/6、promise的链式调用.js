@@ -27,6 +27,10 @@ promise2.then((data) => {
 }, (err) => {
   console.log(err, 'err')
 })
+// 穿透 不写我们默认把值传递下去 return data
+promise2.then(null).then().then().then(data => {
+  console.log(data)
+})
 //
 // Object.defineProperty(x, 'then', {
 //   get () {
