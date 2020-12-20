@@ -128,6 +128,76 @@
   }
 
   console.log(newArr(arrss), 'newArr')
+
+  //  reduce 常见功能 多个数据 最终变成了一个
+  let keys = ['name', 'age']
+  let values = ['jwt', 18]
+  let obj = keys.reduce((memo, current, index) => {
+    memo[current] = values[index]
+    return memo
+  }, {})
+  // 简化我们上面的代码   (memo[current] = values[index], memo) 前面的值不管 我们只取后面的
+  // (1,2,3,4) -> 4
+  // let obj = keys.reduce((memo, current, index) => (memo[current] = values[index], memo), {})
+  console.log(obj)
+
+  function add (str) {
+    return `*****${str}*****`
+  }
+
+  function sum (a, b) {
+    return a + b
+  }
+
+  function toUpper (str) {
+    return str.toUpperCase()
+  }
+
+  // function compose (...fn) {
+  //   return function (...args) {
+  //     let lastFn = fn.pop()
+  //     return fn.reduceRight((a, b) => {
+  //       return b(a)
+  //     }, lastFn(...args))
+  //   }
+  // }
+  // 简化compose  反向
+  // const compose = (...fn) => (...args) => {
+  //   let lastFn = fn.pop()
+  //   return fn.reduceRight((a, b) => b(a), lastFn(...args))
+  // }
+
+  // 我们直接处理函数参数  正向
+  // const compose = (...fn) => {
+  //   return fn.reduce((a, b) => {
+  //     return (...args) => { // toUpper(sum('zl', 'haha'))
+  //       return a(b(...args))
+  //     }
+  //   })
+  // }
+
+  const compose = (...fn) => fn.reduce((a, b) => (...args) => a(b(...args)))
+
+  let r = compose(add, toUpper, sum)('zl', 'haha')
+  console.log(r, 'compose')
+
+  Array.prototype.reduce = function (callback, prev) {
+    for (let i = 0; i < this.length; i++) {
+      if (prev === undefined) {
+        prev = callback(this[i], this[i + 1], i + 1, this)
+        i++
+      } else {
+        prev = callback(prev, this[i], i, this)
+      }
+    }
+    return prev
+  }
+
+  let s = [1, 2, 3, 4].reduce((a, b, index, array) => {
+    return a + b
+  })
+  console.log(s)
+
 </script>
 
 </html>

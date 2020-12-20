@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>vote</title>
+  <style>
+      .vote {
+          width: 400px;
+          height: 30px;
+          line-height: 30px;
+          text-align: center;
+          font-weight: bold;
+          font-size: 20px;
+          border: 1px solid #ccc;
+          margin: 50px auto;
+          cursor: pointer;
+          -webkit-user-select: none;
+      }
+
+      .vote #spanNum {
+          color: red;
+      }
+  </style>
+</head>
+<body>
+<div class="vote">认为我帅狂点 <span id="spanNum">0</span></div>
+
+
+</body>
+</html>
+<script>
+  var oSpan = document.getElementById('spanNum')
+  var vote = document.getElementsByClassName('vote')[0]
+  //var count = 0; //我们在项目中并不提倡全局变量，因为被污染的可能性太大
+  /* vote.onclick = function (){
+        // var count
+       count++;
+       oSpan.innerHTML = count;
+   }*/
+  /*
+  *   1 把count放外面  全局变量尽量避免使用全局变量
+  *   2  相对于全局变量是不是私有变量更安全呀
+  *
+  *
+  * */
+
+  /*;(function (){//函数在执行的时候产生一块新的私有的作用域，这个作用域内的变量也是私有的。
+ //当一个函数的引用赋值给一个元素的事件，那么这个作用域就不被释放了
+      var count = 0;
+      vote.onclick = function (){
+          count++;
+          oSpan.innerHTML = count;
+      }
+  })()*/
+
+  /*
+  *  自定义属性的方式
+  * */
+  //vote.conut = 0; //object 在它身上增加了一个自定义属性是用来保存计数的
+  /* vote.onclick = function (){
+       oSpan.innerHTML = ++this.conut; //++i
+   }*/
+
+  /*
+  *  4
+  *
+  * */
+  //vote.onclick = function (){
+  //oSpan.innerHTML = ++oSpan.innerHTML; //字符串，用++的时候发生了强制类型转换
+  //}
+
+  //改造
+
+  vote.onclick = (function () {
+    var count = 0
+    return function () {
+      count++
+      oSpan.innerHTML = count
+    }
+  })()
+
+
+</script>

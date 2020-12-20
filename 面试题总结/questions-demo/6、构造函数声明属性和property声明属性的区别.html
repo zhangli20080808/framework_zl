@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+  /*
+  * JS-构造函数类和原型prototype定义属性和方法的区别
+  * 1、把方法写在原型中比写在构造函数中消耗的内存更小，因为在内存中一个类的原型只有一个，写在原型中的行为可以被所有实例共享
+  *    实例化的时候并不会再实例中复制一份。
+  * 而写在类中的方法，实例化的时候会在每一个实例对象中在复制一份，
+  * 所以消耗的内存更高。因此没有特殊原因，我们一般把属性定义在类中，行为定义在原型中。
+  *
+  * 2、在构造函数中定义的属性和方法要比原型中定义的属性和方法优先级高，
+  * 如果定义了同名称的属性和方法，构造函数中的将会覆盖原型中的
+  *
+  * */
+
+  //不使用原型方法
+  //不使用原型定义方法
+
+  // (function () {
+  //   function Constractor () {
+  //     this.method1 = method1
+  //     this.method2 = method2
+  //   }
+  //
+  //   function method1 () {
+  //     alert('方法1')
+  //   }
+  //
+  //   function method2 () {
+  //     alert('方法2')
+  //   }
+  // })()
+
+  //一般定义使用原型方法时
+  (function () {
+    function Constractor () {
+
+    }
+
+    Constractor.prototype = {
+      // 注意 constructor 指向
+      // constructor: Constractor
+      method1: function () {
+        alert('方法1')
+      }
+      ,
+      method2: function () {
+        alert('方法2')
+      }
+    }
+    // 或者
+//     Constactor.prototype.method1 = function () {
+//       alert('方法1')
+//     }
+//     Constactor.prototype.method2 = function () {
+//       alert('方法2')
+//     }
+  })()
+
+  function abc (name) {
+    this.name = name//构造函数中的属性和方法要比原型优先级高，如果定义了同名的属性和方法
+    //构造函数中的将会覆盖原型中的，下面的x.say()会弹出xx,如果将项构造函数中的方
+    //法注释去掉，结果便是zheng
+    /*    this.say = function () {
+          alert('this name is a ' + this.name)
+        }*/
+
+  }
+
+  abc.prototype = {
+    name: 'xxx',
+    say: function () {
+      alert('this name is:' + this.name)
+    }
+  }
+
+  let x = new abc('zheng')
+  console.log(x.say())
+
+
+</script>
+</html>

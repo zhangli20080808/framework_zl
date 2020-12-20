@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>this</title>
+</head>
+<body>
+<div id="div1">你瞅啥？点你咋地？</div>
+
+</body>
+</html>
+<script>
+  //console.log(this);
+  /*  在全局作用域声明的变量可以看作是window的一个属性
+  *   this关键字不仅仅存在于函数中，但是我们主要研究函数体内的this
+  *   但是函数中的this无外乎就5种情况
+  *       1 给元素绑定事件，当事件被触发的时候，this就是当前元素
+  *       2 this是谁跟函数在哪里定义和执行没什么关系，就看函数执行的时候前面的'.'点，点前面是谁this就是谁,没有点就是window
+  *       3 自运行函数的this永远是window,无论这个自运行函数在哪
+  *
+  *
+  *       4  构造函数（类）中的this是当前实例
+  *       5  this可以通过call和apply去改变,这个优先级最高
+  *
+  * */
+  //1
+  document.getElementById('div1').onclick = function () {
+    //this div1
+    fn()
+  }
+
+  //2
+  function fn () {
+    console.log(this)
+  }
+
+  var obj = {
+    fn: fn
+  }
+  //window.fn(); //this?   window
+  //obj.fn(); //obj
+
+  //a = 7; //
+
+  //console.log(window.a); //???
+
+  var oo = {
+    sum: function () {
+      console.log(this)
+      fn()
+    }
+  }
+  //fn();
+  //oo.sum(); //this????  oo
+
+  //3
+
+  var obj2 = {
+    fn: (function () {
+      console.log(this) //自执行函数的this永远是window
+
+      return function () {
+        //var xxx = 89;
+        console.log(this)
+        return function () {}
+      }
+    })()
+  }
+  console.log(obj2.fn)
+  //obj2.fn()//???? window obj2
+  alert(window.xxx) //???
+</script>

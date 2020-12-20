@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+
+
+</body>
+</html>
+<script>
+  //window
+
+  function fn (i) {
+    //参数相当于在函数体内声明了一个变量
+    var i = 10 //第一次执行完27行的时候，我们的i被修改了一次
+    i = 10
+    //debugger;
+    //console.log(a);
+    return function (n) {  //return的值即使是一个函数也不会被提前声明
+      console.log(n + (++i))
+    }
+  }
+
+  //fn();
+  //var f = fn();  //首先产生一个私有的作用域，形参赋值，预解释，逐行执行
+
+  //f(45);//56 形参赋值，预解释，代码执行
+  //f(34); //46
+  //f(45);
+  //fn()(34); //45  函数执行完的返回值立即执行，也是作用域不被释放情况之一
+  //fn()(56); //67
+
+
+</script>
+
+<script>
+  function fn (i) {
+    //var  i = 10; //i到最后等于几了
+    //i = 10;
+    var i = 45
+    return function x (n) {
+      console.log(n + (++i))
+    }
+  }
+
+  fn(45)(56) //56 function x(n){console.log(n + (++i));}
+
+
+</script>

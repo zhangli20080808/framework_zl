@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>vw vh test</title>
+  <style>
+      body {
+          margin: 0;
+          padding: 0;
+      }
+
+      #parent {
+          width: 500px;
+          height: 300px;
+          background: teal;
+      }
+
+      #box1 {
+          width: 100px;
+          height: 100px;
+          background: aqua;
+          margin: 20px;
+      }
+  </style>
+</head>
+<!--当两个空的块级元素嵌套时，如果内部的块设置有margin-top属性，而且父元素没有下边解决方法所述的特征，那么内部块的margin-top属性会绑架父元素
+（即将margin-top传递凌驾给了父元素）。-->
+
+<!--就好比一个小兵，看到上级有漏洞，就假传圣旨，利用漏洞扩张自己的权利。只要设置父元素的border（栅栏）或者padding（隔离墙），就能管住这个调皮的下属。-->
+<body>
+<div id="parent">
+  <div id="box1"></div>
+</div>
+
+
+<script>
+
+  /*
+
+解决方法：
+1、设置父元素或者自身的display:inline-block;
+2、设置父元素的border:1px aqua solid;(>0)
+3、设置父元素的padding:1px;(>0)
+4、给父元素设置overflow:hidden;
+5、给父元素或者自身设置position:absolute;
+6、设置父元素非空，填充一定的内容。*/
+
+</script>
+</body>
+</html>

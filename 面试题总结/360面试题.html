@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+  var num = 20 //window.num = 20;  ==> 60 ==>240
+  var obj = {
+    num: 30,
+    fn: (function (num) {
+      // 形参num相当于在函数体声明了一个num变量，并且赋值20; var num = 20;
+      //var num = 20;  相当于在这个作用于声明了一个num变量，并且赋值20。并且是这个作用域的私有变量
+      //this.num *= 3; //自执行函数的this是window ==>window.num *=3;
+      num += 15 // 35
+      var num = 45  //在函数执行的时候，如果在声明的变量之前有和变量名字相同的形参，那么有var和没有var的效果是一样的。代码执行到这的时候就是一个赋值操作
+      return function () {
+        this.num *= 4 //window.num *= 4;
+        num += 20 //当前作用域没有声明一个叫num的变量，那就去上一级作用域去寻找，一直到window。如果没有就报错了
+        console.log(num)
+      }
+    })(num) //num?? obj.num 我们这里的num是全局的20，而不是对象里的num30
+  }
+
+  var fn = obj.fn //
+  fn()  //65
+  //obj.fn();//  85
+  //console.log(window.num, obj.num);//240,120
+
+</script>
+
+
+<script>
+  var num = 7
+  var obj = {
+    num: 8,
+    fn: (function () {
+      this.num *= 2
+      num += 3
+      num = 6
+      return function () {
+        this.num *= 5
+        num += 6
+        console.log(num)
+      }
+    })(num)
+  }
+  var fn = obj.fn
+  fn()
+  obj.fn()
+  console.log(window.num, obj.num)
+
+</script>
+

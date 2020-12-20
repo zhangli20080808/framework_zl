@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>vw vh test</title>
+  <style>
+      body {
+          margin: 0;
+          padding: 0;
+      }
+
+      #container {
+          background-color: red;
+          width: 10vw;
+          height: 10vh;
+      }
+  </style>
+</head>
+<body>
+<p>vw vh 测试</p>
+<div id="container">
+</div>
+
+<script>
+  /*
+  * rem的弊端  阶梯性
+  * 网页视口尺寸
+  * vw/vh  网页视口高度和宽度的1/100
+  * vmax 取两者最大值 vmin 取两者最小值 考虑横竖屏的情况
+  * */
+  // window.innerHeight === 100vh  网页视口高度
+  // window.innerWidth === 100vw
+  document.body.clientHeight //body高度  岁网页内容变化
+  window.screen.height // 屏幕高度
+</script>
+</body>
+</html>

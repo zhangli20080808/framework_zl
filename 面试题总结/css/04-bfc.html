@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style type="text/css">
+      .container {
+          background-color: #f1f1f1;
+      }
+
+      .left {
+          float: left;
+      }
+
+      .bfc {
+          overflow: hidden; /* 触发元素 BFC 利用特性5可以解决浮动元素造成的父元素高度塌陷问题 */
+      }
+  </style>
+</head>
+<body>
+<div class="container bfc">
+  <img src="https://www.imooc.com/static/img/index/logo.png" class="left" style="magin-right: 10px;"/>
+  <p class="bfc">某一段文字……</p>
+</div>
+</body>
+<!--
+
+BFC
+
+1. Block format context 块级格式化上下文
+2. 一块独立渲染区域 内部元素的渲染 对外面没有影响
+
+
+形成 bfc的常见条件
+
+1. 元素的 float 不是 none
+2. 绝对定位元素 (元素具有 position 为 absolute 或 fixed)
+3. 具有overflow 且值不是 visible 的块元素
+4. display 是  inline-block(内联块 ) table-cell(表格单元格) flex 弹性盒（flex或inline-flex） 表格标题 (元素具有 display: table-caption)
+5. 根元素 html
+
+生成BFC除了 @webproblem 童鞋所说的还有：行内块元素、网格布局、contain值为layout、content或 strict的元素等
+
+https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/59
+
+内部的Box会在垂直方向上一个接一个放置
+Box垂直方向的距离由margin决定，属于同一个BFC的两个相邻Box的margin会发生重叠
+每个元素的 margin box 的左边，与包含块 border box 的左边相接触
+BFC的区域不会与float box重叠
+BFC是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素
+计算BFC的高度时，浮动元素也会参与计算
+
+常见应用
+
+1. 清楚浮动
+2. 防止同一 BFC 容器中的相邻元素间的外边距重叠问题
+
+清理浮动一般有两种思路
+
+利用 clear属性，清除浮动
+使父容器形成BFC
+
+-->
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+  /*
+  *请把变量的声明和赋值放在调用之前，否则undefined
+  * 函数名与变量名相同
+  *
+  *
+  * */
+  // var a = 1
+  //
+  // function b () {
+  //   a = 10
+  //   return
+  //
+  //   function a () {
+  //     console.log(a)
+  //   }
+  // }
+  //
+  // b()
+  // console.log(a)
+
+  // function b(){
+  //   function a(){
+  //     console.log(a);
+  //   }
+  //   a = 10;
+  //   return;
+  // }
+  // var a;
+  // a=1;
+  // b();
+  // console.log(a);
+
+  // var a = 10
+  // if(!("a" in window)){
+  //   console.log(a,window.a)
+  //   a=12;
+  //   console.log(a)
+  //
+  // }
+  // console.log(a)
+
+  var a = 0
+  if (true) {
+    // function a var a
+    a = 1
+    console.log(a, window.a)
+
+    function a () {}
+
+    a = 21
+    console.log(a, window.a)
+  }
+  console.log(a, window.a)
+
+  // var mark = 1
+  //
+  // function mark (x) {
+  //   return x * 2
+  // }
+  //
+  // console.log(mark)
+  // //如果把var mark = 1;注释掉会输出整个函数
+  // // 不去掉前边的var mark = 1;则会弹出1
+  if (true) {
+    // var mark1 = 1 ////Identifier 'mark1' has already been declared	标识符“mark1”已经声明
+    mark1 = 1
+
+    function mark1 () {
+      console.log('exec mark1')//为true时会输出exec mark1
+    }
+
+    // 重新定义了  mark1 变成了数字
+    mark1 = 20
+    console.log(mark1)
+  }
+  console.log(mark1, window.mark1)
+  mark1()
+</script>
+</html>

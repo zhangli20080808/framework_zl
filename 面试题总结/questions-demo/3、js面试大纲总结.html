@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+  /*
+  * 数据类型 堆栈内存
+  * 闭包作用域
+  * 面向对象
+  * 任务队列 同步异步编程
+  * ES6
+  * 事件及设计模式
+  * http
+  * ajax 跨域
+  * 数据可视化
+  *
+  *
+  *
+  * */
+  // 数据类型转换   遇到+(+两边只要一遍有字符串或对象) 对象->字符串(valueOf toString)->数字 字符串
+  // undefined->NaN （[]）.toString-> '' 字符串
+  let result = 100 + true + 21.2 + null + undefined + 'Tencent' + [] + null + 9 + false
+  console.log(result) //NaNTencentnull9false
+
+  // == 先转换类型 转换规则
+  // console.log([] == false) //true
+  // console.log(![] == false) //true
+
+  // 对象转字符串 valueOf toString
+  // var a = {
+  //   i: 0,
+  //   toString () {
+  //     return ++this.i
+  //   }
+  // } //a.toString()
+
+  var i = 0
+  var a = {}
+  Object.defineProperty(window, 'a', {
+    get () {
+      return ++i
+    }
+  })
+
+  if (a == 1 && a == 2 && a == 3) {
+    console.log(1)
+  }
+
+</script>
+</html>

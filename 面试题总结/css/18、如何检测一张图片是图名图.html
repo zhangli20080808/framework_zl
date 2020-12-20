@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+  // 检测原理是借助canvas的getImageData()方法
+
+  /*
+  * 一句话概括就是getImageData()方法可以获取canvas画布上每一个像素点的颜色信息，
+  * 于是，我们只要把上传的图片绘制在canvas上，然后检测有没有透明的像素点信息即可。
+  * */
+
+  // 图片绘制在画布上
+  context.drawImage(img, 0, 0)
+  // 获取图片像素信息
+  let imageData = context.getImageData(0, 0, width, height).data
+  // 检测有没有透明数据
+  let isAlphaBackground = false
+  for (var index = 3; index &lt; imageData.length; index += 4) {
+    if (imageData[index] != 255) {
+      isAlphaBackground = true
+      break
+    }
+  }
+  // isAlphaBackground就是最后石头有透明或半透明背景色的结果
+
+  // 上面imageData就是我们获取的图片像素信息数组，是个一维数组，类型为Uint8ClampedArray，
+  // 也就是数组中所有的值范围都是0~255，数组信息这样：
+
+  // [R, G, B, A, R, G, B, A, R, G, B, A, R, G, B, A, R, G, B, A, R, G, B, A, ...]
+  // 因此，我们只要判断数组中的A是否全部都是255就可以判断有没有透明信息了，一个for循环就搞定了。
+</script>
+</html>
