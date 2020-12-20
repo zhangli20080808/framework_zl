@@ -70,7 +70,8 @@ Promise.all = function (promises) {
 // Promise.finally 不是类上的方法
 
 new Promise((resolve, reject) => {
-  resolve('hello')
+  // resolve('hello')
+  reject('helloss')
 }).finally(() => {
   // 无论成功或者失败都会执行的方法，如果finally中返回了一个promise，会等待这个promise执行结束之后再继续执行
   console.log('finally')

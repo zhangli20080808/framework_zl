@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<button id="button">吊我</button>
+<script>
+
+  /*
+  * 进程 和线程
+  * cpu 分配资源的最小单位是 进程 同一时间内，单个cpu只能运行一个进程
+  * cpu 调度的最小单位是线程 一个进程里包含着多个线程
+  *
+  * 浏览器的进程(多进程)
+  * 1.每一个页卡都是一个进程 - 保证每个页卡互补影响
+  * 2.浏览器也有一个主进程(用户界面 前进后退 console)
+  * 3.渲染进程 -- 每个页卡里面 都有一个渲染进程 浏览器内核
+  * 4.网络进程 -- 处理请求
+  * 5.Gpu进程 3D 绘制
+  * 6.第三方插件进程 每个插件都是一个进程
+  *
+  * 渲染进程(包含着多个线程)  js中的主线程是单线程的
+  * 1. GUI渲染线程(渲染页面的)
+  * 2. js引擎线程 他和页面渲染是互斥的
+  * 3. 事件触发线程 独立的线程 eventLoop
+  * 4. 事件click setTimeout ajax 会单独的去开一个线程
+  *
+  * 宏任务微任务
+  * 宏任务 宿主提供的异步方法
+  *     放置时机 ： 当ajax从，定时器执行成功的时候 点击按钮的时候，将对应的回调放入宏任务队列中
+  * 微任务 语言标准提供的
+  *     只要调用 promsie 就直接将回调放入微任务队列中
+  *
+  * ui渲染的时机 是在下一个宏任务执行之前
+  *
+  * 默认先执行 script脚本中的代码 -> 清空微任务(将所有的微任务都执行完) -> 渲染页面
+  * => 取出一个宏任务执行 => 执行完毕后会再次清空微任务
+  * */
+  // 只会渲染一次
+  // document.body.style.background= 'red'
+  // console.log(1)
+  // // 在setTimeout执行之前 会触发一次渲染
+  // Promise.resolve().then(()=>{
+  //   console.log(2)
+  //   document.body.style.background= 'yellow'
+  // })
+  // console.log(4)
+
+  //  先取出一个宏任务 执行 把里面的微任务也清空 再取出一个宏任务 执行 再把里面的微任务清空
+  //  一个个函数来取 每次执行完 会先处理当前定义的微任务
+  const btn = document.getElementById('button')
+  btn.addEventListener('click', () => {
+    console.log('listener1')
+    Promise.resolve().then(() => {
+      console.log('micro task')
+    })
+  })
+  btn.addEventListener('click', () => {
+    console.log('listener2')
+    Promise.resolve().then(() => {
+      console.log('micro task2')
+    })
+  })
+  //   如果直接调用   listener1 listener2 micro task micro task2
+  //  如果宏任务中套了微任务 肯定是先执行完当前宏任务中的微任务再去下一个任务任务
+  // Promise.resolve().then(() => {
+  //   console.log('p1')
+  //   setTimeout(() => {
+  //     console.log('s1')
+  //   }, 0)
+  // })
+  // setTimeout(() => {
+  //   console.log('s2')
+  //   Promise.resolve().then(() => {
+  //     console.log('p2')
+  //   })
+  // }, 0)
+  //  p1 s2 p2 s1
+
+  console.log(1)
+  async function async(){
+    console.log(2)
+    await console.log(3)
+    console.log(4)
+  }
+  setTimeout(()=>{
+    console.log(5)
+  })
+  const promise = new Promise(((resolve) => {
+    console.log(6)
+    resolve(7)
+  }))
+  promise.then((res)=>{
+    console.log(res)
+  })
+  async()
+  console.log(8)
+  // 1 6 2 3 8 7 4 5
+</script>
+</body>
+</html>
