@@ -57,6 +57,7 @@ function co (it) {
         resolve(value) // 将最终的结果返回给 当前co的promise
       }
     }
+
     next()
   }))
 }
@@ -80,12 +81,46 @@ co(read()).then(data => {
 
 // 用 async + await 模拟 Promise.all
 
-async function asyncAll(promises){
+let fn1 = () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve('1')
+    }, 1000)
+  })
+}
+let fn2 = () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve('2')
+    }, 2000)
+  })
+}
+let fn3 = () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve('3')
+    }, 3000)
+  })
+}
+
+async function asyncAll (promises) {
   const arr = []
   // forEach是同步的，不具备等待效果
   for (const promise of promises) {
-    // 会阻塞for循环 但是我们的promise是一起执行的 所以还是以最长事件为主
+    // 会阻塞for循环 但是我们的promise是一起执行的 所以还是以最长时间为主
+    // 第一个成功了 把第一个放进去  第二个成功了 把第二个放进去 这三个一起开的定时器 最长时间3s
     arr.push(await promise) // 走一个 等一个
   }
   return arr
 }
+
+async function readAll () {
+  console.log('start time')
+  let r = await asyncAll([fn1(), fn2(), fn3()])
+  console.log('end time')
+  return r
+}
+
+readAll().then(res => {
+  console.log(res, 'result')
+})
