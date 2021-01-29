@@ -1,17 +1,53 @@
 /*
-* 模块化的概念
+* 模块化的概念 (保护多个文件之间 相互独立 互不影响)
+* 1. 如果定义在global上的属性，肯定是要给全局变量属性
+* 2. node里面默认在文件中打印this的问题
 * node中里面为了实现模块化给每个文件都包装了一个函数，这个函数中的this就被更改掉了
 * */
 // console.log(this)
-// 1. 在文件中运行 -> {} 这个对象 其实是 module.exports 2. 在node环境中运行 this===global ->true
+// 1. 在文件中运行 -> {} 这个对象 其实是 module.exports 在文件默认执行的时候，这个文件会被加一层函数
+// 2. 在node环境中运行 this===global ->true
 // console.log(this===module.exports)  => true
+
+//
+/**
+ * 每次每个模块运行的时候 会默认传入 这几个参数 exports Module __filename __dirname
+ * 1. __filename 代表当前执行文件
+ * 2. __dirname 代表当前文件运行的文件夹 绝对路径
+ * 3. process.cwd() 当前工作目录下 是可以改变的
+ */
+// console.log(arguments)
+console.log(__filename) // /Users/zhangli/framework_zl/node/2、global.js
+console.log(__dirname) //  /Users/zhangli/framework_zl/node
+
+/**
+ * exports require module node中模块化会使用到这三个参数
+ * 模块化
+ * 1. 帮我们解决命名冲突的问题(原理：每个文件外面都会包装一个函数)
+ * 2. 高内聚低耦合 (把相关的代码放到一个模块中)
+ * node 的规范 commonjs规范(每个js就是一个模块)
+ * 2. 模块之间可以项目引用，前提 模块的导出  module.exports
+ * 3. 模块的导入 require
+ *
+ * 常用规范
+ * 1. esModule es6模块规范 export import  2. cmd -> seajs 3.amd -> requirejs 4. umd  统一模块化规范
+ *
+ * es6模块规范和commonjs的简单区别
+ * 1. node中默认不支持es6模块 需要babel去转义
+ * 2. commonjs是动态引入 可以根据条件引入 import静态引入
+ *
+ * node中的模块化实现  === webpack模块化的引入 (node中模块如何进行加载)
+ */
+
+
 
 // console.log(Object.keys(global))
 //  process 进程
 // console.log(process)
 // 常用方法 process.platform  argv cwd env nextTick:
-console.log(process.platform) // 进程运行的平台  max-> darwin  window-> win32
-console.log(process.argv) // 当前进程执行时所带的参数 默认两个参数 数组类型 前两个是固定的
+// console.log(process.platform) // 进程运行的平台  max-> darwin  window-> win32
+// console.log(process.argv) // 当前进程执行时所带的参数 默认两个参数 数组类型 前两个是固定的
+
 // 1. 当前node的执行命令文件
 // 2. 当前执行的文件是谁 node+文件执行时 可以传递参数 这些参数可以放到数组第三项...
 // 用来解析用户传递的参数 看看是否存在port端口
@@ -79,24 +115,24 @@ fs.readFile('.gitignore', 'utf8', (err, data) => {
  还有一种情况就是 刚进来 发现有check 接着走底部回调，再到timers
  */
 
-setImmediate(() => {
-  console.log('setImmediate1')
-  Promise.resolve().then(() => {
-    console.log('promise1')
-  })
-})
-setImmediate(() => {
-  console.log('setImmediate2')
-  Promise.resolve().then(() => {
-    console.log('promise2')
-  })
-  process.nextTick(() => {
-    console.log('nextTick2')
-  })
-})
-process.nextTick(() => {
-  console.log('nextTick1')
-})
+// setImmediate(() => {
+//   console.log('setImmediate1')
+//   Promise.resolve().then(() => {
+//     console.log('promise1')
+//   })
+// })
+// setImmediate(() => {
+//   console.log('setImmediate2')
+//   Promise.resolve().then(() => {
+//     console.log('promise2')
+//   })
+//   process.nextTick(() => {
+//     console.log('nextTick2')
+//   })
+// })
+// process.nextTick(() => {
+//   console.log('nextTick1')
+// })
 // nextTick1  setImmediate1 promise1 setImmediate2 nextTick2 promise2
 //  Buffer 是node中为了操作二进制数提供的一个类
 // 'global', 'clearInterval', 'clearTimeout', 'setInterval', 'setTimeout', 'queueMicrotask', 'clearImmediate', 'setImmediate'
