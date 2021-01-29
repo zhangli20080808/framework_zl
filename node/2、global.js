@@ -47,7 +47,7 @@ console.log(process.nextTick)
 // 如果 setImmediate 和  setTimeout在默认的环境下执行 回受性能影响
 // 每个宏任务执行完毕之后都会执行微任务 老版本是每个队列清空后清空微任务
 // https://nodejs.org/zh-cn/docs/guides/event-loop-timers-and-nexttick/
-const fs = require('fs')
+const fs = require('fs') // readFile 是在pool执行 pool之后是 check setImmediate 之后 在执行timers把
 fs.readFile('.gitignore', 'utf8', (err, data) => {
   setImmediate(() => { // 异步
     console.log('setImmediate') // node中的宏任务
@@ -77,9 +77,27 @@ fs.readFile('.gitignore', 'utf8', (err, data) => {
  4. 如果有定时器，定时器到达时间后，会返回timers阶段 执行定时器的回调
  5. 每一个宏任务执行完毕后都会清空
  还有一种情况就是 刚进来 发现有check 接着走底部回调，再到timers
-
  */
 
+setImmediate(() => {
+  console.log('setImmediate1')
+  Promise.resolve().then(() => {
+    console.log('promise1')
+  })
+})
+setImmediate(() => {
+  console.log('setImmediate2')
+  Promise.resolve().then(() => {
+    console.log('promise2')
+  })
+  process.nextTick(() => {
+    console.log('nextTick2')
+  })
+})
+process.nextTick(() => {
+  console.log('nextTick1')
+})
+// nextTick1  setImmediate1 promise1 setImmediate2 nextTick2 promise2
 //  Buffer 是node中为了操作二进制数提供的一个类
 // 'global', 'clearInterval', 'clearTimeout', 'setInterval', 'setTimeout', 'queueMicrotask', 'clearImmediate', 'setImmediate'
 

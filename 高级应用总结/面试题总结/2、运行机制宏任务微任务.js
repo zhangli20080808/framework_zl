@@ -19,7 +19,11 @@ console.log('script end')
 /*
 * 以上代码虽然 setTimeout 写在 Promise 之前，但是因为 Promise 属于微任务⽽ setTimeout 属
   于宏任务，所以会有以上的打印。
-* 微任务包括 process.nextTick ， promise ， Object.observe ， MutationObserver
+* 微任务包括 process.nextTick ， promise ， Object.observe ，
+* MutationObserver(会监控dom的变化，比如创建一个文本，监控文本内容变化)
+* 
+* 浏览器是一个宏任务队列，node是多个宏任务队列
+* 
 * 宏任务包括 script ， setTimeout ， setInterval ， setImmediate ， I/O ， UI rendering
 *
 * 很多⼈有个误区，认为微任务快于宏任务，其实是错误的。因为宏任务中包括了 script ，浏览器会先
