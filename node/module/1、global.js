@@ -4,12 +4,12 @@
 * 2. node里面默认在文件中打印this的问题
 * node中里面为了实现模块化给每个文件都包装了一个函数，这个函数中的this就被更改掉了
 * */
+
 // console.log(this)
 // 1. 在文件中运行 -> {} 这个对象 其实是 module.exports 在文件默认执行的时候，这个文件会被加一层函数
 // 2. 在node环境中运行 this===global ->true
 // console.log(this===module.exports)  => true
 
-//
 /**
  * 每次每个模块运行的时候 会默认传入 这几个参数 exports Module __filename __dirname
  * 1. __filename 代表当前执行文件
@@ -17,7 +17,7 @@
  * 3. process.cwd() 当前工作目录下 是可以改变的
  */
 // console.log(arguments)
-console.log(__filename) // /Users/zhangli/framework_zl/node/2、global.js
+console.log(__filename) // /Users/zhangli/framework_zl/node/1、global.js
 console.log(__dirname) //  /Users/zhangli/framework_zl/node
 
 /**
@@ -30,13 +30,22 @@ console.log(__dirname) //  /Users/zhangli/framework_zl/node
  * 3. 模块的导入 require
  *
  * 常用规范
- * 1. esModule es6模块规范 export import  2. cmd -> seajs 3.amd -> requirejs 4. umd  统一模块化规范
+ * 1. esModule es6模块规范 export import
+ * 2. cmd -> seajs
+ * 3.amd -> requirejs
+ * 4. umd  统一模块化规范
  *
  * es6模块规范和commonjs的简单区别
  * 1. node中默认不支持es6模块 需要babel去转义
  * 2. commonjs是动态引入 可以根据条件引入 import静态引入
  *
  * node中的模块化实现  === webpack模块化的引入 (node中模块如何进行加载)
+ *
+ * node中的模块分类
+ * 1. 核心模块/内置模块 fs http path 不需要安装 引入的时候不需要增加相对路径、绝对路径
+ * 2. 第三方模块 需要安装
+ * 3. 自定义模块 需要通过相对路径或者绝对路径引入
+ *
  */
 
 
@@ -51,7 +60,7 @@ console.log(__dirname) //  /Users/zhangli/framework_zl/node
 // 1. 当前node的执行命令文件
 // 2. 当前执行的文件是谁 node+文件执行时 可以传递参数 这些参数可以放到数组第三项...
 // 用来解析用户传递的参数 看看是否存在port端口
-// node 2、global.js --port 3000 --config true  ->{ port: '3000', config: 'true' } -> help的各种提示 流行库 commander yargs(webpack) ora可以实现进度条
+// node 1、global.js --port 3000 --config true  ->{ port: '3000', config: 'true' } -> help的各种提示 流行库 commander yargs(webpack) ora可以实现进度条
 // const r = process.argv.slice(2).reduce((memo, current, index, array) => {
 //   if (current.startsWith('--')) {
 //     memo[current.slice(2)] = array[index + 1]
