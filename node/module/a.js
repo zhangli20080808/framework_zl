@@ -1,5 +1,6 @@
-console.log(1)
-module.exports = 'zhangLi'
+console.log(this)
+module.exports.a = 'zhangLi'
+console.log(this)
 
 /**
  * module.exports = {}
@@ -18,18 +19,18 @@ module.exports = 'zhangLi'
  * @type {{}}
  */
 
-let obj = {}
-
-let o1 = obj
-// 刚开始 是指向同一个内存地址的 但是 obj = { name: 'zhangLi' }
-// 让obj指向了一个新的地址 o1 还是指向老地址
-obj = { name: 'zhangLi' }
-o1.a = 123
-console.log(o1)
-
-let aa = {name:123}
-let bb = aa
-aa = {x:123}
-console.log(bb)  // {name:123} 如果 aa.x = 123 那就是同一个结果
-
+// let obj = {}
+//
+// let o1 = obj
+// // 刚开始 是指向同一个内存地址的 但是 obj = { name: 'zhangLi' }
+// // 让obj指向了一个新的地址 o1 还是指向老地址
+// obj = { name: 'zhangLi' }
+// o1.a = 123
+// console.log(o1)
+//
+// let aa = {name:123}
+// let bb = aa
+// aa = {x:123}
+// console.log(bb)  // {name:123} 如果 aa.x = 123 那就是同一个结果
+//
 
