@@ -24,7 +24,7 @@ Module._extensions = {
     let exports = module.exports // {}
     let dirname = path.dirname(module.id) // /Users/zhangli/framework_zl/node/module
     // 把包装的函数执行 require是会让包装的函数执行 并且会改变this
-    fn.call(exports, exports, req, module, dirname, module.id)
+    fn.call(exports, exports, req, module, module.id, dirname)
   },
   '.json' (module) {
     let content = fs.readFileSync(module.id, 'utf8')
@@ -83,7 +83,6 @@ const result = req('./a')
 const result2 = req('./zl.json')
 // exports 和 module.exports 的关系  exports = module.exports  = {}
 console.log(result, result2)
-
 
 /**
  * 运行步骤
