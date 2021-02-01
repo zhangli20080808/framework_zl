@@ -1,6 +1,6 @@
-console.log(this)
+console.log(this) // {}
 module.exports.a = 'zhangLi'
-console.log(this)
+console.log(this)  // {a:'zhangLi'}
 
 /**
  * module.exports = {}
