@@ -79,3 +79,11 @@ npx  安装好-> 执行完 ->删除掉 知识一个临时的使用方案
 3. 好处 npm install create-react-app -g 每次使用都是这个版本 每次想最新 我们使用 npx create-react-app -g
 
    
+## 源的切换 (npm nrm(切换源) nvm)
+- npm install nrm -g
+nrm ls / nrm use npm/cnpm/taobao
+
+## 包的发布
+1. 账号密码
+2. 在官方源上发布
+npm addUser -> npm publish
