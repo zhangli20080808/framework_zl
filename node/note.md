@@ -71,3 +71,11 @@ rc 最终测试版本
 ## script
 - 执行命令 会将当前的node_modules目录下的.bin文件夹放到全局中(所以可以直接使用 执行完就销毁了)
 
+## npx和script基本一致
+npx  安装好-> 执行完 ->删除掉 知识一个临时的使用方案
+可以直接帮我们运行 .bin文件夹下的内容 
+1. 如果.bin目录下存在 会执行对应脚本
+2. 如果不存在，会下载运行
+3. 好处 npm install create-react-app -g 每次使用都是这个版本 每次想最新 我们使用 npx create-react-app -g
+
+   
