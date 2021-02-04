@@ -86,4 +86,4 @@ nrm ls / nrm use npm/cnpm/taobao
 ## 包的发布
 1. 账号密码
 2. 在官方源上发布
-npm addUser -> npm publish
+npm addUser -> npm publish  
