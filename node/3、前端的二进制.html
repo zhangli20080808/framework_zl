@@ -28,16 +28,38 @@
   document.body.appendChild(a)
 
   //  前端中的二进制
-  let arrayBuffer = new ArrayBuffer(10)
-  let content = new Blob([arrayBuffer])
-  console.log(content)
-  // content 代表的是传输的整体文件
-  // 文件读取器 FileReader
-  let fileReader = new FileReader()
-  fileReader.onload = function () {
-    console.log(fileReader.result)
-  }
-  // 读出什么格式 尽量使用 createObjectURL 来产生url readAsDataURL 读取成base64文件大了
-  fileReader.readAsDataURL(blob)
+  // let arrayBuffer = new ArrayBuffer(10)
+  // let content = new Blob([arrayBuffer])
+  // console.log(content)
+  // // content 代表的是传输的整体文件
+  // // 文件读取器 FileReader
+  // let fileReader = new FileReader()
+  // fileReader.onload = function () {
+  //   console.log(fileReader.result)
+  // }
+  // // 读出什么格式 尽量使用 createObjectURL 来产生url readAsDataURL 读取成base64文件大了
+  // fileReader.readAsDataURL(blob)
+
+  //  预览
+  let file = document.getElementById('file')
+  file.addEventListener('change', e => {
+    // let file = e.target.files[0]
+    // let fileReader = new FileReader()
+    // fileReader.onload = function () {
+    //   // console.log(fileReader.result)
+    //   let img = document.createElement('img')
+    //   img.src = fileReader.result
+    //   document.body.appendChild(img)
+    // }
+    // fileReader.readAsDataURL(file)
+
+    let file = e.target.files[0]
+    let r = URL.createObjectURL(file)
+    let img = document.createElement('img')
+    img.src = r
+    document.body.appendChild(img)
+    // URL.revokeObjectURL(r)  //释放资源
+  })
+  // 也可以使用base64 做预览
 </script>
 </html>
