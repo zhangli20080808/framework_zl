@@ -32,3 +32,5 @@ console.log(parseInt('00011011', 2)) //27
 console.log(parseInt('00110010', 2)) //50
 console.log(parseInt('00100000', 2)) //32
 console.log(str[57] + str[27] + str[50] + str[32])  //5byg
+
+// 前端的二进制

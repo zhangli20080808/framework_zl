@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<input type="file" id="file">
+</body>
+<script>
+  /**
+   * 上传文件 后端返回的是buffer 操作excl
+   * 最常用的 Blob对象 binary large object 是不可变的 代表的是文件类型
+   * File 基于Blob的
+   */
+
+    // 实现前端现在 html功能 内存中对应资源产生的路径
+    //  实现前端下载 通过字符串构建了一个blob
+  let str = `<h1>13</h1>`
+  let blob = new Blob([str], {
+    type: 'text/html'
+  })
+  // 我们使用a标签
+  let a = document.createElement('a')
+  a.setAttribute('download', 'a.html')
+  a.innerHTML = '下载'
+  a.href = URL.createObjectURL(blob)
+  document.body.appendChild(a)
+
+  //  前端中的二进制
+  let arrayBuffer = new ArrayBuffer(10)
+  let content = new Blob([arrayBuffer])
+  console.log(content)
+  // content 代表的是传输的整体文件
+  // 文件读取器 FileReader
+  let fileReader = new FileReader()
+  fileReader.onload = function () {
+    console.log(fileReader.result)
+  }
+  // 读出什么格式 尽量使用 createObjectURL 来产生url readAsDataURL 读取成base64文件大了
+  fileReader.readAsDataURL(blob)
+</script>
+</html>
