@@ -112,6 +112,19 @@ function rmdirSync (p) {
   fs.rmdirSync(p)
 }
 
-rmdirSync('q')
+// rmdirSync('q')
 
-
+// 删除目录 深度遍历 同步
+function deepRmdirSync (p) {
+let stat = fs.statSync(p)
+  if(stat.isDirectory()){
+    let dirs = fs.readdirSync(p)
+    dirs.forEach(dir=>{
+      let current = path.join(p,dir)
+      deepRmdirSync(current) // 递归删除 一般考虑两层就好了
+    })
+    fs.rmdirSync(p)
+  }else {
+    fs.unlinkSync(p) // 如果是文件直接删除掉
+  }
+}
