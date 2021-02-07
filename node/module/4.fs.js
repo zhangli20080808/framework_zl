@@ -40,4 +40,39 @@ function mkdirSync (path) {
     }
   }
 }
+
 mkdirSync('a/b/c/d/e/f')
+
+// 异步实现的话 肯定是第一个创建完再创建第二个 next方法 递归创建 上来先调用一次
+
+// 条件 我们的索引和数组的长度相等的时候 结束递归
+
+function mkdir (path, cb) {
+  let arr = path.split('/')
+  // co库 递归的创建
+  let index = 0
+
+  function next () {
+    //  递归要有终止条件
+    if (index === arr.length) return cb()
+    let p = arr.slice(0, index + 1).join('/')
+    fs.access(p, err => {
+      // 不管文件存在不存在 index++
+      index++
+      // 如果文件不存在会报错 创建文件
+      if (err) {
+        fs.mkdir(p, next)
+      } else {
+        // 如果文件存在 跳过创建过程 继续往下面走
+        next()
+      }
+    })
+  }
+
+  next()
+}
+
+mkdir('f/s/d/a/s', () => {
+  console.log('创建陈宫')
+})
+
