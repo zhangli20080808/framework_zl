@@ -27,7 +27,7 @@
   a.href = URL.createObjectURL(blob)
   document.body.appendChild(a)
 
-  //  前端中的二进制
+  //  前端中的二进制 主要对应我们浏览器中的内存
   // let arrayBuffer = new ArrayBuffer(10)
   // let content = new Blob([arrayBuffer])
   // console.log(content)
@@ -61,5 +61,6 @@
     // URL.revokeObjectURL(r)  //释放资源
   })
   // 也可以使用base64 做预览
+//   ArrayBuffer 浏览器中的二进制
 </script>
 </html>

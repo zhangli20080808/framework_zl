@@ -17,7 +17,7 @@
  * 3. process.cwd() 当前工作目录下 是可以改变的
  */
 // console.log(arguments)
-console.log(__filename) // /Users/zhangli/framework_zl/node/1、global.js
+console.log(__filename) // /Users/zhangli/framework_zl/node/1.global.js
 console.log(__dirname) //  /Users/zhangli/framework_zl/node
 
 /**
@@ -60,7 +60,7 @@ console.log(__dirname) //  /Users/zhangli/framework_zl/node
 // 1. 当前node的执行命令文件
 // 2. 当前执行的文件是谁 node+文件执行时 可以传递参数 这些参数可以放到数组第三项...
 // 用来解析用户传递的参数 看看是否存在port端口
-// node 1、global.js --port 3000 --config true  ->{ port: '3000', config: 'true' } -> help的各种提示 流行库 commander yargs(webpack) ora可以实现进度条
+// node 1.global.js --port 3000 --config true  ->{ port: '3000', config: 'true' } -> help的各种提示 流行库 commander yargs(webpack) ora可以实现进度条
 // const r = process.argv.slice(2).reduce((memo, current, index, array) => {
 //   if (current.startsWith('--')) {
 //     memo[current.slice(2)] = array[index + 1]
