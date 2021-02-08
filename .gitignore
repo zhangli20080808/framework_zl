@@ -13,3 +13,4 @@ project.config.json
 dist_weapp/
 src/index.html
 
+.vscode
