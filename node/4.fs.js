@@ -4,20 +4,28 @@
 // 默认写都会转换成utf8格式来进行存储 并且会将文件清空，如果文件没有会创建文件
 
 // 实现拷贝
-const fs = require('fs')
-const path = require('path')
+const { dir } = require('console');
+const fs = require('fs');
+const path = require('path');
 // 在代码运行期间最好使用异步 运行时使用同步可能会阻塞
 // 这种拷贝不适合大文件操作 比如视频文件 我们需要读一点写一点 采用流的方式
 // 如何区分文件大小呢？ 如果文件超过64k，就是用流的方式  小于64k直接 read write
 fs.readFile(path.resolve(__dirname, 'zl.json'), function (err, data) {
-  if (err) {console.log(err)}
-  fs.writeFile(path.resolve(__dirname, 'b.json'), data, {
-    // w 写  a 追加  r 读取
-    flag: 'w'
-  }, function (err, data) {
-    console.log('写入成功')
-  })
-})
+  if (err) {
+    console.log(err);
+  }
+  fs.writeFile(
+    path.resolve(__dirname, 'b.json'),
+    data,
+    {
+      // w 写  a 追加  r 读取
+      flag: 'w',
+    },
+    function (err, data) {
+      console.log('写入成功');
+    }
+  );
+});
 
 // 文件夹操作
 // 创建目录必须先有 父级 再有子级
@@ -28,14 +36,14 @@ fs.readFile(path.resolve(__dirname, 'zl.json'), function (err, data) {
  * 实现同步创建
  * @param path
  */
-function mkdirSync (path) {
-  let arr = path.split('/')
+function mkdirSync(path) {
+  let arr = path.split('/');
   for (let i = 0; i < arr.length; i++) {
-    let p = arr.slice(0, i + 1).join('/')
+    let p = arr.slice(0, i + 1).join('/');
     try {
-      fs.accessSync(p) // accessSync 不存在会报错
+      fs.accessSync(p); // accessSync 不存在会报错
     } catch {
-      fs.mkdirSync(p)
+      fs.mkdirSync(p);
     }
   }
 }
@@ -46,29 +54,29 @@ function mkdirSync (path) {
 
 // 条件 我们的索引和数组的长度相等的时候 结束递归
 
-function mkdir (path, cb) {
-  let arr = path.split('/')
+function mkdir(path, cb) {
+  let arr = path.split('/');
   // co库 递归的创建
-  let index = 0
+  let index = 0;
 
-  function next () {
+  function next() {
     //  递归要有终止条件
-    if (index === arr.length) return cb()
-    let p = arr.slice(0, index + 1).join('/')
-    fs.access(p, err => {
+    if (index === arr.length) return cb();
+    let p = arr.slice(0, index + 1).join('/');
+    fs.access(p, (err) => {
       // 不管文件存在不存在 index++
-      index++
+      index++;
       // 如果文件不存在会报错 创建文件
       if (err) {
-        fs.mkdir(p, next)
+        fs.mkdir(p, next);
       } else {
         // 如果文件存在 跳过创建过程 继续往下面走
-        next()
+        next();
       }
-    })
+    });
   }
 
-  next()
+  next();
 }
 
 // mkdir('f/s/d/a/s', () => {
@@ -85,47 +93,47 @@ function mkdir (path, cb) {
  * 判断状态 statSync
  * @param p
  */
-function rmdirSync (p) {
+function rmdirSync(p) {
   try {
     // 判断文件路径是否存在
-    fs.accessSync(p)
+    fs.accessSync(p);
   } catch (e) {
-    return
+    return;
   }
-  let dirs = fs.readdirSync(p)  // [ '1.txt', 'a' ]
+  let dirs = fs.readdirSync(p); // [ '1.txt', 'a' ]
   // 路径映射
-  dirs = dirs.map(dir => path.join(p, dir))  // [ 'q/1.txt', 'q/a' ]
-  console.log(dirs)
+  dirs = dirs.map((dir) => path.join(p, dir)); // [ 'q/1.txt', 'q/a' ]
+  console.log(dirs);
   // 需要判断 这个路径 是文件  还是文件夹 在删除
-  dirs.forEach(item => {
+  dirs.forEach((item) => {
     // 判断文件状态 statSync
-    let statObj = fs.statSync(item)
+    let statObj = fs.statSync(item);
     if (statObj.isDirectory()) {
       // isDirectory  isFile 不是目录就是文件
       // console.log('目录', item)
-      fs.rmdirSync(item)  // 删除目录
+      fs.rmdirSync(item); // 删除目录
     } else {
       // console.log('文件', item)
-      fs.unlinkSync(item)  // 删除文件
+      fs.unlinkSync(item); // 删除文件
     }
-  })
-  fs.rmdirSync(p)
+  });
+  fs.rmdirSync(p);
 }
 
 // rmdirSync('q')
 
 // 删除目录 深度遍历 同步 性能有问题
-function deepRmdirSync (p) {
-let stat = fs.statSync(p)
-  if(stat.isDirectory()){
-    let dirs = fs.readdirSync(p)
-    dirs.forEach(dir=>{
-      let current = path.join(p,dir)
-      deepRmdirSync(current) // 递归删除 一般考虑两层就好了
-    })
-    fs.rmdirSync(p)
-  }else {
-    fs.unlinkSync(p) // 如果是文件直接删除掉
+function deepRmdirSync(p) {
+  let stat = fs.statSync(p);
+  if (stat.isDirectory()) {
+    let dirs = fs.readdirSync(p);
+    dirs.forEach((dir) => {
+      let current = path.join(p, dir);
+      deepRmdirSync(current); // 递归删除 一般考虑两层就好了
+    });
+    fs.rmdirSync(p);
+  } else {
+    fs.unlinkSync(p); // 如果是文件直接删除掉
   }
 }
 
@@ -143,3 +151,27 @@ let stat = fs.statSync(p)
  * 3. 再把指针往后移 移到C 等等  结束完之后我们获取到了一个列表 优点 可以倒着删除
  */
 
+function wideSync(p) {
+  let arr = [p];
+  let index = 0;
+  let current; // 获取当前指针指向谁
+  while (current === arr[index++]) {
+    let statObj = fs.statSync(current);
+    if (statObj.isDirectory()) {
+      let dirs = fs.readdirSync(current);
+      dirs = dirs.map((d) => path.join(current, d));
+      arr = [...arr, ...dirs];
+    }
+  }
+  // 倒着删
+  for (let i = 0; i < arr.length - 1; i--) {
+    let current = arr[i];
+    let statObj = fs.statSync(current);
+    if (statObj.isDirectory()) {
+      fs.rmdirSync(current);
+    } else {
+      fs.unlinkSync(current);
+    }
+  }
+}
+wideSync('a');
