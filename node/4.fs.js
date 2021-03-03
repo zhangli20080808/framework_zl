@@ -141,7 +141,8 @@ function deepRmdirSync(p) {
 /**
  * 删除逻辑如何使用异步实现？
  * 1. 异步串行执行  1. 整个节点串行在一起 性能不好 删除动作应该是独立的
- * 2. 异步并行执行 两个节点同时考试遍历
+ * 2. 异步并行执行 两个节点同时开始遍历 Promise.all
+ * 3. 异步广度删除如何实现
  *
  * 广度遍历 刚才深度 我们是首先找了儿子 广度呢 一行一行找 环形
  *
@@ -175,3 +176,27 @@ function wideSync(p) {
   }
 }
 wideSync('a');
+
+//  异步深度删除
+function deepRmdir(p, cb) {
+  // co库 cb
+  fs.stat(p, function (err, statObj) {
+    if (statObj.isDirectory()) {
+      fs.readdir(p, function (err, dirs) {
+        dirs = dirs.map((dir) => path.join(p, dir)); // a/b
+        let index = 0;
+        function next() {
+          // 等到儿子都删除完毕 触发自己的删除
+          if (index === dirs.length) return fs.rmdir(p, cb);
+          let current = dirs[index++];
+          // 将第二个路劲的删除放入回调中，等待第一个删除完毕后，再进行删除
+          fs.rmdir(current, next);
+        }
+        next();
+      });
+    } else {
+      fs.unlink(p, cb);
+    }
+  });
+}
+deepRmdir('a', function (err, data) {console.log('删除成功');});
