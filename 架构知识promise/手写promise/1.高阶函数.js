@@ -5,9 +5,11 @@
  *
  * 通过函数取学习我们的设计模式 promise
  * 参数值是函数  返回值是函数 满足一个即可
+ * 通过函数取学习我们的设计模式 promise，参数值是函数 返回值是函数 满足一个即可
+ * 写代码时我们不破话原有逻辑而增加一些功能， 就有了 对函数进行保证(装饰) 切片编程(把核心抽离出来) 包装上自己的内容 AOP
  * */
 
-//核心业务代码
+//核心业务代码 希望在调用say方法之前做一些事情，拓展一些功能
 function say(a, b, c, d) {
   console.log('说话', a, b, c, d);
 }
@@ -16,8 +18,8 @@ function say(a, b, c, d) {
 //当前实例都可以调用所属类原型上的方法
 //this指向  谁调用this就指向谁 拓展运算符  实现after函数
 
-Function.prototype.before = function (callback) {
-  //this -> say
+Function.prototype.before = function (callback) {   // 高阶函数
+  //this -> say 谁调用了 before
   //箭头函数的特点 没有this  没有arguments 没有prototype 不能new
   //剩余运算符 可以把所有参数组成一个数组列表
   return (...args) => {
@@ -30,5 +32,3 @@ let newSay = say.before(() => {
   console.log('说话前');
 });
 newSay(1, 2, 3, 4);
-
-// react中的事务 
