@@ -5,6 +5,7 @@
  * 如果当前目录下，没有 node_modules 回向上级查找，一直找到根目录，找不到报错
  */
 
+// const EventEmitter = require('events')
 const EventEmitter = require('./4.EventEmitter')
 const util = require('util')
 // let events = new EventEmitter()
@@ -21,14 +22,20 @@ function Girl () {
 util.inherits(Girl, EventEmitter)
 let girl = new Girl()
 
-let fn = (who) => {
+let cry = (who) => {
   console.log('cry' + who)
 }
 
-girl.on('data', fn)
-girl.on('data', (who) => {
+let eat = (who) => {
   console.log('eat' + who)
-})
-girl.emit('data', fn)
+}
 
+girl.once('data', cry)
+girl.once('data', eat)
+girl.emit('data', '我')
+// 手动移除很麻烦
+// girl.off('data',cry)
+// girl.off('data',eat)
+
+girl.emit('data', '我')
 girl.emit('data', '我')
