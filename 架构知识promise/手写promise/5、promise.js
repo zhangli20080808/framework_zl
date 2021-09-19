@@ -1,16 +1,16 @@
-// promise 是一个类 需要new这个类型  解决的问题 回调地狱 错误捕获不好处理错误 多个异步同步的问题 all
-// 还是基于回调的方式
-
-// 文档 promise A+ 规范  核心  三个状态
-
-//1. executor 执行器 默认会立即执行
-//2、每个 promise有三个状态  默认 promise的状态是 待等待状态 pending fulfilled rejected
-//3、调用 resolve 成功 reject 失败
-//4、返回实例有一个then方法，then中需要提供两个参数，分别是成功对应的函数和失败对应的函数
-//5、如果 同时调用成功和失败 默认会采取第一次调用的结果 如果状态变化后就不能再修改状态
-//6、如何让promise变成失败态  异常抛出就走失败逻辑/是失败态 reject
-//7、成功时可以传入成功的值、失败时可以传入失败的原因
-//8、如果多次调用成功或者失败 只会执行第一次 一旦状态变化了 就不能再成功或者失败了
+/**
+ * 什么是 Promise？ 解决了哪些问题？(还是基于回调的方式)
+ * 1. 回调地狱 (错误捕获不好处理错误)
+ * 2. 多个请求的并发问题 (all)
+ * 文档 promise A+ 规范  核心  三个状态
+ *
+ * 1. executor - 在 new Promise 的时候，是需要传递一个执行器函数,这个函数会默认立即执行，重要
+ * 2. 每个 promise有三个状态  默认 promise 的状态是 等待态 pending fulfilled 成功态 rejected 失败态
+ * 3. 默认创建一个 Promise 是等待态,默认提供两个函数  resolve让Promise变为成功态， reject让Promise变为失败态
+ * 4. 每个Promise实例都具备一个then方法，then方法中需要传递两个参数，分别是成功对应的回调和失败对应的回调函数
+ * 5. 如何让promise变成失败态  a.异常抛出就走失败逻辑/是失败态  b. reject('xxx')
+ * 6. 如果多次调用成功或者失败,默认会采取第一次调用的结果 如果状态变化后就不能再修改状态
+ */
 
 const fs = require('fs')
 let Promise = require('./promise')

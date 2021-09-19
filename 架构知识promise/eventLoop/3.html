@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script>
+        // let mutationObserver = new MutationObserver(function(){
+        //     console.log(app.children.length); // 异步的api
+        // })
+        // mutationObserver.observe(app,{childList:true})
+        // for(let i = 0 ; i< 10;i++){
+        //     app.appendChild(document.createElement('p'));
+        // }
+        // Promise.resolve().then(()=>{
+        //     for(let i = 0 ; i< 10;i++){
+        //      app.appendChild(document.createElement('p'));
+        //     }
+        // });
+        // webworker多线程 工作线程里不能使用ajax 不能操作dom 消息通信 onmessage postmessage
+        let channel = new MessageChannel();
+        let port1 = channel.port1;
+        let port2 = channel.port2;
+        port1.postMessage('hello');
+         for(let i = 0 ; i< 10;i++){
+            app.appendChild(document.createElement('p'));
+        }
+        port2.onmessage = function(e){
+           console.log(app.children.length);
+        }
+        for(let i = 0 ; i< 10;i++){
+            app.appendChild(document.createElement('p'));
+        }
+    </script>
+</body>
+</html>
