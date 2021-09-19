@@ -12,12 +12,12 @@ let querystring = require('querystring'); // 核心模块
 // 服务端就是有特定的端口号 和特定ip
 let server = http.createServer((req,res)=>{
   // 请求行
-  console.log(req.method); // 请求方法 是大写的
+  // console.log(req.method); // 请求方法 是大写的
   let {pathname,query} = url.parse(req.url,true);
-  console.log(pathname,query);
+  // console.log(pathname,query);
   console.log(req.httpVersion,req.httpVersionMajor,req.httpVersionMinor);
   // 请求头 请求实体 通用头 自己的
-  console.log(req.headers); // 所有的key都是小写的
+  // console.log(req.headers); // 所有的key都是小写的
   // 有一个空行
   // 请求体 req是一个可读流 （源码 incoming message）
   // 读取可读流内容 on('data') on('end')  ajax发送
