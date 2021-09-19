@@ -19,19 +19,21 @@ let server = http.createServer((req,res)=>{
   // 请求头 请求实体 通用头 自己的
   console.log(req.headers); // 所有的key都是小写的
   // 有一个空行
-  // 请求体 req是一个可读流 （源码 incoming message）  作业
+  // 请求体 req是一个可读流 （源码 incoming message）
   // 读取可读流内容 on('data') on('end')  ajax发送
-  let arr = [];
+  let arr = [];  // tcp分段传输
+  // data 事件 只有传入数据时，才会触发
   req.on('data',function(chunk){ // this.push(xxx) this.push(null)
     arr.push(chunk)
   })
+  // 可读流如果获取不到数据 内部会push(null)
   req.on('end',function(){ // 如果没有请求体会直接执行end事件
     if(req.headers['content-type'] === 'application/x-www-form-urlencoded'){
       let str = Buffer.concat(arr).toString(); // a=1&b=2  => {a:1,b:2}
       let obj = querystring.parse(str);
       res.setHeader('Content-Type','application/json;charset=utf-8');
-      res.end(JSON.stringify(obj)); // 前后端通信 都是json
-    }else if(req.headers['content-type'] == 'application/json'){
+      res.end(JSON.stringify(obj)); // 前后端通信 都是json 我们的end方法只能放流或者字符串
+    }else if(req.headers['content-type'] === 'application/json'){
       let str = Buffer.concat(arr).toString();
       let obj = JSON.parse(str);
       res.setHeader('Content-Type','application/json;charset=utf-8');

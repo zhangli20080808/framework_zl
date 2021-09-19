@@ -1,10 +1,11 @@
+// 中间层 - 可以解决跨域问题,自己创建一个客户端去请求服务器
 let http = require('http'); /// 自己写一个客户端 中间层
 
 // 可以像其他的服务器发送请求
 
 // http.get 只能发送get请求  http.request发任何请求  ajax
 
-// 发送请求必须调用end方法
+// 发送请求必须调用end方法 post返回的是一个客户端
 
 let client = http.request({
   host:'localhost', // 不能加端口和协议
@@ -25,7 +26,7 @@ let client = http.request({
     console.log(Buffer.concat(arr).toString(),'result');
   })
 });
-client.end('{"a":1}'); // 相当于我要给服务端的res写入内容
+client.end('{"a":2}'); // 相当于我要给服务端的res写入内容
 
 
 // text/plain
