@@ -1,13 +1,26 @@
 const path = require('path')
-ƒ// 前端路由 # 后端无法获取
+// 前端路由 # 后端无法获取
 let str = 'https://user:password@www.zhufeng.cn:80/abs?a=1#1'
 
-let url = new URL(str)
-console.log(url) // pathname: '/abs'
+let myURL = new URL(str)
+let myURL2 = new URL('/abs?a=1#1', 'https://www.baidu.com')
+console.log(myURL2,'myURL2')
+// 获取键值对
+const a = myURL.searchParams.get('a')
+myURL.searchParams.append('b', '4')
+
+console.log(myURL.href, 'append b')
+// href: 'https://user:password@www.zhufeng.cn:80/abs?a=1&b=4#1',
+
+myURL.searchParams.delete('a')
+console.log(myURL.href, 'delete a')
+
+myURL.searchParams.set('name', 'zhangLi')
+console.log(myURL.href, 'set name')
 
 // 规范 如果路径 带了 / 我们不能使用 path.resolve，要使用 join
-const absPath = path.join(__dirname, url.pathname)  // /Users/zhangli/framework_zl/http/cors/abs
-const absPath2 = path.resolve(__dirname, url.pathname)  // /abs
+const absPath = path.join(__dirname, myURL.pathname)  // /Users/zhangli/framework_zl/http/cors/abs
+const absPath2 = path.resolve(__dirname, myURL.pathname)  // /abs
 console.log(absPath)
 console.log(absPath2)
 // protocol 协议

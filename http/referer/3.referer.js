@@ -6,7 +6,9 @@ let path = require('path');
 let url = require('url');
 let whitList = ['localhost']; //权限 这些白名单可以访问
 /**
- * 直接打开图片访问一个连接是 没有referer 因为没有引用
+ * 
+ * 直接打开图片访问一个链接是 没有referer 因为没有引用  如果引用了，会增加一个header
+ * 可以在服务端用当前资源的 host 和 referer 作对比，如果不一致，说明这个资源被其他网址所引用，返回错误图片
  * referer特点
  * 1.可以判断当前资源是不是被某个人来引用
  * 2.安全性 接口  需要referer  比如来源不对 我们把它屏蔽掉 返回错误的图片 csrf 爬虫 增加一些手段 host referer useagent
