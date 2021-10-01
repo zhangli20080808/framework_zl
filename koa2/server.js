@@ -12,8 +12,8 @@
  * content 上下文对象 整合 req\res\request\response
  */
 
-const Koa = require('koa');
-// const Koa = require('./lib/application');
+// const Koa = require('koa');
+const Koa = require('./lib/application');
 
 const app = new Koa();
 
