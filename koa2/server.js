@@ -26,7 +26,7 @@ app.use((ctx) => {
   // console.log(ctx.path); // 这个path可以认为是我们之前获取的  pathname
   // ctx.body = '123'; // 等价于 ctx.response.body
   ctx.response.body = '12';
-  console.log(ctx.body,ctx.response.body);
+  console.log(ctx.body, ctx.response.body);
 });
 // 原理描述
 /**
