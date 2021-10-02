@@ -9,7 +9,11 @@ let context = {
   //   return this.request.path;
   // },
 };
-
+/**
+ * 属性值代理
+ * @param {*} target
+ * @param {*} key
+ */
 function defineGetter(target, key) {
   context.__defineGetter__(key, function () {
     console.log(this.__proto__.__proto__ === context);
@@ -17,9 +21,17 @@ function defineGetter(target, key) {
   }); // context.url  ->this.request.url
 }
 
+function defineSetter(target, key) {
+  context.__defineSetter__(key, function (value) {
+    this[target][key] = value;
+  });
+}
+
 defineGetter('request', 'url');
 defineGetter('request', 'path');
 defineGetter('request', 'query');
+defineGetter('response', 'body');
+defineSetter('response', 'body');
 
 module.exports = context;
 
