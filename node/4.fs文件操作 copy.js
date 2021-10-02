@@ -4,7 +4,6 @@
 // 默认写都会转换成utf8格式来进行存储 并且会将文件清空，如果文件没有会创建文件
 
 // 实现拷贝
-const { dir } = require('console');
 const fs = require('fs');
 const path = require('path');
 // 在代码运行期间最好使用异步 运行时使用同步可能会阻塞
