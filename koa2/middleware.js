@@ -4,7 +4,12 @@
  */
 // const Koa = require('koa');
 const Koa = require('./lib/application');
+
 const app = new Koa();
+
+const fs = require('fs');
+const file = fs.createReadStream('./server.js');
+
 const sleep = () => {
   return new Promise((resolve, reject) => {
     console.log('睡觉');
@@ -17,8 +22,6 @@ const sleep = () => {
 app.use(async (ctx, next) => {
   console.log(1);
   await next();
-  next();
-  next();
   console.log(2);
 });
 
@@ -33,6 +36,10 @@ app.use(async (ctx, next) => {
   console.log(5);
   next();
   console.log(6);
+  // ctx.body = file;
+  ctx.body = {
+    a: 1,
+  };
 });
 
 app.on('error', (err) => {
