@@ -11,12 +11,14 @@
   "license": "ISC",
   "dependencies": {
     "ejs": "^3.1.6",
+    "express": "^4.17.1",
     "koa": "^2.13.3",
     "koa-bodyparser": "^4.3.0",
     "koa-static": "^5.0.0",
     "koa-views": "^7.0.1",
     "lodash": "^4.17.21",
     "mime": "^2.5.2",
+    "nunjucks": "^3.2.3",
     "uuid": "^8.3.0",
     "yargs": "^17.2.1"
   },

@@ -1,6 +1,9 @@
-let fs = require('fs').promises;
-const path = require('path');
-
+let ejs = require('ejs');
+let fs = require('fs');
+let templateStr = fs.readFileSync('./template.html', 'utf8');
+// 把<%%> 语法替换掉 ，把我们需要的内容用str拼接起来
+// 实现一个with(obj);
+// new Function
 function render(templateStr, data) {
   let start = `let str\r\n`;
   start += `with(data){\r\n`;
@@ -16,18 +19,5 @@ function render(templateStr, data) {
   let htmlStr = start + content + tail;
   return new Function('data', htmlStr)(data);
 }
-
-const views = (dirname, { map }) => {
-  return async (ctx, next) => {
-    ctx.render = async (fileName, data) => {
-      const str = await fs.readFile(
-        path.join(dirname, fileName) + '.html',
-        'utf8'
-      );
-      ctx.body = render(str, data);
-    };
-    await next();
-  };
-};
-
-module.exports = views;
+let r = render(templateStr, { arr: [4, 2, 3] });
+console.log(r);
