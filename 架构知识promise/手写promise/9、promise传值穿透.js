@@ -1,10 +1,12 @@
+/**
+ * 穿透 不写我们默认把值传递下去 return data
+ */
 let Promise = require('./promise')
 let promise = new Promise((resolve, reject) => {
   // resolve('hello')
   reject('hello')
 })
 
-// 穿透 不写我们默认把值传递下去 return data
 // promise.then(null).then().then().then(data => {
 //   console.log(data)
 // })

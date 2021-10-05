@@ -83,7 +83,7 @@ class Promise {
     this.onResolvedCallbacks = []; //存储成功的的所有的回调 只有pending的时候才存储
     this.onRejectedCallbacks = []; //存储失败的的所有的回调
     const resolve = (value) => {
-      // 考虑传递进来的值还是 promise 知道解析出来的值是一个普通值
+      // 考虑传递进来的值还是 promise，直到解析出来的值是一个普通值
       if (value instanceof Promise) {
         return value.then(resolve, reject);
       }
@@ -113,9 +113,9 @@ class Promise {
   // 只要x是一个普通值，就会让下一个promise变成成功态，调用p2的resolve将值传递下去
   // x 有可能是一个promise
   then(onFulfilled, onRejected) {
-    //默认看一下状态  调用对应的函数
+    // 默认看一下状态  调用对应的函数
     // console.log(onFulfilled, onRejected)
-    // 可选参数的处理
+    // 可选参数的处理,如果then的data没有写返回值，给一个默认函数，默认向下传递，我们返回一个默认值 (val) => val
     onFulfilled =
       typeof onFulfilled === 'function' ? onFulfilled : (val) => val;
     onRejected =
@@ -184,6 +184,7 @@ class Promise {
     return promise2;
   }
 
+  // promise中的catch指代的就是then中没有成功回调的一个别名而已
   catch(callback) {
     //就是一个成功的then
     return this.then(null, callback);
@@ -200,7 +201,11 @@ class Promise {
     });
   }
 }
-
+/**
+ * 静态方法
+ * 测试脚本也是去测试dfd上面的对象的 resolve和reject方法，如果通过了，说明这个promise可用
+ * @returns
+ */
 Promise.deferred = function () {
   let dfd = {};
   dfd.promise = new Promise((resolve, reject) => {
