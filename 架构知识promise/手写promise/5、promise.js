@@ -6,7 +6,7 @@
  *
  * 1. executor - 在 new Promise 的时候，是需要传递一个执行器函数,这个函数会默认立即执行，重要
  * 2. 每个 promise有三个状态  默认 promise 的状态是 等待态 pending fulfilled 成功态 rejected 失败态
- * 3. 默认创建一个 Promise 是等待态,默认提供两个函数  resolve让Promise变为成功态， reject让Promise变为失败态
+ * 3. 默认创建一个 Promise 是等待态,默认提供两个函数  resolve 让 Promise 变为成功态， reject让 Promise 变为失败态
  * 4. 每个Promise实例都具备一个then方法，then方法中需要传递两个参数，分别是成功对应的回调和失败对应的回调函数
  * 5. 如何让promise变成失败态  a.异常抛出就走失败逻辑/是失败态  b. reject('xxx')
  * 6. 如果多次调用成功或者失败,默认会采取第一次调用的结果 如果状态变化后就不能再修改状态
@@ -32,8 +32,9 @@ let p1 = new Promise((resolve, reject) => {
 // promise 有多个状态 如果成功 会让成功的函数  一次执行
 // 如果失败 会让失败的函数 依次执行
 
-// 如果调用then的时候没有成功也没有失败 我们可以先保存success和fail的回调(可以then多次，多个回调) 就像加了定时器的情况 先走then在执行resolve
-// 可以将then理解为订阅  将resolve理解为发布 ok的
+// 如果调用then的时候没有成功也没有失败 我们可以先保存success和fail的回调(可以then多次，多个回调) 
+// 就像加了定时器的情况 先走then在执行resolve
+// 可以将then理解为订阅  将resolve理解为发布 - 核心就是发布订阅模式
 p1.then((value) => {
   console.log(value, 'success')
 }, (reason) => {
