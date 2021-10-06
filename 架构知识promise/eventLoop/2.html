@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 当我们触发点击时，会先执行点击事件，然后再去跳转 -->
+    <a id="link" href="http:www.baidu.com">xxx</a>
+    <script>
+      let link = document.getElementById('link');
+      link.addEventListener('click', (e) => {
+        // 会等待微任务执行完毕之后再跳转
+        Promise.resolve().then(() => {
+          e.preventDefault();
+        });
+        // 如果换成定时器，会跳转
+        // setTimeout(() => {
+        //   e.preventDefault();
+        // }, 0);
+      });
+    </script>
+    <script>
+      let link = document.getElementById('link');
+      const nextTick = new Promise((resolve) => {
+        link.addEventListener('click', resolve);
+      });
+      nextTick.then((event) => {
+        e.preventDefault();
+      });
+      link.click(); // 会跳转，因为先走了点击 我们的微任务执行时，要放到下一个队列中
+    </script>
+  </body>
+</html>

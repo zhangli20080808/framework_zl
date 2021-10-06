@@ -1,16 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
-</head>
-<body>
+  </head>
+  <body>
     <script>
-        // 不能再file协议下执行
-        let wb = new Worker('./worker.js');
-        wb.postMessage(100);
+      // // 不能再file协议下执行
+      // let wb = new Worker('./worker.js');
+      // wb.postMessage(100);
+      document.body.style.background = 'blue';
+      console.log(1);
+      // 在 setTimeout 执行前，会触发一次渲染
+      // setTimeout(() => {
+      //     document.body.style.background = 'red';
+      // }, 0);
+      Promise.resolve().then(() => {
+        console.log(2);
+        document.body.style.background = 'red';
+      });
+      console.log(3);
     </script>
-</body>
+  </body>
 </html>

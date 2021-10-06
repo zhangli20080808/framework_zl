@@ -127,7 +127,7 @@ async function asyncAll(promises) {
   return arr;
 }
 
-async function readAll() {
+async function readAll() { 
   console.log('start time');
   let r = await asyncAll([fn1(), fn2(), fn3()]);
   console.log('end time');
