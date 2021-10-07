@@ -9,13 +9,17 @@ const path = require('path')
 
 const filePath = path.resolve(__dirname, '../../.gitignore')
 // 判断文件是否存在 不过已经被废弃掉了 返回布尔值
-fs.existsSync(filePath)  //true
-
+let isFileExist = fs.existsSync(filePath)
+console.log(isFileExist) //true
 // 读取文件全部采用绝对路径
 // console.log(path.resolve(__dirname)) // /Users/zhangli/framework_zl/node/module
-fs.readFileSync(filePath, 'utf8')
+if (isFileExist) {
+  let content = fs.readFileSync(filePath, 'utf8')
+  console.log(content, 'content')
+}
 /**
- * 如果需要拼接 / 必须使用join resolve会回到根目录下
+ * 都有拼接的能力，但是要注意 有没有拼接 /
+ * 如果需要拼接 / 必须使用join,因为resolve会回到根目录下
  * @type {string}
  */
 let s = path.join('a', 'b', 'c')  // 拼接 可以拼接/
@@ -37,7 +41,8 @@ let a = 100
 // let str = `console.log(a)` // 100
 
 let fn = new Function('a', 'b', `console.log(a); return 100`)
-console.log(fn(1,2))
+console.log(fn(1, 2))
 // console.log(fn.toString())
+vm.runInThisContext('console.log(a)'); // node 的模块使用的是这种方法,直接运行字符串，运行函数字符串
 
 

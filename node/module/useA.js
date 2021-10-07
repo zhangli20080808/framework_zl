@@ -1,6 +1,7 @@
 /**
- * node中可以使用同步的方式读取文件
- * 一调用 require 会把当前用户写的代码包装到一个函数中
+ * node中可以使用同步的方式读取文件 - 性能更高点，一运行就读取了过来
+ * 一调用 require 会读取文件，把当前用户写的代码包装到一个函数中
+ * 实现了一个闭包，将模块中的变量都私有化到这个作用域中了，起到了隔离作用
  */
 const path = require('path')
 const fs = require('fs')
@@ -94,7 +95,7 @@ console.log(result, result2)
  * 6. Module._extensions 文件的处理方式
  * 7. 核心就是读取文件
  * 8. 给文件外层增加一个函数 并且让函数执行 改变了this，传入了  exports, require, module,filename, dirname属性
- 9. 用户会给  module.exports 赋值
+ * 9. 用户会给  module.exports 赋值
  * 10.最终返回  module.exports 拿到最终结果
 
  简单理解-> 把文件读出来 包个函数 执行 传入对象 用户填值 填完返回
