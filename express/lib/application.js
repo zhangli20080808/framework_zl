@@ -1,37 +1,20 @@
-const url = require('url');
 const http = require('http');
+const Router = require('./router/index');
+// 将应用和路由解耦，进行一个分离
 function Application() {
-  this.routers = [
-    {
-      path: '*',
-      method: 'all',
-      handler(req, res) {
-        console.log(`Cannot find ${req.path} ${req.url} my`);
-      },
-    },
-  ];
+  this._routers = new Router();
 }
 Application.prototype.get = function (path, handler) {
-  this.routers.push({
-    path,
-    method: 'get',
-    handler,
-  });
+  this._routers.get(path, handler);
 };
 
 Application.prototype.listen = function () {
   let server = http.createServer((req, res) => {
-    let { pathname } = url.parse(req.url);
-    console.log(pathname, 'pathname');
-    let m = req.method.toLowerCase();
-    // 从第二个开始，如果匹配不到，默认匹配第一个
-    for (let i = 1; i < this.routers.length; i++) {
-      const { path, method, handler } = this.routers[i];
-      if (path === pathname && method === m) {
-        return handler(req, res);
-      }
-      this.routers[0].handler(req, res);
+    // 需要让路由自己去匹配，如果匹配不到再找应用系统
+    function done() {
+      res.end(`Cannot find ${req.method} ${req.url}`);
     }
+    this._routers.handler(req, res, done);
   });
   server.listen(...arguments);
 };
