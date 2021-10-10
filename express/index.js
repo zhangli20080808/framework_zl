@@ -1,4 +1,4 @@
-let express = require('./express');
+let express = require('./lib/express');
 let app = express();
 
 app.get('/', function (req, res, next) {
