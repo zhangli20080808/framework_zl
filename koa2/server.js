@@ -17,9 +17,11 @@
 
 // const Koa = require('koa');
 const Koa = require('./lib/application');
-const static = require('koa-static')
-const path = require('path')
+const static = require('koa-static');
+const path = require('path');
+const Router = require('@koa/router');
 const app = new Koa();
+const router = new Router();
 
 // console.log(__dirname);
 // console.log(path.resolve(__dirname,'public'));
@@ -45,6 +47,9 @@ app.use((ctx) => {
  * 比如 ctx.path 找的时候，自身没有，沿着__proto__去找，找到了context对象，{} 在他身上取值的时候，回去执行另一个方法
  */
 
+// 这里为了保证其他中间件先加载，我们把koa-router放到最后来加载，确保可以使用 ctx.render 
+app.use(router.routes()); // 挂载路由
+app.use(router.allowedMethods()); // 405 后端不支持某个方法时候，会显示405
 app.listen(3002, () => {
   console.log(`服务启动在${3002}`);
 });

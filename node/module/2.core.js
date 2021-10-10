@@ -8,6 +8,7 @@ const fs = require('fs')
 const path = require('path')
 
 const filePath = path.resolve(__dirname, '../../.gitignore')
+console.log(path.dirname(filePath),'dirname') // /Users/zhangli/framework_zl
 // 判断文件是否存在 不过已经被废弃掉了 返回布尔值
 let isFileExist = fs.existsSync(filePath)
 console.log(isFileExist) //true
@@ -15,7 +16,7 @@ console.log(isFileExist) //true
 // console.log(path.resolve(__dirname)) // /Users/zhangli/framework_zl/node/module
 if (isFileExist) {
   let content = fs.readFileSync(filePath, 'utf8')
-  console.log(content, 'content')
+  // console.log(content, 'content')
 }
 /**
  * 都有拼接的能力，但是要注意 有没有拼接 /
@@ -43,6 +44,6 @@ let a = 100
 let fn = new Function('a', 'b', `console.log(a); return 100`)
 console.log(fn(1, 2))
 // console.log(fn.toString())
-vm.runInThisContext('console.log(a)'); // node 的模块使用的是这种方法,直接运行字符串，运行函数字符串
+// vm.runInThisContext('console.log(a)'); // node 的模块使用的是这种方法,直接运行字符串，运行函数字符串
 
 

@@ -7,27 +7,28 @@ const path = require('path')
 const fs = require('fs')
 const vm = require('vm')
 
-// console.log(result);
-
-function Module (id) {
-  this.id = id
-  this.exports = {}  // 最终模块的返回结果
+function Module (id) { // node比较早，基本都是es5写法
+  this.id = id // id是我们传入模块的绝对路径 filename
+  this.exports = {}  // 代表最终模块的返回结果
 }
 
+// .commonjs规范规定会先查找.js 文件 找不到查找.json
 Module._extensions = {
   '.js' (module) {
     console.log('加载js模块')
     let content = fs.readFileSync(module.id, 'utf8')
+    // 给读取出来的文件内容 添加自执行函数
     content = Module.wrapper[0] + content + Module.wrapper[1]
     // 需要让函数字符串变成真正的函数
     let fn = vm.runInThisContext(content)
     // console.log(fn.toString()) // function (exports, require, module,__filename, __dirname) {module.exports = 'zhangLi'}
     let exports = module.exports // {}
     let dirname = path.dirname(module.id) // /Users/zhangli/framework_zl/node/module
-    // 把包装的函数执行 require是会让包装的函数执行 并且会改变this
+    // 让包装的函数执行 require是会让包装的函数执行 并且会改变this
     fn.call(exports, exports, req, module, module.id, dirname)
   },
   '.json' (module) {
+    // 在json中只需要将 结果赋予给exports 对象上即可
     let content = fs.readFileSync(module.id, 'utf8')
     module.exports = JSON.parse(content)
   }
@@ -39,40 +40,56 @@ Module.wrapper = [
   `})`
 ]
 
-Module._resolveFilename = function (filename) {
-  let absPath = path.resolve(__dirname, filename)
-  let exists = fs.existsSync(absPath)
-  if (exists) {
-    return absPath
-  }
-  let keys = Object.keys(Module._extensions)
-  for (let i = 0; i < keys.length; i++) {
-    let newPath = absPath + keys[i]
-    let flag = fs.existsSync(newPath)
-    if (flag) {
-      return newPath
+// 解析文件的绝对路径 可以尝试添加后缀
+Module.resolveFilename = function (filePath) {
+  let absPath = path.resolve(__dirname, filePath)
+  // 如果文件名没后缀 我需要依次添加后缀 如果没有 就报错了
+  let ext = path.extname(absPath) // 去查找当前有没有后缀
+  let finalPath = absPath
+  if (!ext) {
+    let exts = Object.keys(Module._extensions) // [.js,.json]
+    for (let i = 0; i < exts.length; i++) {
+      finalPath = absPath + exts[i] // xxx
+      try {
+        fs.accessSync(finalPath)
+        break
+      } catch (e) {
+        finalPath = path.basename(finalPath, exts[i])
+      }
+    }
+    if (!path.extname(finalPath)) {
+      // 如果循环后文件还是没有后缀
+      throw new Error('文件不存在')
+    }
+  } else {
+    try {
+      fs.accessSync(finalPath)
+    } catch (e) {
+      throw new Error('文件不存在')
     }
   }
-  throw new Error('模块不存在')
+  return finalPath
 }
-
+/**
+ * 加载文件，主要是 取到不同的后缀，调用对应的处理方法去处理
+ */
 Module.prototype.load = function () {
   let extname = path.extname(this.id)
-  Module._extensions[extname](this)  //
+  Module._extensions[extname](this)  // load执行完毕得到 module.exports = {"name":"zhangLi"}
 }
 
 Module._cache = {}
 
 function req (filename) { // 默认传入的文件名可能是没有.js .json后缀的,如果没有 尝试添加
+                          // 解析出绝对路径
   filename = Module._resolveFilename(filename) // /Users/zhangli/framework_zl/node/module/a.js
   // 创建一个模块
   // 加载前先看一眼 是否加载过了  如果加载过了 我们直接读缓存
-
   let cacheModule = Module._cache[filename]  // 多次引用同一个模块只运行一次
   if (cacheModule) {
     return cacheModule.exports  //返回缓存的结果
   }
-
+  // 根据路径创建一个模块
   let module = new Module(filename)
   Module._cache[filename] = module
   // 加载模块
@@ -98,17 +115,17 @@ console.log(result, result2)
  * 9. 用户会给  module.exports 赋值
  * 10.最终返回  module.exports 拿到最终结果
 
- 简单理解-> 把文件读出来 包个函数 执行 传入对象 用户填值 填完返回
+ 简单理解-> 把文件读出来 包个函数 执行 执行传入对象 用户填值 填完返回
  *
  */
 
 /**
  * 通过读取文件内容 将内容包装自执行函数中 默认返回 module.exports 作为函数的结果
  * 会转义成下方代码
- let result = function (exports, module, __filename, __dirname) {
+ let result = function (exports, require,module, __filename, __dirname) {
   module.exports = 'zhangLi'
   return module.exports
-}(exports, module, __filename, __dirname)
+}(exports, require,module, __filename, __dirname)
  */
 
 /**
