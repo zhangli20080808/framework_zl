@@ -6,17 +6,30 @@
    5. 请求到来，找到对应的dispatch方法
  */
 const http = require('http');
+const methods = require('methods');
 const Router = require('./router/index');
+
 // 将应用和路由解耦，进行一个分离
 function Application() {
-  this._routers = new Router();
+  // 希望 当创建应用时，不是立即初始化路由系统
+  // this._routers = new Router();
 }
-Application.prototype.get = function (path, ...handlers) {
-  this._routers.get(path, handlers);
+Application.prototype.lazy_route = function () {
+  if (!this._routers) {
+    this._routers = new Router();
+  }
 };
+
+methods.forEach((method) => {
+  Application.prototype[method] = function (path, ...handlers) {
+    this.lazy_route();
+    this._routers[method](path, handlers);
+  };
+});
 
 Application.prototype.listen = function () {
   let server = http.createServer((req, res) => {
+    this.lazy_route();
     // 需要让路由自己去匹配，如果匹配不到再找应用系统
     function done() {
       res.end(`Cannot find ${req.method} ${req.url}`);

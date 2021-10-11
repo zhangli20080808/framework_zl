@@ -1,6 +1,7 @@
 const url = require('url');
 const Route = require('./route');
 const Layer = require('./layer');
+const methods = require('methods');
 function Router() {
   this.stack = [];
 }
@@ -13,19 +14,23 @@ Router.prototype.route = function (path) {
   this.stack.push(layer); // 将当前生成的路由层，放入路由系统中
   return route;
 };
-Router.prototype.get = function (path, handlers) {
-  // 1. 当我们调用 get 方法的时候，需要创建一个 layer，将 layer 放入我们的 stack 中
-  // 2. 路由系统中的 layer 上应该有一个route属性
-  let route = this.route(path);
-  // 需要将 用户的handler，可能有多个 传入当前路由对应的route的内部，也就是将用户传过来的方法，放入 route中
-  // 产生一个个layer
-  route.get(handlers);
-  // this.stack.push({
-  //   path,
-  //   method: 'get',
-  //   handler,
-  // });
-};
+
+methods.forEach((method) => {
+  Router.prototype[method] = function (path, handlers) {
+    // 1. 当我们调用 get 方法的时候，需要创建一个 layer，将 layer 放入我们的 stack 中
+    // 2. 路由系统中的 layer 上应该有一个route属性
+    let route = this.route(path);
+    // 需要将 用户的handler，可能有多个 传入当前路由对应的route的内部，也就是将用户传过来的方法，放入 route中
+    // 产生一个个layer
+    route[method](handlers);
+    // this.stack.push({
+    //   path,
+    //   method: 'get',
+    //   handler,
+    // });
+  };
+});
+
 /**
  * 先将stack中的第一个拿出来
  */
@@ -44,7 +49,7 @@ Router.prototype.handler = function (req, res, out) {
   let next = () => {
     if (idx >= this.stack.length) return out();
     let layer = this.stack[idx++];
-    if (layer.path === pathname) {
+    if (layer.match(pathname) && layer.route.handle_method(req.method)) {
       // 如果路径一样，就处理对应的回调函数
       layer.handler(req, res, next);
     } else {
