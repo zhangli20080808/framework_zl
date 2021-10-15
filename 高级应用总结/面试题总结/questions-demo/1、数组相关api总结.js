@@ -114,17 +114,16 @@ console.log(res3)  //10, NaN, 2, 2, 11]
 
 // Array.prototype.map 的第二个参数  thisValue - 执行回调时使用传递给函数，用作this的值
 //如果省略了 thisValue 或者传入null undefined 回调函数的this指向全局
-
 // Array.prototype.map(cb,thisValue)
-
 var array = [1, 2, 3]
 var a = {
   name: '123',
   mapObject: function () {
     array.map(function () {
-      console.log(this.name)  // 传入this的时候 123 123 123 不传this undefined undefined undefined
+      // 传入this的时候 123 123 123 不传this undefined undefined undefined
+      console.log(this.name) 
     }, this) // 这个时候的this是什么呢？是a啊！
   }
 }
 // 可以这样理解 传入this之后 相当于 改变了this指向 类似于bind
-a.mapObject()
+a.mapObject() 

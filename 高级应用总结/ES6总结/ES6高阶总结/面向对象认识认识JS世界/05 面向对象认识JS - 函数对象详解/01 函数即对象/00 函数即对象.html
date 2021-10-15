@@ -1,26 +1,22 @@
 <!DOCTYPE html>
 <html>
-<head lang="en">
-    <meta charset="UTF-8">
+  <head lang="en">
+    <meta charset="UTF-8" />
     <title></title>
-</head>
-<body>
-
-</body>
+  </head>
+  <body></body>
 </html>
 <script>
-    function add1(a,b){
-        return a+b;
-    }
+  function add1(a, b) {
+    return a + b;
+  }
+  // Function对象的实例  -- 高级技巧 --- 写框架必须用的。。。
+  //前面表示参数，后面表示函数语句
+  var add2 = new Function('obj', 'b', 'return a+b');
 
-//    Function对象的实例  -- 高级技巧 --- 写框架必须用的。。。
-
-    //前面表示参数，后面表示函数语句
-    var add2 = new Function("a.text.json","b","return a+b");
-
-   /* var num=1; Number
+  /* var num=1; Number
     var arr =[1,1,1,1,1,1,1,] Array*/
 
-    alert(add1(1,2))
-    alert(add2(1,2))
+  alert(add1(1, 2));
+  alert(add2(1, 2));
 </script>

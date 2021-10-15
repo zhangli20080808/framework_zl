@@ -1,6 +1,5 @@
 /*
 * 手写  深度比较  模拟 lodash objectIsIsEqual
-*
 * 地址不一样  但是属性什么的都一样 我们返回true
 *
 * 实现效果
@@ -23,6 +22,7 @@ function objectIsIsEqual (obj1, obj2) {
     // 值类型（注意，参与 equal 的一般不会是函数）
     return obj1 === obj2
   }
+  // 判断是不是同一个对象
   if (Object.toString.call(obj1) !== Object.toString.call(obj2)) {
     return false
   }
@@ -79,7 +79,7 @@ console.log(Object.is(obj1, obj2), 'object') //false
 * undefined === undefined true
 如果两个都是字符串，每个位置的字符都一样，那么相等；否则不相等。
 *  值得注意的是，如果两个值中至少一个是NaN，那么不相等（判断一个值是否是NaN，可以用isNaN()或Object.is()来判断）
-*
+
 * O
 * */
 console.log(Object.is(NaN, 123), 'NaN') //false

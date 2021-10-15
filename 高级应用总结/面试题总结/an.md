@@ -34,7 +34,7 @@ js运⾏机制 JS 在执⾏的中执⾏，所以本质上来说 JS 中的异步�
 
 Object.defineProperty缺点
 
-1. Object.defineProperty⽆法监控到数组下标的变化，导致通过数组下标添加元素，不能实时响 应；
+1. Object.defineProperty⽆法监控到数组下标的变化，导致通过数组下标添加元素，不能实时响应；
 2. Object.defineProperty只能劫持对象的属性，从⽽需要对每个对象，每个属性进⾏遍历，如果， 属性值是对象，还需要深度遍历。Proxy可以劫持整个对象，并返回⼀个新的对象。
 3. Proxy不仅可以代理对象，还可以代理数组。还可以代理动态增加的属性。
 

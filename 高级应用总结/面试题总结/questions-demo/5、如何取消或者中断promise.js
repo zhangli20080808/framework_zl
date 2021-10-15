@@ -26,19 +26,27 @@
 // })
 
 //3. 当Promise链中抛出一个错误时，错误信息沿着链路向后传递，直至被捕获
-Promise.resolve().then(() => {
-  console.log('test')
-  throw new Error('i am is err')
-}).then(() => {
-  console.log('1')
-}, () => {
-  console.log('then中提前捕获错误，不会走catch了，继续走then')
-  return { name: 'zl' }  // 什么都不返回的话就是 undefined
-}).then((res) => {
-  console.log(res, 'then中捕获错误之后，是否还走then?')
-  throw new Error('then中抛出错误，后续catch捕获异常')
-}).catch(err => {
-  console.log(err, '输出错误 继续走catch')
-}).then(() => {
-  console.log('很奇怪吧，catch之后 我还能走then，你想到了吗？')
-})
+Promise.resolve()
+  .then(() => {
+    console.log('test');
+    throw new Error('i am is err');
+  })
+  .then(
+    () => {
+      console.log('1');
+    },
+    () => {
+      console.log('then中提前捕获错误，不会走catch了，继续走then');
+      return { name: 'zl' }; // 什么都不返回的话就是 undefined
+    }
+  )
+  .then((res) => {
+    console.log(res, 'then中捕获错误之后，是否还走then?');
+    throw new Error('then中抛出错误，后续catch捕获异常');
+  })
+  .catch((err) => {
+    console.log(err, '输出错误 继续走catch');
+  })
+  .then(() => {
+    console.log('很奇怪吧，catch之后 我还能走then，你想到了吗？');
+  });

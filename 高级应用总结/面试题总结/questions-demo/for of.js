@@ -1,6 +1,5 @@
 /*
-* 与for in 区别
-* for of无法循环遍历对象
+* 与for in 区别 for of无法循环遍历对象
 * */
 
 // let userMsg = {

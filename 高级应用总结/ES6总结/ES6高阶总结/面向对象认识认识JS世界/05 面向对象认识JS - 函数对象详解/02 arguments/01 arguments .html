@@ -1,38 +1,34 @@
 <!DOCTYPE html>
 <html>
-<head lang="en">
-    <meta charset="UTF-8">
+  <head lang="en">
+    <meta charset="UTF-8" />
     <title></title>
-</head>
-<body>
-
-</body>
+  </head>
+  <body></body>
 </html>
 <script>
-    //arguments重要性：9分 使用频率 8分 考试点：10分
-    function add(){
-        var sum=0;
-        for(var i=0;i<arguments.length;i++){
-            sum+=arguments[i]
-        }
-        return sum;
+  //arguments重要性：9分 使用频率 8分 考试点：10分
+  function add() {
+    var sum = 0;
+    for (var i = 0; i < arguments.length; i++) {
+      sum += arguments[i];
     }
-   var sum = add(1,2)
-   var sum2 = add(1,2,3)
-    console.log(sum)
-    console.log(sum2)
+    return sum;
+  }
+  var sum = add(1, 2);
+  var sum2 = add(1, 2, 3);
+  console.log(sum);
+  console.log(sum2);
 
-    /*function add(a,b,c,d){
+  /*function add(a,b,c,d){
         alert(arguments.length);
         alert(arguments[0]);
     }*/
-//    arguments只有在代码运行的时候才起作用
-    //arguments是一个数组，保存函数的参数 -- 准确的说是伪数组
-    add();//0
-    add(1);//1
-    add('李思',2);
-    add('范冰冰',2,3);
-    add('李晨',2,2,3,4,4);
-
-
+  //    arguments只有在代码运行的时候才起作用
+  //arguments是一个数组，保存函数的参数 -- 准确的说是伪数组
+  add(); //0
+  add(1); //1
+  add('李思', 2);
+  add('范冰冰', 2, 3);
+  add('李晨', 2, 2, 3, 4, 4);
 </script>

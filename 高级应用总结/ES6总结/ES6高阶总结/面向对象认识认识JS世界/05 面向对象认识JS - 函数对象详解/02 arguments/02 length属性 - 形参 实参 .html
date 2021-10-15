@@ -1,27 +1,23 @@
 <!DOCTYPE html>
 <html>
-<head lang="en">
-    <meta charset="UTF-8">
+  <head lang="en">
+    <meta charset="UTF-8" />
     <title></title>
-</head>
-<body>
-
-</body>
+  </head>
+  <body></body>
 </html>
 <script>
-
-    //    什么是形参 什么是实参
-    //      形参:函数定义的时候的参数
-    //      实参,用户调用函数的时候传递的参数
-    //    length指的是实际参数个数   arguments.length指的是实参个数
-    function checkVarCount(a, b) {
-        if (checkVarCount.length == arguments.length) {
-            alert("形参和实参个数一样");
-        }else{
-            alert("形参和实参的个数不一样");
-
-        }
+  // 什么是形参 什么是实参
+  //   形参:函数定义的时候的参数
+  //   实参,用户调用函数的时候传递的参数
+  //   length指的是实际参数个数   arguments.length指的是实参个数
+  function checkVarCount(a, b) {
+    if (checkVarCount.length == arguments.length) {
+      alert('形参和实参个数一样');
+    } else {
+      alert('形参和实参的个数不一样');
     }
-    checkVarCount(1, 2);//形参和实参个数一样
-    checkVarCount(1);//形参和实参的个数不一样
+  }
+  checkVarCount(1, 2); //形参和实参个数一样
+  checkVarCount(1); //形参和实参的个数不一样
 </script>

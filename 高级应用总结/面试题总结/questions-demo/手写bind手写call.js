@@ -20,6 +20,7 @@ function _new(Func, ...args) {
 
 	// 3.分析返回结果
 	if (result !== null && /^(object|function)$/.test(typeof result)) return result;
+	// return ret instanceof Object ? ret : obj;
 	return obj;
 }
 let sanmao = _new(Dog, '三毛');
