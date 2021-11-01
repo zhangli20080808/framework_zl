@@ -21,6 +21,7 @@ function bodyParser() { // 中间件是函数的原因是因为 函数可以传�
         arr.push(data);
       });
       ctx.req.on("end", function(data) {
+        console.log(Buffer.concat(arr).toString());
         resolve(Buffer.concat(arr).toString());
       });
     });

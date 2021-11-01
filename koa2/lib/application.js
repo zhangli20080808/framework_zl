@@ -24,7 +24,8 @@ module.exports = class Applicaton extends EventEmitter {
     // 每次请求上下文，都应该是独立的
     let request = Object.create(this.request);
     let response = Object.create(this.response);
-    let context = Object.create(this.context); // context.__proto__ = this.context.__proto__
+    let context = Object.create(this.context);
+    // context.__proto__ = this.context.__proto__
 
     context.request = request;
     context.response = response;

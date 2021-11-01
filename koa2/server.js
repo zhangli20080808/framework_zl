@@ -43,7 +43,8 @@ app.use((ctx) => {
 // 原理描述
 /**
  * 1. req和request的区别  request.req = req
- * 2. ctx.path === ctx.request.path的原因  // 从ctx上取值的时候，他会从request中去取，内部做了代理  defineProperty
+ * 2. ctx.path === ctx.request.path的原因  
+// 从ctx上取值的时候，他会从request中去取，内部做了代理  defineProperty
  * 比如 ctx.path 找的时候，自身没有，沿着__proto__去找，找到了context对象，{} 在他身上取值的时候，回去执行另一个方法
  */
 
