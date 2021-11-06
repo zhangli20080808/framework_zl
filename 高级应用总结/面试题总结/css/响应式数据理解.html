@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      // 1. 将数据定义成响应式
+      // 2. 需要对属性增加dep，来收集他对应哪些watcher，数据改变去更新
+      let state = { count: 1 };
+      let active;
+      function defineReactive(obj) {
+        for (let key in obj) {
+          let value = obj[key];
+          let dep = [];
+          Object.defineProperty(obj, key, {
+            get() {
+              if (active) {
+                dep.push(active);
+              }
+              return value;
+            },
+            set(newValue) {
+              value = newValue;
+              dep.forEach((watcher) => watcher());
+            },
+          });
+        }
+      }
+      defineReactive(state);
+      const watcher = (fn) => {
+        active = fn;
+        fn();
+        // 后续不再watcher中取值，不做依赖收集
+        active = null;
+      };
+
+      watcher(() => {
+        app.innerHTML = state.count;
+      });
+      watcher(() => {
+        console.log(state.count);
+      });
+    </script>
+  </body>
+</html>

@@ -1,3 +1,7 @@
+/**
+ * 大文件上传，断电续传
+ * https://www.cnblogs.com/zmyxixihaha/p/13534120.html
+ */
 let http = require('http');
 let uuid = require('uuid');
 let fs = require('fs');

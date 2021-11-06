@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      function mergeHook(parentValue, childValue) {
+        if (childValue) {
+          if (parentValue) {
+            return parentValue.concat(childValue);
+          } else {
+            return [childValue]; // 将钩子函数包装成一个数组
+          }
+        } else {
+          return parentValue;
+        }
+      }
+      function mergeOptions(parent, child) {
+        let opts = {};
+        for (let key in child) {
+          // undefined function
+          opts[key] = mergeHook(parent[key], child[key]);
+        }
+        return opts;
+      }
+
+      function callHook(vm, hookName) {
+        // console.log(vm.options);
+        vm.options[hookName] && vm.options[hookName].forEach((h) => h());
+      }
+      function Vue(options) {
+        // 将默认的配置和传入的配置做一个合并，在合适的时机调用 callHook
+        // 内部会将钩子函数 转换成一个数组 [beforeCreate]
+        this.options = mergeOptions(this.constructor.options, options);
+        callHook(this, 'beforeCreate');
+        callHook(this, 'create');
+      }
+      // 默认的,比如 全局组件，全局过滤器
+      // 比如 全局定义了一个A组件，当前组件也定义了A组件，就近原则
+      Vue.options = {};
+      // 把自定义的方法和组件自身的方法做一个合并，这样组件在new的时候会把全局的mixin进来
+      Vue.mixin = function (obj) {
+        // 把 Vue.options中的 beforeCreate 变成了数组
+        // this.options[beforeCreate] = [fn]
+        this.options = mergeOptions(this.options, obj);
+        console.log(this.options);
+      };
+      Vue.mixin({
+        beforeCreate() {
+          console.log('beforeCreate parent');
+        },
+      });
+      new Vue({
+        beforeCreate() {
+          console.log('beforeCreate 1');
+        },
+        create() {
+          console.log('create');
+        },
+      });
+    </script>
+  </body>
+</html>
