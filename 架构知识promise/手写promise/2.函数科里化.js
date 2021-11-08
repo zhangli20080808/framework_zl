@@ -4,7 +4,8 @@
  * 2.constructor 可以判断这个实例是通过谁构造出来的 无法区分到底属于谁
  * 3.instanceof 可以区分实例
  * 4.Object.prototype.toString.call([]) 区分具体的类型 不能区分实例
- *
+ * 
+ * 
  * */
 // function isType (content, typing) {
 //   return Object.prototype.toString.call(content) === `[object ${typing}]`
@@ -13,7 +14,7 @@
 // console.log(isType('123', 'String')) //true
 // console.log(isType(123, 'Number')) //true
 
-// 什么叫函数科里化呢? 就是细化函数的功能 ，把一个函数的范围变小 让其变得具体一点
+// 什么叫函数科里化呢? 就是细化函数的功能 ，把一个函数的范围变小,让其变得具体一点
 // 内置参数 isNumber  isString
 // function isType(typing) {
 //   私有化，这个函数可以拿到上层函数的参数，这个空间不会被释放掉，这个闭包并没有在当前作用域被执行，
@@ -52,7 +53,8 @@ const curring = (fn, arr = []) => {
   // 记录调用时参数的个数 和函数个体的关系  长度指代的是函数的参数个数
   let len = fn.length;
   console.log(len, 'len');
-  return (...args) => { // 科里化完传几个参数是不确定的，当数量=函数参数个数的时候，再让sum当前函数执行
+  // 科里化完传几个参数是不确定的，当数量=函数参数个数的时候，再让sum当前函数执行
+  return (...args) => { 
     //保存用户传入的参数
     let concatArgs = [...arr, ...args];
     console.log(concatArgs, 'concatArgs');
