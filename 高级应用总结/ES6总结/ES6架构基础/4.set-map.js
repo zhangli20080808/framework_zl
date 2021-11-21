@@ -73,7 +73,7 @@ function difference (arr1, arr2) {
 // console.log(difference(arr1, arr2))
 
 // 内存泄漏  浏览器 垃圾会收机制 标记清除
-let map = new Map([
+let map = new Map([shoushou'j
   ['a', 1],
   ['a', 100],
   ['b', 2],

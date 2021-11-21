@@ -17,11 +17,9 @@
 
 //https://www.w3school.com.cn/jsref/jsref_splice.asp
 
-
 // arr.splice(1,1,arr[0]) 将第二个值替换成第一个值
 // ...arr.splice(1,1,arr[0])拿到被替换的值,即第二个值
 // arr.splice(0,1,...arr.splice(1,1,arr[0]))将第一个值换成第二个值
-
 
 // var arr = ['one','two'];
 
