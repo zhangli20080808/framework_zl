@@ -24,7 +24,9 @@
     "mime": "^2.5.2",
     "nunjucks": "^3.2.3",
     "uuid": "^8.3.0",
-    "yargs": "^17.2.1"
+    "yargs": "^17.2.1",
+    "mongodb": "^4.1.2",
+    "mongoose": "^6.0.10"
   },
   "devDependencies": {
     "co": "^4.6.0"
