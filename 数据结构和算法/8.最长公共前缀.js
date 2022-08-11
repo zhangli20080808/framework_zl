@@ -24,4 +24,3 @@ let longestCommonPrefix = function (strs) {
   }
   return re;
 };
-

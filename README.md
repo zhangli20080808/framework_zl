@@ -68,7 +68,7 @@ mkdir -p /usr/local/var/log/mongodb
 --logpath 配置文件地址
 --fork 后台运行
 
-mongod --dbpath=/usr/local/var/mongodb --logpath=/usr/local/var/log/mongodb/log.log --fork
+mongod --dbpath=/usr/local/var/mongodb --logpath=/usr/local/var/log/mongodb/mongo.log --fork
 //child process started successfully, parent exiting
 # 3 查看 mongo 是否启动
 ps aux | grep mongod
