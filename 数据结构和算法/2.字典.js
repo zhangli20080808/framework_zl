@@ -49,9 +49,10 @@ function deepClone(obj, hash = new WeakMap()) {
   // 过滤 null undefined
   if (obj == null) return obj;
   if (typeof obj !== 'object') return obj;
-  // 判断是数组 还是对象
+  // 判断是数组 还是对象 -  typeof instanceof constructor
+  // 如果已经拷贝过了 我们就把拷贝过的结果直接返回 防止循环拷贝
   if (hash.has(obj)) {
-    return hash.get(obj);
+    return hash.get(obj); //  解决循环引用的问题
   }
   let instance = Array.isArray(obj) ? [] : {};
   hash.set(obj, instance);
