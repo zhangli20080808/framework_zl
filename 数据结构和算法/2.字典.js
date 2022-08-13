@@ -131,3 +131,24 @@ function isValid2(s) {
   return stack.length === 0;
 }
 console.log(isValid(aString), 'test');
+
+/**
+使用 Map 优化两数之和的处理
+1. 新建字典
+2. 循环nums里面的值，逐个来寻找，没有合适的就先存着，有就直接返回
+内存可能有点问题  主要是Map存储值的大小
+*/
+function toSum(nums, target) {
+  const map = new Map();
+  for (let i = 0; i < nums.length; i++) {
+    const n = nums[i];
+    const n2 = target - n;
+    if (map.has(n2)) {
+      return [map.get(n2), i];
+    } else {
+      // 没有
+      map.set(n, i);
+    }
+  }
+}
+console.log(toSum([2, 7, 1, 3, 11], 13), 'sum');
