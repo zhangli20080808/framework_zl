@@ -73,3 +73,61 @@ let obj = { name: 1, age: 2 };
 obj.a = obj;
 let b = deepClone(obj);
 console.log('[ b ] >', b);
+
+/**
+1."()" -> true
+2. "()[]{}" -> true
+3. "(]" -> false
+思路1  使用栈  遇到将左括号推入栈中，遇到右括号，如果能和栈顶元素能组成一对 pop ，负责直接返回false
+*/
+function isValid(s) {
+  // 如果是 奇数直接返回false
+  if (s % 2 === 1) return false;
+  const stack = [];
+  for (let i = 0; i < s.length; i++) {
+    const c = s[i];
+    if (c === '{' || c === '(' || c === '[') {
+      stack.push(c);
+    } else {
+      const t = stack[stack.length - 1];
+      if (
+        (t === '(' && c === ')') ||
+        (t === '{' && c === '}') ||
+        (t === '[' && c === ']')
+      ) {
+        stack.pop();
+      } else {
+        return false;
+      }
+    }
+  }
+  return stack.length === 0;
+}
+let aString = '(){}[]'; // true
+// let aString = '(){}]['; // false
+
+// console.log(isValid(aString), 'test');
+// 优化
+function isValid2(s) {
+  if (s % 2 === 1) return false;
+  const stack = [];
+  const map = new Map();
+  map.set('(', ')');
+  map.set('{', '}');
+  map.set('[', ']');
+  for (let i = 0; i < s.length; i++) {
+    const c = s[i];
+    if (map.has(c)) {
+      stack.push(c);
+    } else {
+      const t = stack[stack.length - 1];
+      if (map.get(t) === c) {
+        stack.pop();
+      } else {
+        return false;
+      }
+    }
+  }
+  return stack.length === 0;
+}
+console.log(isValid(aString), 'test');
