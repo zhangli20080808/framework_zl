@@ -73,3 +73,10 @@ const bfs = (root) => {
   }
 };
 bfs(treeData);
+// a
+// b
+// c
+// d
+// e
+// f
+// g
