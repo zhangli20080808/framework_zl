@@ -19,7 +19,7 @@ const binaryTree = {
 2. 對根節點的 左 子樹進行先序遍歷
 3. 對根節點的 右 子樹進行先序遍歷
 */
-const bs = require('../data/binary');
+const bs = require('./data/binary');
 const preorder = (root) => {
   if (!root) return;
   console.log(root.val);
