@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    /**
+     * 减少重排
+     * 批量修改dom
+     * 事件委托
+     *
+     * 引起重排的操作
+     * 1. 浏览器窗口大小发生变化    
+     * 2. 元素尺寸或者位置发生变化
+     * 3. 元素的内容 - 元素的数量或者图片大小
+     * 4. 添加或者删除可见的dom元素
+     * 5. 查询某些属性或者调用某些方法
+     *
+     * 优化
+     * 1. 避免频繁操作样式
+     * 2. 避免频繁操作dom 使用 碎片或者虚拟dom
+     * 3. 避免频繁读取引发 reflow的属性
+     * 4. 创建图层 - transfer、will-change
+     * 5. 不要使用table布局
+    clientWidth、clientHeight、clientTop、
+    clientLeft
+    offsetWidth、offsetHeight、offsetTop、
+    offsetLeft
+    scrollWidth、scrollHeight、scrollTop、
+    scrollLeft
+    scrollIntoView()、scrollIntoViewIffNeeded()
+    getComputedStyle()
+    getBoundingClientRect()
+    scrollTo()
+     * **/
+  </script>
+</html>

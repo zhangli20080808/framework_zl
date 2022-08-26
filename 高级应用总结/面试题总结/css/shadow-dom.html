@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p>hello world</p>
+    <div id="shadow"></div>
+  </body>
+  <script>
+    // dom api
+    let shadowDom = shadow.attachShadow({ mode: 'closed' });
+    let pElem = document.createElement('p');
+    pElem.innerHTML = 'hello shadow';
+
+    let styleElem = document.createElement('style');
+
+    styleElem.textContent = 'p{color:red}';
+
+    shadowDom.appendChild(styleElem);
+    shadowDom.appendChild(pElem);
+    // 外部样式影响不了影子节点内部样式, 移动到body下 里面的样式控制不到外部
+    // document.body.appendChild(pElem);
+    // 一般情况react  弹窗  基本都是改挂在到body上面，这种方案不太适合，如果
+    // 子项目body上面没有挂载属性，这种最合适
+  </script>
+</html>

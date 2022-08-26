@@ -56,6 +56,7 @@ console.log(dfs(treeData), 'con');
 // undefined con
 
 /**
+ * 广度
 1. 新建一个队列，把根节点入队  -> 根节点 a，
 2. 把队头出队并访问，
 3. 把队头的children挨个入队
@@ -64,12 +65,15 @@ console.log(dfs(treeData), 'con');
  */
 const bfs = (root) => {
   const queue = [root];
+  console.log('[ queue ] >', queue);
   while (queue.length > 0) {
     const n = queue.shift();
     console.log(n.val);
     n.children.forEach((item) => {
       queue.push(item);
     });
+    console.log('[ push ] >', queue);
+    console.log('[ 1 ] >', 1);
   }
 };
 bfs(treeData);

@@ -1,6 +1,12 @@
 /**
+ * Map Set 差异
     共同点：集合、字典，可以储存不重复的值
     不同点：集合 是以 [value, value]的形式储存元素，字典 是以 [key, value] 的形式储存
+
+    Map和对象的区别
+        key 元素顺序  数据访问  迭代  Size  性能
+Map     简单类型  有序  .get()  是  是  好
+Object  复杂类型  无需  []      否  否  差 
  */
 const m = new Map();
 const o = { p: 'haha' };
@@ -38,11 +44,17 @@ console.log('[ inter ] >', intersection(arr, arr2));
 // weakMap  weakSet
 /**
  * 1. 弱应用，防止内存泄露
- * 2. weakMap只能用对象做key，weakSet只能用对象做value
- * 因为是弱引用，所以没有forEach size  只能用add  has  delete
- *
+ * 2. WeakMap只接受对象作为 键名不接受其他类型的值作为键名
+ *    WeakMap的键名所指向的对象，不计入垃圾回收机制 不能遍历
  * weakMap 中添加完对象之后，这个对象之前该怎么销毁就怎么销毁
  * 不用管我 我引用了也没关系，不影响这个销毁的过程
+ * 
+ * weakSet只能用对象做value - 成员只能是对象，而不能是其他类型的值
+ * 不能遍历，因为是弱引用，随时可能消失
+ * 因为是弱引用，所以没有forEach size  只能用add  has  delete
+ * new WeakMap().set(1,2) 错误
+ * new WeakMap().set(Symbol(),2) 错误
+ *
  */
 
 function deepClone(obj, hash = new WeakMap()) {
@@ -152,3 +164,7 @@ function toSum(nums, target) {
   }
 }
 console.log(toSum([2, 7, 1, 3, 11], 13), 'sum');
+
+/**
+ * 
+ */

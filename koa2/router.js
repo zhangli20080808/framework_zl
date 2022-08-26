@@ -16,10 +16,10 @@ router.get('/form', (ctx, next) => {
   //next();
 });
 router.get('/hello', (ctx, next) => {
-  ctx.body = 'hello';
+  ctx.body = 'hello'; 
   //next();
 });
-
+ 
 let user = require('./routes/user');
 let work = require('./routes/work');
 // 跟用户相关的 可能我放到一个user文件夹中 /user/add  /user/delete
@@ -35,3 +35,4 @@ app.use((ctx) => {
   ctx.body = '12';
 });
 app.listen(3003);
+ 

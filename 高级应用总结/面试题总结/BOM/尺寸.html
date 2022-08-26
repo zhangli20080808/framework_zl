@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /* #app {
+        width: 100px;
+        height: 110px;
+        background: red;
+      } */
+      div {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        border: 1px solid red;
+      }
+
+      #aDiv {
+        width: 100px;
+        border: 1px solid blue;
+      }
+
+      button {
+        margin-bottom: 2em;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- <div id="app"></div> -->
+    <div id="aDiv">FooBar-FooBar-FooBar-FooBar</div>
+    <button id="aButton">Check for overflow</button>
+
+    <div id="anotherDiv">FooBar-FooBar-FooBar-FooBar</div>
+    <button id="anotherButton">Check for overflow</button>
+  </body>
+  <script>
+    /**
+     * https://www.runoob.com/jsref/prop-element-offsetwidth.html
+     * 尺寸
+     * style.width  getComputedStyle
+     * offsetWidth - 返回一个元素的布局宽度,包含边框，内边距，滚动条
+     * clientWidth - 元素的内部宽度
+     * scrollWidth - 元素内容宽度的一种度量，包括由于overflow溢出而在屏幕上不可见的内容
+     * 包含内边距，但不包含边框 外边距 垂直滚动条
+     *
+     *
+     * getBoundingClientRect
+     *
+     * 定位
+     * offsetTop
+     * offsetLeft
+     */
+    // let aa = document.getElementById('app');
+    // aa.offsetWidth; // 100
+    // aa.offsetWidth; // 110
+    // console.log('[ getBoundingClientRect ] >', aa.getBoundingClientRect());
+    // console.log('[ clientWidth ] >', aa.clientWidth);
+
+    var buttonOne = document.getElementById('aButton'),
+      buttonTwo = document.getElementById('anotherButton'),
+      divOne = document.getElementById('aDiv'),
+      divTwo = document.getElementById('anotherDiv');
+
+    //check to determine if an overflow is happening
+    function isOverflowing(element) {
+      console.log(element.scrollWidth, 'scrollWidth');
+      console.log(element.offsetWidth, 'offsetWidth');
+      return element.scrollWidth > element.offsetWidth;
+    }
+
+    function alertOverflow(element) {
+      if (isOverflowing(element)) {
+        console.log('Contents are overflowing the container.');
+      } else {
+        console.log('No overflows!');
+      }
+    }
+
+    buttonOne.addEventListener('click', function () {
+      alertOverflow(divOne);
+    });
+
+    buttonTwo.addEventListener('click', function () {
+      alertOverflow(divTwo);
+    });
+  </script>
+</html>
