@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <p>hello world</p>
+    <div id="shadow"></div>
+</body>
+<script>
+    // 如果应用 加载 刚开始加载应用A 是 window.a  B应用是 window.b
+    // 单应用的切换 如何实现隔离 A加载完切换到B 把a去掉 B切换到A 重新加载a
+    // 沙箱 - 创造一个干净的环境给这个子应用使用，当切换时，可以选择丢弃属性和恢复属性
+    // 应用的运行，从开始到结束，切换后不会影响到全局
+    // js沙箱
+    // 快照沙箱 1年前拍一张，去别的地方再拍一张，将区别保存起来 再回到1年前  激活  放弃
+
+    // 代理沙箱可以实现多应用沙箱，把不同的应用用不同的代理来实现
+    class SnapshotSandbox {
+        constructor() {
+            this.proxy = window; // window 属性
+            this.modifyPropsMap = {}; // 记录在window上的修改
+            this.active();
+        }
+        // 激活
+        active() {
+            this.windowSnapshot = {}; // 拍照window
+            for (const prop in window) {
+                if (window.hasOwnProperty(prop)) {
+                    this.windowSnapshot[prop] = window[prop];
+                }
+            }
+            // 激活时，将上次的值应用于window
+            Object.keys(this.modifyPropsMap).forEach((p) => {
+                window[p] = this.modifyPropsMap[p];
+            });
+        }
+        // 失效,丢弃沙箱 - 比较1年后的和1年之前有啥区别，将变化的保存起来
+        inactive() {
+            for (const prop in window) {
+                if (window.hasOwnProperty(prop)) {
+                    //判断当前window上的属性和快照属性有啥区别，改变没有
+                    if (this.windowSnapshot[prop] !== window[prop]) {
+                        this.modifyPropsMap[prop] = window[prop];
+                        // 将window变回去
+                        window[prop] = this.windowSnapshot[prop];
+                    }
+                }
+            }
+        }
+    }
+    let sandbox = new SnapshotSandbox();
+    // 多个子应用不能使用这种方式
+    ((window) => {
+        window.a = 1;
+        window.b = 2;
+        console.log('[ window.a b ] >', window.a, window.b);
+        sandbox.inactive();
+        console.log('[ window.a b ] >', window.a, window.b);
+        sandbox.active();
+        console.log('[ window.a b ] >', window.a, window.b);
+    })(sandbox.proxy); //  sandbox.proxy - 原生的window
+</script>
+
+</html>
