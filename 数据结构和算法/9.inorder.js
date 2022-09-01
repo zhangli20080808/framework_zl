@@ -43,3 +43,25 @@ console.log(postOrder(bs));
 // 7
 // 3
 // 1
+// const lengthOfLongestSubstring = (s: string) => {
+//   let arr = [],
+//     max = 0;
+//   for (let i = 0; i < s.length; i++) {
+//     let index = arr.indexOf(s[i]);
+//     if (index !== -1) {
+//       arr.splice(0, index + 1);
+//     }
+//     arr.push(s.charAt(i));
+//     max = Math.max(arr.length, max);
+//   }
+//   return max;
+// };
+
+
+// 设一课二叉树的中序遍历序列：badce，
+// 后序遍历序列：bdeca，则二叉树先序遍历序列为____。abdec
+
+//   a
+// b   d
+//      c
+//    e       

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- https://codepen.io/JowayYoung/pens/public -->
+    <style>
+      .justify-text li {
+        padding: 0 20px;
+        width: 100px;
+        height: 40px;
+        background-color: #f66;
+        line-height: 40px;
+        text-align-last: justify;
+        color: #fff;
+      }
+      .justify-text li + li {
+        margin-top: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bruce flex-ct-x" data-title="使用text-align-last对齐两端文本">
+      <ul class="justify-text">
+        <li>账号</li>
+        <li>密码</li>
+        <li>电子邮件</li>
+        <li>通讯地址</li>
+      </ul>
+    </div>
+  </body>
+</html>

@@ -9,15 +9,15 @@
       .wrapper {
         display: grid;
         /* 2. 设置每一行中单个元素的宽度： grid-template-columns，每个宽度值100px根据业务需要设置。 */
-        grid-template-columns: 100px 100px 100px;
+        grid-template-columns: 100px 200px 50px;
         /* 3. 设置每一列中单个元素的高度： grid-template-rows，每个高度值100px根据业务需要设置。*/
-        grid-template-rows: 100px 100px 100px;
+        grid-template-rows: 100px 200px 50px;
       }
       .list {
         background: #eee;
       }
       .list:nth-child(odd) {
-        background: #999;
+        background: red;
       }
     </style>
   </head>

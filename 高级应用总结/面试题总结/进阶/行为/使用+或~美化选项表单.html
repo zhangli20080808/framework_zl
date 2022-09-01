@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /* 
+        https://blog.csdn.net/amnesiac666/article/details/122060057
+        +  ~（加号）加号又被称作兄弟选择器。A+B表示选择紧邻在A后面的B元素，且A和B必须拥有相同的父元素，
+        所选到的仅为一个B元素标签。
+        ~（波浪号）：A ~ B表示选择A标签后的所有B标签，
+        但是A和B标签必须有相同的父元素。
+        */
+      .beauty-selection {
+        display: flex;
+      }
+      .beauty-selection li {
+        display: flex;
+        align-items: center;
+      }
+      .beauty-selection li + li {
+        margin-left: 20px;
+      }
+      .beauty-selection input:checked + label {
+        background-color: #f90;
+      }
+      .beauty-selection label {
+        margin-right: 5px;
+        padding: 2px;
+        border: 1px solid #f90;
+        border-radius: 100%;
+        width: 18px;
+        height: 18px;
+        background-clip: content-box;
+        cursor: pointer;
+        transition: all 300ms;
+      }
+      .beauty-selection label:hover {
+        border-color: #09f;
+        background-color: #09f;
+        box-shadow: 0 0 7px #09f;
+      }
+      .beauty-selection span {
+        font-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bruce flex-ct-x" data-title="使用+或~美化选项表单">
+      <ul class="beauty-selection">
+        <li>
+          <input id="fed-engineer" type="radio" name="radioName" hidden />
+          <label for="fed-engineer"></label>
+          <span>前端工程师</span>
+        </li>
+        <li>
+          <input id="bed-engineer" type="radio" name="radioName" hidden />
+          <label for="bed-engineer"></label>
+          <span>后端工程师</span>
+        </li>
+        <li>
+          <input id="fsd-engineer" type="radio" name="radioName" hidden />
+          <label for="fsd-engineer"></label>
+          <span>全栈工程师</span>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>
