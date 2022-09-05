@@ -5,8 +5,8 @@
 
     Map和对象的区别
         key 元素顺序  数据访问  迭代  Size  性能
-Map     简单类型  有序  .get()  是  是  好
-Object  复杂类型  无需  []      否  否  差 
+    Map     简单类型  有序  .get()  是  是  好
+    Object  复杂类型  无需  []      否  否  差 
  */
 const m = new Map();
 const o = { p: 'haha' };
