@@ -57,6 +57,7 @@ LRUCache.prototype.put = function (key, value) {
 const lRUCache = new LRUCache(2);
 lRUCache.put(1, 1); // 缓存是 {1=1}
 lRUCache.put(2, 2); // 缓存是 {1=1, 2=2}
+console.log(lRUCache, 'get 1');
 lRUCache.get(1); // 返回 1
 console.log(lRUCache, 'get 1');
 lRUCache.put(3, 3); // 该操作会使得关键字 2 作废，缓存是 {1=1, 3=3}

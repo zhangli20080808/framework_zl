@@ -1,8 +1,9 @@
+//  最近使用的一个缓存
 // 如果你最近使用了，我就给你放到最前面
-// 基础指向  1->2->3->4
-// 如果有新增 同步插入 6->1->2->3 新增6删除4
+// 基础指向，比如最多缓存4个  1->2->3->4
+// 如果有新增 同步插入 6->1->2->3 新增6删除4 ，如果再来一个2 ，2放到最前面
 // 如果新增项，在链表中存在，移动到顶部，类似的lru cache的简单算法
-// 使用链表的原因 - 删除，新增的操作很多并且很频繁
+// 使用链表的原因 - 删除，新增的操作很多并且很频繁，用一个合适的淘汰机制
 // 使用Map模拟我们的链表  可以把我们的Map理解成链表，反着来用
 const cache = new Map();
 cache.set('a', 1);
@@ -57,6 +58,7 @@ LRUCache.prototype.put = function (key, value) {
 const lRUCache = new LRUCache(2);
 lRUCache.put(1, 1); // 缓存是 {1=1}
 lRUCache.put(2, 2); // 缓存是 {1=1, 2=2}
+console.log(lRUCache, 'read');
 lRUCache.get(1); // 返回 1
 console.log(lRUCache, 'get 1');
 lRUCache.put(3, 3); // 该操作会使得关键字 2 作废，缓存是 {1=1, 3=3}

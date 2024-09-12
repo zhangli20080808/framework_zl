@@ -48,7 +48,7 @@ console.log('[ inter ] >', intersection(arr, arr2));
  *    WeakMap的键名所指向的对象，不计入垃圾回收机制 不能遍历
  * weakMap 中添加完对象之后，这个对象之前该怎么销毁就怎么销毁
  * 不用管我 我引用了也没关系，不影响这个销毁的过程
- * 
+ *
  * weakSet只能用对象做value - 成员只能是对象，而不能是其他类型的值
  * 不能遍历，因为是弱引用，随时可能消失
  * 因为是弱引用，所以没有forEach size  只能用add  has  delete
@@ -115,9 +115,41 @@ function isValid(s) {
   }
   return stack.length === 0;
 }
-let aString = '(){}[]'; // true
-// let aString = '(){}]['; // false
 
+function isMatch(p, cur) {
+  if (p === '(' && cur === ')') return true;
+  if (p === '{' && cur === '}') return true;
+  if (p === '[' && cur === ']') return true;
+  return false;
+}
+/**
+ * 1. '({[' 入栈
+  2. 循环到右边 如果匹配到 出栈
+ * @param {*} s 
+ */
+function isValid3(s) {
+  let left = '({[';
+  let right = ')}]';
+  const stack = [];
+  for (let i = 0; i < s.length; i++) {
+    const current = s[i];
+    if (left.includes(current)) {
+      // 左括号，入栈
+      stack.push(current); // ['(', '{', '[']
+    } else if (right?.includes(current)) {
+      // 有货号，判断栈顶部（stack最后一个元素） -是否出栈
+      const top = stack[stack.length - 1];
+      if (isMatch(top, current)) {
+        stack.pop();
+      } else {
+        return false;
+      }
+    }
+  }
+  return stack.length === 0;
+}
+let aString = '(){}[]'; // true
+let aStringFalse = '(){}]['; // false
 // console.log(isValid(aString), 'test');
 // 优化
 function isValid2(s) {
@@ -143,6 +175,7 @@ function isValid2(s) {
   return stack.length === 0;
 }
 console.log(isValid(aString), 'test');
+console.log(isValid3(aString), 'isValid3');
 
 /**
 使用 Map 优化两数之和的处理
@@ -166,5 +199,5 @@ function toSum(nums, target) {
 console.log(toSum([2, 7, 1, 3, 11], 13), 'sum');
 
 /**
- * 
+ *
  */
