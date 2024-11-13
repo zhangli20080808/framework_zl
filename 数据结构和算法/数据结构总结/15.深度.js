@@ -42,3 +42,24 @@ const tree = {
 depthFirstSearch(tree);
 // 在这个例子中，depthFirstSearch函数首先检查传入的节点是否为null。如果是，函数就返回并不做任何事情。
 // 否则，它会打印出当前节点的值，然后遍历并递归调用其所有子节点。这样就保证了每个节点都会被访问，并且是先访问其所有子节点，然后再访问其兄弟节点。
+
+function visitNode(n) {
+  if (n instanceof Comment) {
+    // 注释
+    console.info('Comment node', n.textContent);
+  }
+  if (n instanceof Text) {
+    console.info('Text node', n.textContent?.trim());
+  }
+  if (n instanceof HTMLElement) {
+    console.info('Element node', `<${n.tagName.toLowerCase()}>`);
+  }
+}
+function depthTraverse(root) {
+  visitNode(root);
+
+  const childNodes = root.childNodes; // childNodes 和 children 不一样
+  childNodes.forEach((curNode) => {
+    depthTraverse(curNode);
+  });
+}

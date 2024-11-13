@@ -109,6 +109,52 @@ function testAsync() {
 // testAsync();
 // 最终，每隔一秒打印出来的都是5
 
+class LazyMan2 {
+  constructor(name) {
+    this.tasks = [];
+    const task = () => {
+      console.log(name);
+      this.next();
+    };
+    this.tasks.push(task);
+    setTimeout(() => {
+      this.next();
+    }, 0);
+  }
+  next() {
+    const task = this.tasks.shift();
+    task && task();
+    return this;
+  }
+  look(name) {
+    const task = () => {
+      console.log(name);
+      this.next();
+    };
+    this.tasks.push(task);
+    return this;
+  }
+  sleep(time) {
+    this._sleepWraper(time, false);
+    return this;
+  }
+  _sleepWraper(time, first) {
+    const task = () => {
+      setTimeout(() => {
+        console.log(`等待${time}s`);
+        this.next();
+      }, time * 1000);
+    };
+    this.tasks.push(task);
+    if (first) {
+      this.tasks.unshift(task);
+    } else {
+      this.tasks.push(task);
+    }
+    return this;
+  }
+}
+
 // 函数实现
 // https://juejin.cn/post/6854573208469929998
 function chain() {

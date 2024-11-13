@@ -1,5 +1,7 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>无标题文档</title>
@@ -25,19 +27,21 @@
     栈：存放变量，变量中保存的只是对象所在的地址
     堆：保存对象真正的数据
 -->
+
 <body>
 </body>
+
 </html>
 <script>
     function show(x) {
-        console.log(typeof(x));    // undefined 值类型
-        console.log(typeof(10));   // number 值类型
-        console.log(typeof('abc')); // string 值类型
-        console.log(typeof(true));  // Boolean 值类型
-        console.log(typeof(function () { }));  //函数 引用类型
-        console.log(typeof([1, 'a.text.json', true]));  //数组  引用类型
+        console.log(typeof (x));    // undefined 值类型
+        console.log(typeof (10));   // number 值类型
+        console.log(typeof ('abc')); // string 值类型
+        console.log(typeof (true));  // Boolean 值类型
+        console.log(typeof (function () { }));  //函数 引用类型
+        console.log(typeof ([1, 'a.text.json', true]));  //数组  引用类型
         console.log(typeof ({ a: 10, b: 20 }));  //object 或者json  引用类型
-        console.log(typeof (null));  //null  引用类型
+        console.log(typeof (null));  //object  引用类型
         console.log(typeof (new Number(10)));  //内置对象 引用类型
     }
     show();
@@ -45,10 +49,10 @@
     //    函数、数组、对象、null、new Number(10)都是对象。他们都是引用类型。  null干掉指针
 
 
-    var test ={name:'wangshukui'};
-    var test2=  test;
+    var test = { name: 'wangshukui' };
+    var test2 = test;
     alert(test === test2);
-    test.name='zhangsan';
+    test.name = 'zhangsan';
     alert(test2.name);
 
 </script>

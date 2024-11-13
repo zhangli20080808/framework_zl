@@ -197,7 +197,3 @@ function toSum(nums, target) {
   }
 }
 console.log(toSum([2, 7, 1, 3, 11], 13), 'sum');
-
-/**
- *
- */

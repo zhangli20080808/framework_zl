@@ -44,3 +44,45 @@ function printTree(tree, level = 0) {
   });
 }
 printTree(tree);
+const obj = {
+  id: 1,
+  name: '部门A',
+  children: [
+    {
+      id: 2,
+      name: '部门B',
+      children: [
+        { id: 4, name: '部门D' },
+        { id: 5, name: '部门E' },
+      ],
+    },
+    {
+      id: 3,
+      name: '部门C',
+      children: [{ id: 6, name: '部门F' }],
+    },
+  ],
+};
+
+// 树转成列表
+function convertTreeToList(obj) {
+  const arr = [];
+  const nodeToParent = new Map();
+  const queue = [];
+  queue.unshift(obj);
+  while (queue.length > 0) {
+    const node = queue.pop();
+    const { id, name, children = [] } = node;
+    const parentNode = nodeToParent.get(node);
+    const parentId = parentNode ? parentNode.id : 0;
+    const item = { id, name, parentId };
+    arr.push(item);
+    children.forEach((child) => {
+      nodeToParent.set(child, node); // set当前孩子节点的父节点是谁，为上面找父节点做准备
+      queue.unshift(child); // 入队
+    });
+  }
+  return arr;
+}
+const arr1 = convertTreeToList(obj);
+console.info(arr1);

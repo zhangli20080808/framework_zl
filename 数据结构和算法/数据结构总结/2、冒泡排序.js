@@ -73,3 +73,22 @@ console.log(bubuleSort2(arrs)); // 输出：[8, 21, 32, 34, 51, 64]
 
 // 上述算法在 数据比较少的时候 还可以，逻辑，简单粗暴。数据量很大，显然不行，需要优化，二分思想
 // 给数组找一个标识位置，比如我，所有人都给我比个头，比我高的，站我右边，比我矮的，站我左边
+
+function flatten(arr = []) {
+  let res = [];
+  arr.forEach((item) => {
+    if (Array.isArray(item)) {
+      const p = flatten(item);
+      res = res.concat(p);
+    } else {
+      res = res.concat(item);
+    }
+  });
+  return res;
+}
+const arrList = [1, 2, 3, [4, 5, [10, 11]], [7, 8]];
+console.log(flatten(arrList));
+
+function getType(obj) {
+  Array.prototype.slice.call(obj);
+}

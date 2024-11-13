@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>template</title>
+</head>
+
+<body>
+  <p>template</p>
+
+  <div id="box">
+    <p>hello <b>world</b></p>
+    <img src="https://www.baidu.com/img/flexible/logo/pc/result.png" />
+    <!-注释->
+      <ul>
+        <li>a</li>
+        <li>b</li>
+      </ul>
+  </div>
+  <script>
+
+    function visitNode(n) {
+      if (n instanceof Comment) {
+        // 注释
+        console.info('Comment node', n.textContent);
+      }
+      if (n instanceof Text) {
+        console.info('Text node', n.textContent?.trim());
+      }
+      if (n instanceof HTMLElement) {
+        console.info('Element node', `<${n.tagName.toLowerCase()}>`);
+      }
+    }
+    function depthTraverse(root) {
+      visitNode(root);
+
+      const childNodes = root.childNodes; // childNodes 和 children 不一样
+      if (childNodes.length) {
+        childNodes.forEach((curNode) => {
+          depthTraverse(curNode); // 递归
+        });
+      }
+    }
+
+    let box = document.getElementById('box')
+    depthTraverse(box)
+  </script>
+
+</html>

@@ -9,20 +9,20 @@ const fs = require('fs');
 // let { promisify } = require('util');
 
 // 高阶函数 接受一个fn 返回一个函数 函数返回一个 promise
-function promisify (fn) {
+function promisify(fn) {
   return function (...args) {
     return new Promise((resolve, reject) => {
       fn(...args, (err, data) => {
-        if (err) return reject(err)
-        resolve(data)
-      })
-    })
-  }
+        if (err) return reject(err);
+        resolve(data);
+      });
+    });
+  };
 }
 let read = promisify(fs.readFile);
-read('./name.txt', 'utf-8').then(data => {
-  console.log(data)
-})
+read('./name.txt', 'utf-8').then((data) => {
+  console.log(data);
+});
 // 让我们的promise里面的每一个都依次执行 把结果和我们的索引做上一个映射关系
 function isPromise(value) {
   if (
@@ -64,10 +64,13 @@ Promise.all = function (promises) {
   });
 };
 
-Promise.all([1, 2, read('./name.txt', 'utf8'), read('./age.txt', 'utf8')]).then((data) => {
-  console.log(data, 111)
-}, (err) => {
-  console.log(err, 'err')
-})
+Promise.all([1, 2, read('./name.txt', 'utf8'), read('./age.txt', 'utf8')]).then(
+  (data) => {
+    console.log(data, 111);
+  },
+  (err) => {
+    console.log(err, 'err');
+  }
+);
 
 // Promise.race  谁是第一个完成的就用它的结果、如果是失败，那么这个promise就失败，如果第一个是成功，那么就成功

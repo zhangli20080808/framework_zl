@@ -1,6 +1,8 @@
 // js 主线程是单线程的，setTimeout,ajax js模型还是多线程的
 // 多线程就是 同时干很多事
 
+const { resolve } = require('../手写promise/promise');
+
 // js当前执行的上下文 全局上下文
 
 // 执行上下文 “栈” (先进后出)  队列 （先进后出）

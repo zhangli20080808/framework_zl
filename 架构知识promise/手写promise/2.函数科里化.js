@@ -192,3 +192,135 @@ console.log('[ 2 ] >', newFn2(10, 20)(30));
 // • 函数柯里化降低了函数通用性，却提高了适用性。
 // • 函数柯里化主要应用场景：参数复用、延迟执行。
 // • 函数柯里化的重点在于闭包和递归，将每次执行的作用域保存在内存中，等待后续使用。
+
+function getType(obj) {
+  // '[Object object]'
+  const res = Object.prototype.toString.call(obj);
+  // return res.slice(8, -1).toLocaleLowerCase();
+  // 从空格的位置开始截取
+  const spaceIndex = res.indexOf(' ');
+  const p = res.slice(spaceIndex + 1, -1);
+  return p.toLocaleLowerCase();
+}
+
+// 1. 函数执行获得属性 2. 继承 获得原型上的方法
+function name(fn, ...arg) {
+  // let obj = {}
+  // obj.__proto__ = fn.prototype
+  // 1. 构造一个空对象，并且继承构造函数的原型
+  let obj = Object.create(fn.prototype);
+  // 2. 将 obj 作为 this， 执行
+  fn.call(obj, ...arg); // fn.apply(obj, arg)
+  // 3. 返回 obj
+  return obj;
+}
+
+Function.prototype.customBind = (content, ...bindArgs) => {
+  // context 是函数传入的this
+  // bindArgs 是传入的各个参数
+  const self = this; // 当前执行的函数本身
+  return (...args) => {
+    // 拼接参数
+    const newArgs = args.concat(bindArgs);
+    self.apply(content, newArgs);
+  };
+};
+function sum(a, b, c) {
+  console.log(this, a, b, c);
+}
+const fn1 = sum.bind({ x: 100 }, 1, 2, 3);
+console.log(fn1()); // {x: 100} , 1, 2, 3
+console.log(fn1(50)); //  {x: 100} , 1, 2, 3 , 因为参数满了
+
+// 手写
+// 在一个函数时，执行this，该怎么绑定呢？
+Function.prototype.customCall = (content, ...args) => {
+  // 如果content 传入 null
+  if (content == null) content = globalThis;
+  if (typeof content !== 'object') content = new Object(content); // 值类型变为对象类型
+  // 利用对象执行函数的特性
+  const fnKey = Symbol(); // 不会出现属性名称的覆盖
+  content[fnKey] = this; // this 就是当前函数
+  const res = content[fnKey](...args); // 绑定了this
+  delete content[fnKey]; // 清理掉fn，防止污染
+  return res;
+};
+
+const obj = {
+  x: 100,
+  fn() {
+    console.log(this);
+  },
+};
+console.info(obj.fn()); // obj
+
+class EventBus {
+  constructor(parameters) {
+    /**
+     * {
+        key1: [
+          { fn: fn11, isOnce: false }, 
+          { fn: fn22, isOnce: false },
+          { fn: fn33, isOnce: true },
+         ]
+      }
+     */
+    this.events = {};
+  }
+  on(type, fn, isOnce = false) {
+    const event = this.events;
+    if (event[type] == null) {
+      event[type] = []; // 初始化 key 的fn 数组
+    }
+    event[type].push({
+      fn,
+      isOnce,
+    });
+  }
+  once(type, fn) {
+    this.on(type, fn, true);
+  }
+  emit(type, ...args) {
+    const fnList = this.events[type];
+    if (fnList == null) return;
+    // 注意
+    this.events[type] = fnList.filter((item) => {
+      const { fn, isOnce } = item;
+      fn(...args);
+      // once 执行一次就要过滤掉
+      if (!isOnce) return true;
+      return false;
+    });
+  }
+  off(type, fn) {
+    if (!fn) {
+      // 解绑所有 type的函数
+      this.events[type] = [];
+    } else {
+      // 解绑单个fn
+      const fnList = this.events[type];
+      if (fnList) {
+        this.events[type] = fnList.filter((item) => item.fn !== fn);
+      }
+    }
+  }
+}
+const fn11 = (a, b) => {
+  console.log('fn11', a, b);
+};
+const fn22 = (a, b) => {
+  console.log('fn22', a, b);
+};
+const fn33 = (a, b) => {
+  console.log('fn33', a, b);
+};
+const e = new EventBus();
+e.on('key1', fn11);
+e.on('key1', fn22);
+e.once('key1', fn33);
+e.on('xxxxx', fn33);
+
+// e.emit('key1', 10, 20); // fn11 fn22 fn33
+// e.off('key1', fn11);
+
+// e.emit('key1', fn22); // 触发 fn22

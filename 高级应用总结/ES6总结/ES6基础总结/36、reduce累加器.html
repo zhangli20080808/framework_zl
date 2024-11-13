@@ -1,213 +1,217 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Title</title>
-  </head>
-  <body></body>
-  <script>
-    /*
-     * reduce() 方法接收一个函数作为累加器，数组中的每个值（从左到右）开始缩减，
-     * 最终计算为一个值。
-     *
-     * reduce() 可以作为一个高阶函数，用于函数的 compose。
-     *
-     * 注意: reduce() 对于空数组是不会执行回调函数的。
-     *
-     * array.reduce(function(total, currentValue, currentIndex, arr), initialValue)
-     * */
 
-    function a() {
-      // console.log('a')
-      return 'a';
-    }
+<head>
+  <meta charset="UTF-8" />
+  <title>Title</title>
+</head>
 
-    function b(...arg) {
-      // console.log('b')
-      return { ...arg };
-    }
+<body></body>
+<script>
+  /*
+   * reduce() 方法接收一个函数作为累加器，数组中的每个值（从左到右）开始缩减，
+   * 最终计算为一个值。
+   *
+   * reduce() 可以作为一个高阶函数，用于函数的 compose。
+   *
+   * 注意: reduce() 对于空数组是不会执行回调函数的。
+   *
+   * array.reduce(function(total, currentValue, currentIndex, arr), initialValue)
+   * */
 
-    // let numbers = [15.5, 2.3, 1.1, 4.7];
-    // let result = numbers.reduce(function (total, currentVal) {
-    // return total + currentVal
-    // }, 0);
+  function a() {
+    // console.log('a')
+    return 'a';
+  }
 
-    // let arr = [a, b, c]
-    //
-    // let result = arr.reduce(function (left, right) {
-    //   return right(left())
-    // },)
-    //
-    // console.log(result, '123')
+  function b(...arg) {
+    // console.log('b')
+    return { ...arg };
+  }
 
-    //数组去重
-    let arr = [1, 2, 3, 5, 222, 1, 2].reduce((accu, current) => {
-      return accu.includes(current) ? accu : accu.concat(current);
-    }, []);
-    console.log(arr, 'arr'); //[1, 2, 3, 5, 222] "arr"
+  // let numbers = [15.5, 2.3, 1.1, 4.7];
+  // let result = numbers.reduce(function (total, currentVal) {
+  // return total + currentVal
+  // }, 0);
 
-    let arr1 = [1, 2, 3, 5, 222, 1, 2].filter((item, index, arr) => {
-      return arr.indexOf(item) === index;
-    });
-    console.log(arr1, 'filter');
+  // let arr = [a, b, c]
+  //
+  // let result = arr.reduce(function (left, right) {
+  //   return right(left())
+  // },)
+  //
+  // console.log(result, '123')
 
-    let arr3 = [...new Set([1, 2, 2, 4, null, null])]; // [1,2,4,null]
+  //数组去重
+  let arr = [1, 2, 3, 5, 222, 1, 2].reduce((accu, current) => {
+    return accu.includes(current) ? accu : accu.concat(current);
+  }, []);
+  console.log(arr, 'arr'); //[1, 2, 3, 5, 222] "arr"
 
-    let arr4 = Array.from(new Set([1, 2, 3, 4, 2, 1, 2])); // [1, 2, 3, 4]
-    let total = 0;
-    [1, 2, 3, 4].forEach((item) => (total += item));
+  let arr1 = [1, 2, 3, 5, 222, 1, 2].filter((item, index, arr) => {
+    return arr.indexOf(item) === index;
+  });
+  console.log(arr1, 'filter');
 
-    //注意
-    // 在使用reduce方法有一点需要注意，若有初始值但数组为空，或无初始值但数组只有一项时，reduce方法都不会执行
-    // [].reduce(() => console.log(1), 1); //不会执行
-    // [1].reduce(() => console.log(1)); //不执行
-    // // 若数组为空且没有初始值，reduce方法报错。
-    // [].reduce(() => console.log(1)); //报错
-    //
-    // // 所以如果没有初始值，你至少得保证数组有2项才能执行；如果给了初始值，你至少得保证数组有一项才能执行。
-    // [1, 2].reduce(() => console.log(1)); //1
-    // [1].reduce(() => console.log(1), 1); //1
+  let arr3 = [...new Set([1, 2, 2, 4, null, null])]; // [1,2,4,null]
 
-    // 统计一个数组中有多少个不重复的单词：
+  let arr4 = Array.from(new Set([1, 2, 3, 4, 2, 1, 2])); // [1, 2, 3, 4]
+  let total = 0;
+  [1, 2, 3, 4].forEach((item) => (total += item));
 
-    // 1. 不使用reduce
-    let arr2 = ['apple', 'orange', 'apple', 'orange', 'pear', 'orange'];
+  //注意
+  // 在使用reduce方法有一点需要注意，若有初始值但数组为空，或无初始值但数组只有一项时，reduce方法都不会执行
+  // [].reduce(() => console.log(1), 1); //不会执行
+  // [1].reduce(() => console.log(1)); //不执行
+  // // 若数组为空且没有初始值，reduce方法报错。
+  // [].reduce(() => console.log(1)); //报错
+  //
+  // // 所以如果没有初始值，你至少得保证数组有2项才能执行；如果给了初始值，你至少得保证数组有一项才能执行。
+  // [1, 2].reduce(() => console.log(1)); //1
+  // [1].reduce(() => console.log(1), 1); //1
 
-    // function getWordCount(array) {
-    //   let obj = {}
-    //   for (let i = 0; i < array.length; i++) {
-    //     let cur = array[i]
-    //     obj[cur] = (obj[cur] + 1) || 1
-    //   }
-    //   return obj
-    // }
+  // 统计一个数组中有多少个不重复的单词：
 
-    function getWordCount(array) {
-      return array.reduce((prev, next) => {
-        // prev[next] = (prev[next] + 1) || 1
-        if (next in prev) {
-          prev[next]++;
-        } else {
-          prev[next] = 1;
-        }
-        return prev;
-      }, {});
-    }
+  // 1. 不使用reduce
+  let arr2 = ['apple', 'orange', 'apple', 'orange', 'pear', 'orange'];
 
-    console.log(getWordCount(arr2)); //{apple: 2, orange: 3, pear: 1}
+  // function getWordCount(array) {
+  //   let obj = {}
+  //   for (let i = 0; i < array.length; i++) {
+  //     let cur = array[i]
+  //     obj[cur] = (obj[cur] + 1) || 1
+  //   }
+  //   return obj
+  // }
 
-    // reduce的理解：
-    // reduce(callback,initiaValue)会传入两个变量，回调函数(callback)和初始值(initiaValue)。
-    //
-    // 假设函数有个传入参数，prev和next，index和array。 Prev和next是你必须要了解的。
-    //
-    // 当没有传入初始值时，prev是从数组中第一个元素开始的，next是第二个函数。
-    //
-    // 但是当传入初始值（initiaValue）后,第一个prev将是initivalValue，next将是数组中的第一个元素。
-
-    //  数组姜维
-    let arrs = [
-      [0, 1],
-      [2, 3],
-      [4, 5],
-    ];
-
-    let result = arrs.reduce((prev, next) => {
-      return prev.concat(next);
-    }, []);
-    console.log(result);
-
-    //flat方式
-    let arrss = [
-      [0, 1],
-      [2, 3],
-      [4, [5, 6, 7]],
-    ];
-    let result1 = Array.from(arrss.flat(Infinity));
-    console.log(result1);
-
-    //递归方式
-    const newArr = function (arr) {
-      return arr.reduce((per, cur) => {
-        return per.concat(Array.isArray(cur) ? newArr(cur) : cur);
-      }, []);
-    };
-
-    console.log(newArr(arrss), 'newArr');
-
-    //  reduce 常见功能 多个数据 最终变成了一个
-    let keys = ['name', 'age'];
-    let values = ['jwt', 18];
-    let obj = keys.reduce((memo, current, index) => {
-      memo[current] = values[index];
-      return memo;
-    }, {});
-    // 简化我们上面的代码   (memo[current] = values[index], memo) 前面的值不管 我们只取后面的
-    // (1,2,3,4) -> 4
-    // let obj = keys.reduce((memo, current, index) => (memo[current] = values[index], memo), {})
-    console.log(obj);
-
-    function add(str) {
-      console.log('[ add ] >');
-      return `*****${str}*****`;
-    }
-
-    function sum(a, b) {
-      console.log('[ sum ] >');
-      return a + b;
-    }
-
-    function toUpper(str) {
-      console.log('[toUpper  ] >');
-      return str.toUpperCase();
-    }
-
-    // function compose (...fn) {
-    //   return function (...args) {
-    //     let lastFn = fn.pop()
-    //     return fn.reduceRight((a, b) => {
-    //       return b(a)
-    //     }, lastFn(...args))
-    //   }
-    // }
-    // 简化compose  反向
-    // const compose = (...fn) => (...args) => {
-    //   let lastFn = fn.pop()
-    //   return fn.reduceRight((a, b) => b(a), lastFn(...args))
-    // }
-
-    // 我们直接处理函数参数  正向
-    const compose = (...fn) => {
-      return fn.reduce((a, b) => {
-        console.log('[ a ] >', a);
-        console.log('[ b ] >', b);
-        return (...args) => {
-          // toUpper(sum('zl', 'haha'))
-          return a(b(...args));
-        };
-      });
-    };
-
-    // const compose = (...fn) => fn.reduce((a, b) => (...args) => a(b(...args)))
-
-    let r = compose(add, toUpper, sum)('zl', 'haha');
-    console.log(r, 'compose');
-
-    Array.prototype.reduce = function (callback, prev) {
-      for (let i = 0; i < this.length; i++) {
-        if (prev === undefined) {
-          prev = callback(this[i], this[i + 1], i + 1, this);
-          i++;
-        } else {
-          prev = callback(prev, this[i], i, this);
-        }
+  function getWordCount(array) {
+    return array.reduce((prev, next) => {
+      // prev[next] = (prev[next] + 1) || 1
+      if (next in prev) {
+        prev[next]++;
+      } else {
+        prev[next] = 1;
       }
       return prev;
-    };
+    }, {});
+  }
 
-    let s = [1, 2, 3, 4].reduce((a, b, index, array) => {
-      return a + b;
+  console.log(getWordCount(arr2)); //{apple: 2, orange: 3, pear: 1}
+
+  // reduce的理解：
+  // reduce(callback,initiaValue)会传入两个变量，回调函数(callback)和初始值(initiaValue)。
+  //
+  // 假设函数有个传入参数，prev和next，index和array。 Prev和next是你必须要了解的。
+  //
+  // 当没有传入初始值时，prev是从数组中第一个元素开始的，next是第二个函数。
+  //
+  // 但是当传入初始值（initiaValue）后,第一个prev将是initivalValue，next将是数组中的第一个元素。
+
+  //  数组姜维
+  let arrs = [
+    [0, 1],
+    [2, 3],
+    [4, 5],
+  ];
+
+  let result = arrs.reduce((prev, next) => {
+    return prev.concat(next);
+  }, []);
+  console.log(result);
+
+  //flat方式
+  let arrss = [
+    [0, 1],
+    [2, 3],
+    [4, [5, 6, 7]],
+  ];
+  let result1 = Array.from(arrss.flat(Infinity));
+  console.log(result1);
+
+  //递归方式
+  const newArr = function (arr) {
+    return arr.reduce((per, cur) => {
+      return per.concat(Array.isArray(cur) ? newArr(cur) : cur);
+    }, []);
+  };
+
+  console.log(newArr(arrss), 'newArr');
+
+  //  reduce 常见功能 多个数据 最终变成了一个
+  let keys = ['name', 'age'];
+  let values = ['jwt', 18];
+  let obj = keys.reduce((memo, current, index) => {
+    memo[current] = values[index];
+    return memo;
+  }, {});
+  // 简化我们上面的代码   (memo[current] = values[index], memo) 前面的值不管 我们只取后面的
+  // (1,2,3,4) -> 4
+  // let obj = keys.reduce((memo, current, index) => (memo[current] = values[index], memo), {})
+  console.log(obj);
+
+  function add(str) {
+    console.log('[ add ] >');
+    return `*****${str}*****`;
+  }
+
+  function sum(a, b) {
+    console.log('[ sum ] >');
+    return a + b;
+  }
+
+  function toUpper(str) {
+    console.log('[toUpper  ] >');
+    return str.toUpperCase();
+  }
+
+  // function compose (...fn) {
+  //   return function (...args) {
+  //     let lastFn = fn.pop()
+  //     return fn.reduceRight((a, b) => {
+  //       return b(a)
+  //     }, lastFn(...args))
+  //   }
+  // }
+  // 简化compose  反向
+  // const compose = (...fn) => (...args) => {
+  //   let lastFn = fn.pop()
+  //   return fn.reduceRight((a, b) => b(a), lastFn(...args))
+  // }
+
+  // 我们直接处理函数参数  正向
+  const compose = (...fn) => {
+    return fn.reduce((a, b) => {
+      console.log('[ a ] >', a);
+      console.log('[ b ] >', b);
+      return (...args) => {
+        // toUpper(sum('zl', 'haha'))
+        return a(b(...args));
+      };
     });
-    console.log(s);
-  </script>
+  };
+  // const temp = (...fn) => fn.reduce((a, b) => (...args) => a(b(...args)))
+
+  // const compose = (...fn) => fn.reduce((a, b) => (...args) => a(b(...args)))
+
+  let r = compose(add, toUpper, sum)('zl', 'haha');
+  console.log(r, 'compose');
+
+  Array.prototype.reduce = function (callback, prev) {
+    for (let i = 0; i < this.length; i++) {
+      if (prev === undefined) {
+        prev = callback(this[i], this[i + 1], i + 1, this);
+        i++;
+      } else {
+        prev = callback(prev, this[i], i, this);
+      }
+    }
+    return prev;
+  };
+
+  let s = [1, 2, 3, 4].reduce((a, b, index, array) => {
+    return a + b;
+  });
+  console.log(s);
+</script>
+
 </html>

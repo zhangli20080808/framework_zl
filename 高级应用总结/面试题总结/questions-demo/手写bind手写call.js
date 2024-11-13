@@ -65,35 +65,35 @@ console.log(res);
 //res => {name:'Alibaba',total:300} 
 */
 
-~function () {
-  function bind (context, ...args) {
+~(function () {
+  function bind(context, ...args) {
     // this -> func
-    let _this = this
-    context = context == undefined ? window : context
-    let type = typeof context
+    let _this = this;
+    context = context == undefined ? window : context;
+    let type = typeof context;
     if (!/^(object|function)$/.test(type)) {
       if (/^(symbol|bigint)$/.test(type)) {
-        context = Object(context)
+        context = Object(context);
       } else {
-        context = new context.constructor(context)
+        context = new context.constructor(context);
       }
     }
-    return function anonymous (...innerArgs) {
-      _this.call(context, ...args.concat(innerArgs))
-    }
+    return function anonymous(...innerArgs) {
+      _this.call(context, ...args.concat(innerArgs));
+    };
   }
 
-  Function.prototype.bind = bind
-}()
+  Function.prototype.bind = bind;
+})();
 var obj = {
-  name: 'zhufeng'
+  name: 'zhufeng',
+};
+
+function func() {
+  console.log(this, arguments);
 }
 
-function func () {
-  console.log(this, arguments)
-}
-
-document.body.onclick = func.bind(obj, 100, 200)
+document.body.onclick = func.bind(obj, 100, 200);
 
 /* document.body.onclick = function anonymous(ev) {
 	func.call(obj, 100, 200,ev);

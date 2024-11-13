@@ -29,4 +29,52 @@ function KP(arr) {
   return KP(left).concat(flag, KP(right));
 }
 
+function findA(arr) {
+  const res = {
+    chart: '',
+    length: 0,
+  };
+  let i = 0;
+  let j = 0;
+  let maxLength = 0;
+  for (let i = 0; i < arr.length; i++) {
+    const cur = arr[i];
+    if (arr[i] === arr[j]) {
+      maxLength++;
+    }
+    if (arr[i] !== arr[j] || i === length - 1) {
+      if (maxLength > res.length) {
+        res.chart = arr[i];
+        res.length = maxLength;
+      }
+      maxLength = 0;
+      j = i;
+      i--;
+    }
+  }
+}
+
+function find(max) {
+  if (max <= 0) return res;
+  for (let i = 0; i <= max; i++) {
+    let s = i.toString();
+    const length = s.length;
+    // 比较头尾字符串
+    let flag = false;
+    let startIndex = 0;
+    let endIndex = length - 1;
+    while (startIndex < endIndex) {
+      if (s[startIndex] === s[endIndex]) {
+        flag = true;
+        break;
+      } else {
+        // 不相等 继续比较
+        startIndex++;
+        endIndex--;
+      }
+    }
+    if (flag) res.push(i);
+  }
+}
+
 console.log(KP(arr));

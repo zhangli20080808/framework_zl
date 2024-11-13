@@ -13,7 +13,7 @@ cache.set('d', 4);
 console.log(cache.keys().next());
 // { value: 'a', done: false }
 /**
- * @param {number} capacity
+ * @param {number} capacit
  */
 const LRUCache = function (capacity) {
   this.cache = new Map();
@@ -78,3 +78,61 @@ console.log(lRUCache, 'get 4');
 // LRUCache { cache: Map(2) { 3 => 3, 4 => 4 }, max: 2 } put 4
 // LRUCache { cache: Map(2) { 4 => 4, 3 => 3 }, max: 2 } get 3
 // LRUCache { cache: Map(2) { 3 => 3, 4 => 4 }, max: 2 } get 4
+
+// const str = '{a(b[c]d)e}f'
+
+// 遇到左括号，入栈
+// 匹配到右括号，取出左括号，对比， 如果相同 pop 出来，不相同 返回false
+// 返回 stack 的 length ==== 0 为止
+
+function matchStr(str) {
+  if (str.length === 0) return;
+  let left = '{([';
+  let right = '})]';
+  const stack = [];
+  const length = str.length;
+  for (let i = 0; i < length; i++) {
+    const cur = str[i];
+    if (left.includes(cur)) {
+      stack.push(cur);
+    } else if (right.includes(cur)) {
+      const p = stack[stack.length - 1];
+      if (isMatch(cur, p)) {
+        stack.pop();
+      } else {
+        return false;
+      }
+    }
+  }
+  return stack.length === 0;
+}
+
+// arr [1,2,3,4,5]
+// const obj = {
+//   value: 1,
+//   next: {
+//     value: 2,
+//     next: {
+//       value:3,
+//       next: ?
+//     }
+//   }
+function createLinkList(arr) {
+  const length = arr.length;
+  if (length === 0) throw new Error('arr is empty');
+
+  let curNode = {
+    value: arr[length - 1],
+  };
+  if (length === 1) return curNode;
+
+  for (let i = length - 2; i >= 0; i--) {
+    curNode = {
+      value: arr[i],
+      next: curNode,
+    };
+  }
+
+  return curNode;
+}
+console.log(createLinkList[(1, 2, 3, 4, 5)]);

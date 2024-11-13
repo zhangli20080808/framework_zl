@@ -11,7 +11,7 @@ let longestCommonPrefix = function (strs) {
   // 1. 判断空数组情况，直接将第一位元素作为参照物
   // 2. 这里遍历是从1开始，因为第一位被我们拿来当参照物了
   // 3. 这里的正则加了^，表示从字符开始位置开始匹配
-  // 4. 比较其它字符看是否符合，若不符合让正则条件的字符递减
+  // 4. 比较其它字符看是否符合，若不符合让正则条件的字符递减==
   let re = strs[0] ? strs[0] : '';
   for (let i = 1; i < strs.length; i++) {
     let regex = new RegExp(`^${re}`);

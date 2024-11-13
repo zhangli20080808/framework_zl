@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html>
+
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
 </head>
+
 <body>
 
 </body>
+
 </html>
 <script>
     //    数组 ： 当定义一个新数组，
     // 内存会产生两篇区域，一个存储变量，一个存储数组 变量中保存的只是数组所在的地址
-    var arr1=['传智播客','传智播客黑马'];//分配内存
+    var arr1 = ['传智播客', '传智播客黑马'];//分配内存
     //引用类型其实是指向同一个地址,也就是操纵的其实是同一个位置
-    var arr2=arr1;   //问题：这里arr2会不会分配内存  答案：不会
+    var arr2 = arr1;   //问题：这里arr2会不会分配内存  答案：不会
     console.log(arr1[0]);
     console.log(arr2[0]); //一样
 
@@ -30,7 +33,7 @@
 
 
     //修改数组1
-    arr1[0]='射雕英雄传 西游记 三国演义';
+    arr1[0] = '射雕英雄传 西游记 三国演义';
     console.log(arr1[0]); //射雕英雄传 西游记 三国演义
     console.log(arr2[0]); //射雕英雄传 西游记 三国演义
 

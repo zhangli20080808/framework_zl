@@ -47,3 +47,62 @@ breadthFirstSearch(tree);
 // 将该节点的所有子节点加入队列。
 
 // 这个过程将确保树的遍历按照广度优先的方式进行，即先遍历所有兄弟节点，再遍历子节点，一层层向下遍历。
+
+class LazyMan {
+  constructor(name) {
+    this.tasks = [];
+    const task = () => {
+      console.log(name);
+      this.next();
+    };
+    this.tasks.push(task);
+    setTimeout(() => {
+      this.next();
+    }, 0);
+  }
+  eat(name) {
+    const task = () => {
+      console.log(name);
+      this.next();
+    };
+    this.tasks.push(task);
+    return this;
+  }
+  sleep(time) {
+    const task = () => {
+      setTimeout(() => {
+        console.log(`等待${time}s`);
+        this.next();
+      }, time * 1000);
+    };
+    this.tasks.push(task);
+    return this;
+  }
+  next() {
+    const task = this.tasks.shift();
+    task && task();
+    return this;
+  }
+}
+const me = new LazyMan();
+me.eat('苹果').eat('香蕉').sleep(5).eat('吃葡萄');
+
+function curry(fn, arr = []) {
+  const length = fn.length;
+  return (...args) => {
+    const combineArgs = [...arr, ...args];
+    if (combineArgs.length < length) {
+      console.log(combineArgs, 'combineArgs');
+      return curry(fn, combineArgs);
+    } else {
+      return fn.apply(this, combineArgs);
+    }
+  };
+}
+
+function add(a, b, c, d) {
+  return a + b + c + d;
+}
+
+const curryAdd = curry(add);
+console.log(curryAdd(10)(20)(30)); // 60

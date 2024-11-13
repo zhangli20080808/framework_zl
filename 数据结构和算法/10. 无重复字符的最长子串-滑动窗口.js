@@ -3,21 +3,21 @@
  * @param {*} s 
  * @returns 
 1. 先找出所有不包含重复字符 的子串
-2. 找出长度最大的子串，返回长度
+2. 找出长度最大的子串，返回长度 
  */
-// const lengthOfLongestSubstring = (s) => {
-//   let arr = [],
-//     max = 0;
-//   for (let i = 0; i < s.length; i++) {
-//     let index = arr.indexOf(s[i]);
-//     if (index !== -1) {
-//       arr.splice(0, index + 1);
-//     }
-//     arr.push(s.charAt(i));
-//     max = Math.max(arr.length, max);
-//   }
-//   return max;
-// };
+const lengthOfLongestSubstring2 = (s) => {
+  let arr = [],
+    max = 0;
+  for (let i = 0; i < s.length; i++) {
+    let index = arr.indexOf(s[i]);
+    if (index !== -1) {
+      arr.splice(0, index + 1);
+    }
+    arr.push(s.charAt(i));
+    max = Math.max(arr.length, max);
+  }
+  return max;
+};
 
 /**
  * 1. 用双指针维护一个滑动窗口，用来剪切子串 
