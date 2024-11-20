@@ -25,3 +25,19 @@ var Cycle = (head) => {
   }
   return false;
 };
+
+/**
+ * 1. 慢的走一拍 p1 = p1.next
+   2. 快的走两牌 p2 = p2.next.next
+ * @param {*} head 
+ */
+function hasCycle(head) {
+  let p1 = head;
+  let p2 = head;
+  while (p1 && p2 && p2.next) {
+    p1 = p1.next;
+    p2 = p2.next.next;
+  }
+  if (p1 === p2) return true;
+  return false;
+}
