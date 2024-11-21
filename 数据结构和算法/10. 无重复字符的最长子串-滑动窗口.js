@@ -24,24 +24,26 @@ const lengthOfLongestSubstring2 = (s) => {
    双指针 - 定义两个变量，记录子串的起始位置
    2. 不断移动右指针，遇到重复的字符，就把左指针移动到 之前重复字符的下一位
    3. 移动过程中，记录所有窗口的长度，并返回最大值
+   abcabcbb
+   ab-》abc （遇到重复字符）-》 bca-》cab -》 abc-》cb-》b
  */
 const lengthOfLongestSubstring = (s) => {
-  let left = 0;
+  let l = 0;
   let res = 0;
   const map = new Map();
   for (let r = 0; r < s.length; r += 1) {
-    const current = s[r];
-    // 必须在滑动窗口内
-    if (map.has(current) && map.get(current) >= left) {
-      left = map.get(current) + 1;
-    } else {
+    // 右指针递增
+    const cur = s[r];
+    // 如果map中存在，则说明是重复字符, 移动左指针, 重复字符必须在滑动区间内
+    if (map.has(cur) && map.get(cur) >= l) {
+      l = map.get(cur) + 1;
     }
-    // 记录最大值
-    res = Math.max(res, r - left + 1);
-    map.set(current, r);
+    // 记录最大值, 滑动区间的值
+    res = Math.max(res, r - l + 1);
+    // 记录当前值和 索引下标
+    map.set(cur, r);
   }
   return res;
 };
-
 const test = 'abcabcba'; // 4 错误
 console.log(lengthOfLongestSubstring(test));

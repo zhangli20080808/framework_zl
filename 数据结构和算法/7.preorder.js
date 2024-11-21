@@ -27,7 +27,6 @@ const preorder = (root) => {
   preorder(root.right);
 };
 
-console.log(preorder(bs));
 // 1
 // 2
 // 4
@@ -35,3 +34,18 @@ console.log(preorder(bs));
 // 3
 // 6
 // 7
+
+// 非递归版本
+const preorder2 = (root) => {
+  if (!root) return;
+  const stack = [root];
+  const res = [];
+  while (stack.length) {
+    const p = stack.pop();
+    res.push(p.val);
+    if (p.right) stack.push(p.right);
+    if (p.left) stack.push(p.left);
+  }
+  return res;
+};
+console.log(preorder2(bs));
