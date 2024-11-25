@@ -1,3 +1,18 @@
+// 1. 第一轮从0 开始  第二轮从 i 开始(i代表论述)
+// Array.prototype.selectionSort = function () {
+//   for (let i = 0; i < this.length; i += 1) {
+//     let indexMin = 0;
+//     for (let j = i; j < this.length; j += 1) {
+//       if (this[j] < this[indexMin]) {
+//         indexMin = j;
+//       }
+//       // 交换位置
+//       const temp = this[i];
+//       this[i] = this[indexMin];
+//       this[indexMin] = temp;
+//     }
+//   }
+// };
 function selectionSort(arr) {
   var len = arr.length;
   for (var i = 0; i < len - 1; i++) {

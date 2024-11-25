@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>事件冒泡</title>
+</head>
+
+<body>
+  <div>
+    <p id="parEle">我是父元素 <span id="sonEle">我是子元素</span></p>
+  </div>
+</body>
+<!-- 
+点击父元素 - 父级捕获，父级冒泡
+当容器元素及嵌套元素，即在捕获阶段又在冒泡阶段调用事件处理程序时：事件按DOM事件流的顺序执行事件处理程序：
+点击子元素 - 父级捕获，子级捕获，子级冒泡，父级冒泡
+-->
+
+</html>
+<script type="text/javascript">
+  var sonEle = document.getElementById('sonEle');
+  var parEle = document.getElementById('parEle');
+
+  parEle.addEventListener('click', function () {
+    alert('父级 冒泡');
+  }, false);
+  parEle.addEventListener('click', function () {
+    alert('父级 捕获');
+  }, true);
+
+  sonEle.addEventListener('click', function () {
+    alert('子级冒泡');
+  }, false);
+  sonEle.addEventListener('click', function () {
+    alert('子级捕获');
+  }, true);
+
+</script>
+<!-- 
+2. 事件是如何实现的？
+基于发布订阅模式 - 浏览器先读取代码，等到具体事件触发时，执行
+
+-->

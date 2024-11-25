@@ -57,10 +57,10 @@ function bubuleSort2(arr) {
     for (let j = 0; j < len - i; j++) {
       // 相邻元素两两对比
       if (arr[j] > arr[j + 1]) {
-        // const temp = arr[j + 1];
-        // arr[j + 1] = arr[j];
-        // arr[j] = temp;
-        [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+        const temp = arr[j + 1];
+        arr[j + 1] = arr[j];
+        arr[j] = temp;
+        // [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
       }
     }
   }
