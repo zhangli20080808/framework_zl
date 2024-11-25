@@ -42,3 +42,4 @@ function reverseK2(arr = [], k) {
 const arr = [1, 2, 3, 4, 5, 6];
 const res = reverseK(arr, 3);
 // 预期结果  [4,5,6,1,2,3]
+console.log(res)

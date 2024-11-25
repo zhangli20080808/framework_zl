@@ -1,6 +1,9 @@
 /**
 基础方法 add size delete has
  迭代
+集合是什么？
+1. 无序且唯一的数据结构 
+2. 
 */
 
 let mySet = new Set();

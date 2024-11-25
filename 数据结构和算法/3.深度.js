@@ -45,7 +45,7 @@ const dfs = (root) => {
   console.log(root.val);
   root.children.forEach(dfs);
 };
-console.log(dfs(treeData), 'con');
+// console.log(dfs(treeData), 'con');
 // a
 // b
 // d
@@ -73,7 +73,6 @@ const bfs = (root) => {
       queue.push(item);
     });
     console.log('[ push ] >', queue);
-    console.log('[ 1 ] >', 1);
   }
 };
 bfs(treeData);
@@ -84,3 +83,9 @@ bfs(treeData);
 // e
 // f
 // g
+
+const dfs2 = (root) => {
+  console.log(root.val);
+  root.children((item) => dfs2(item));
+};
+
