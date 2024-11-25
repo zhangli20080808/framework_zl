@@ -17,6 +17,7 @@ function breadthFirstSearch(root) {
     }
   }
 }
+
 // 示例树结构
 const tree = {
   value: 'root',
@@ -38,8 +39,19 @@ const tree = {
   ],
 };
 // 从根节点开始广度优先遍历
-breadthFirstSearch(tree);
-
+// breadthFirstSearch(tree);
+const bfs = (root) => {
+  // 根节点入队
+  const queue = [root];
+  while (queue.length > 0) {
+    const p = queue.shift();
+    console.log(p.value);
+    p.children.forEach((item) => {
+      queue.push(item);
+    });
+  }
+};
+console.log(bfs(tree));
 // 在这个例子中，breadthFirstSearch函数首先检查传入的根节点是否为null。如果不是，它将根节点放入队列中。然后，它进入一个循环，只要队列不为空，就持续执行以下操作：
 
 // 从队列中取出第一个节点（即最早入队的节点）。
@@ -47,45 +59,6 @@ breadthFirstSearch(tree);
 // 将该节点的所有子节点加入队列。
 
 // 这个过程将确保树的遍历按照广度优先的方式进行，即先遍历所有兄弟节点，再遍历子节点，一层层向下遍历。
-
-class LazyMan {
-  constructor(name) {
-    this.tasks = [];
-    const task = () => {
-      console.log(name);
-      this.next();
-    };
-    this.tasks.push(task);
-    setTimeout(() => {
-      this.next();
-    }, 0);
-  }
-  eat(name) {
-    const task = () => {
-      console.log(name);
-      this.next();
-    };
-    this.tasks.push(task);
-    return this;
-  }
-  sleep(time) {
-    const task = () => {
-      setTimeout(() => {
-        console.log(`等待${time}s`);
-        this.next();
-      }, time * 1000);
-    };
-    this.tasks.push(task);
-    return this;
-  }
-  next() {
-    const task = this.tasks.shift();
-    task && task();
-    return this;
-  }
-}
-const me = new LazyMan();
-me.eat('苹果').eat('香蕉').sleep(5).eat('吃葡萄');
 
 function curry(fn, arr = []) {
   const length = fn.length;
@@ -104,5 +77,5 @@ function add(a, b, c, d) {
   return a + b + c + d;
 }
 
-const curryAdd = curry(add);
-console.log(curryAdd(10)(20)(30)); // 60
+// const curryAdd = curry(add);
+// console.log(curryAdd(10)(20)(30)); // 60
