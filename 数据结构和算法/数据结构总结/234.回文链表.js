@@ -46,10 +46,10 @@ function isPali(head) {
   // 翻转过程
   let prev = null;
   while (slow) {
+    // 反转链表的过程
     const nextNode = slow.next; // 保存下一个节点
     slow.next = prev; // 当前节点的 next 指向前一个节点
     prev = slow; // 更新 prev 为当前节点
     slow = nextNode; // 移动到下一个节点
   }
-  
 }

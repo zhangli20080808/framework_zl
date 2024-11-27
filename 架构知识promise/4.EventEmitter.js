@@ -4,7 +4,7 @@
  */
 
 function EventEmitter () {
-  this._events = Object.create(null)
+  this._events = Object.create(null) // {}
 }
 
 // 订阅
