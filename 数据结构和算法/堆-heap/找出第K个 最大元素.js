@@ -1,26 +1,67 @@
-/**
-1. 堆 - 是一种 完全二叉树(第一层第二层填满)
-2. 所有的节点都大于等于(最大堆)或者小于等于(最小堆)他的子节点
-js中的堆
-1. 通常使用数组来表示堆
-2. 任意节点的左侧子节点的位置 是 2 * index + 1
-3. 任意节点的右侧子节点的位置 是 2 * index + 2
+// 在JavaScript中可以使用一个大小为k的最小堆来找到第K个最大元素。
+// 当堆的大小超过k时，移除堆顶元素。
+class MinHeap {
+  constructor() {
+    this.heap = [];
+  }
 
-应用
-1. 堆能高效的、快速的找出最大值，最小值
-时间复杂度是 O(1)
-2. 找出第K个 最大元素 或者 最小元素  - 构建一个最小堆
-    a. 构建一个最小堆，并将元素依次插入堆中
-    b. 当堆的容量超过K，就删除堆顶
-    c. 插入结束后，堆顶就是第K个最大元素
-*/
+  insert(val) {
+    this.heap.push(val);
+    this.bubbleUp();
+  }
 
-/**
- * js实现 最小堆类
-1. 在类里面，声明一个数组，用来装元素
-2. 主要方法：插入、删除堆顶，获取堆顶，获取堆大小
+  bubbleUp() {
+    let index = this.heap.length - 1;
+    while (index > 0) {
+      let element = this.heap[index];
+      let parentIndex = Math.floor((index - 1) / 2);
+      let parent = this.heap[parentIndex];
 
-a.将值插入堆的底部，即数组的底部
-b.然后上移动，将这个值和它的父节点进行交换，直到父节点小于等于这个插入的值
+      if (parent <= element) break;
+      this.heap[index] = parent;
+      this.heap[parentIndex] = element;
+      index = parentIndex;
+    }
+  }
 
- */
+  extractMin() {
+    const min = this.heap[0];
+    const end = this.heap.pop();
+    if (this.heap.length > 0) {
+      this.heap[0] = end;
+      this.sinkDown(0);
+    }
+    return min;
+  }
+
+  sinkDown(index) {
+    let left = 2 * index + 1;
+    let right = 2 * index + 2;
+    let smallest = index;
+    const length = this.heap.length;
+
+    if (left < length && this.heap[left] < this.heap[smallest]) {
+      smallest = left;
+    }
+    if (right < length && this.heap[right] < this.heap[smallest]) {
+      smallest = right;
+    }
+    if (smallest !== index) {
+      let temp = this.heap[index];
+      this.heap[index] = this.heap[smallest];
+      this.heap[smallest] = temp;
+      this.sinkDown(smallest);
+    }
+  }
+}
+
+function findKthLargest(nums, k) {
+  const minHeap = new MinHeap();
+  for (let num of nums) {
+    minHeap.insert(num);
+    if (minHeap.heap.length > k) {
+      minHeap.extractMin();
+    }
+  }
+  return minHeap.heap[0];
+}

@@ -52,13 +52,13 @@ function trap(height) {
   const leftMax = new Array(n).fill(0);
   const rightMax = new Array(n).fill(0);
 
-  // 预处理 leftMax
+  // 预处理 leftMax 计算 leftMax ，从左到右，和前一个最高的高度比较，因为从左到右
   leftMax[0] = height[0];
   for (let i = 1; i < n; i++) {
     leftMax[i] = Math.max(leftMax[i - 1], height[i]);
   }
 
-  // 预处理 rightMax
+  // 预处理 rightMax 因为从右到左，和右边最高的高度的比较
   rightMax[n - 1] = height[n - 1];
   for (let i = n - 2; i >= 0; i--) {
     rightMax[i] = Math.max(rightMax[i + 1], height[i]);
@@ -87,3 +87,5 @@ function trap(height) {
 // 对于每个位置 i，计算可以接住的雨水量 Math.min(leftMax[i], rightMax[i]) - height[i]。
 const height = [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1];
 console.log(trap(height)); // 输出：6
+
+
