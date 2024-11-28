@@ -15,13 +15,15 @@
  */
 function trap(height) {
   if (height.length === 0) return 0;
-
+  const n = height.length;
   let left = 0,
-    right = height.length - 1;
-  let leftMax = 0,
-    rightMax = 0;
+    right = n - 1;
+  let leftMax = height[0],
+    rightMax = height[n - 1];
+
   let water = 0;
 
+  // 不断移动指针
   while (left < right) {
     if (height[left] < height[right]) {
       if (height[left] >= leftMax) {
@@ -40,6 +42,20 @@ function trap(height) {
     }
   }
 
+  while (left < right) {
+    leftMax = Math.max(leftMax, height[left]);
+    rightMax = Math.max(rightMax, height[right]);
+    if (leftMax < rightMax) {
+      // 左边的柱子矮,无序关注右边
+      water += leftMax - height[left];
+      left++;
+    } else {
+      // g关注右边的柱子
+      water += rightMax - height[right];
+      right--;
+    }
+  }
+
   return water;
 }
 // 动态规范法
@@ -49,6 +65,7 @@ function trap(height) {
   if (height.length === 0) return 0;
 
   const n = height.length;
+
   const leftMax = new Array(n).fill(0);
   const rightMax = new Array(n).fill(0);
 
@@ -64,8 +81,6 @@ function trap(height) {
     rightMax[i] = Math.max(rightMax[i + 1], height[i]);
   }
 
-  // 计算雨水量
-  let water = 0;
   for (let i = 0; i < n; i++) {
     water += Math.min(leftMax[i], rightMax[i]) - height[i];
   }
@@ -87,5 +102,3 @@ function trap(height) {
 // 对于每个位置 i，计算可以接住的雨水量 Math.min(leftMax[i], rightMax[i]) - height[i]。
 const height = [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1];
 console.log(trap(height)); // 输出：6
-
-
