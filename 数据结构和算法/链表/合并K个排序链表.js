@@ -25,11 +25,11 @@ function mergeKLists(lists) {
 
   // 从优先队列中取出最小的节点，直到队列为空
   while (!minHeap.isEmpty()) {
-    const node = minHeap.pop();
-    current.next = node;
-    current = current.next;
+    const node = minHeap.pop(); // 弹出堆顶
+    current.next = node; // 接到新的链表上
+    current = current.next; // 指针往下走一步
 
-    // 将取出节点的下一个节点加入优先队列
+    // 将取出节点的下一个节点加入优先队列，将最小节点的next插入堆里，就是把4插进来和，其他的1,2，进行pk
     if (node.next) {
       minHeap.push(node.next);
     }
