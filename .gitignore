@@ -14,3 +14,4 @@ dist_weapp/
 src/index.html
 
 .vscode
+.idea
