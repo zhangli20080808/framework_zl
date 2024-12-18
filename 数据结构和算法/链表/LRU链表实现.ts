@@ -1,138 +1,133 @@
-//  最近使用的一个缓存
-// 如果你最近使用了，我就给你放到最前面
-// 基础指向，比如最多缓存4个  1->2->3->4
-// 如果有新增 同步插入 6->1->2->3 新增6删除4 ，如果再来一个2 ，2放到最前面
-// 如果新增项，在链表中存在，移动到顶部，类似的lru cache的简单算法
-// 使用链表的原因 - 删除，新增的操作很多并且很频繁，用一个合适的淘汰机制
-// 使用Map模拟我们的链表  可以把我们的Map理解成链表，反着来用
-const cache = new Map();
-cache.set('a', 1);
-cache.set('b', 2);
-cache.set('c', 3);
-cache.set('d', 4);
-console.log(cache.keys().next());
-// { value: 'a', done: false }
 /**
- * @param {number} capacit
+ * @description LRU 缓存 - 不使用 Map
+ * @author 双越老师
  */
-const LRUCache = function (capacity) {
-  this.cache = new Map();
-  this.max = capacity;
-};
 
-/**
- * @param {number} key
- * @return {number}
- */
-LRUCache.prototype.get = function (key) {
-  const temp = this.cache.get(key);
-  // 如果村子
-  if (this.cache.has(key)) {
-    this.cache.delete(key);
-    this.cache.set(key, temp);
-    return this.cache.get(key);
+interface IListNode {
+  value: any;
+  key: string; // 存储 key ，方便删除（否则删除时就需要遍历 this.data )
+  prev?: IListNode;
+  next?: IListNode;
+}
+
+export default class LRUCache {
+  private length: number;
+  private data: { [key: string]: IListNode } = {};
+  private dataLength: number = 0;
+  private listHead: IListNode | null = null;
+  private listTail: IListNode | null = null;
+
+  constructor(length: number) {
+    if (length < 1) throw new Error('invalid length');
+    this.length = length;
   }
-  return -1;
-};
 
-/**
- * @param {number} key
- * @param {number} value
- * @return {void}
- */
-LRUCache.prototype.put = function (key, value) {
-  if (this.cache.has(key)) {
-    this.cache.delete(key);
-  } else if (this.cache.size >= this.max) {
-    this.cache.delete(this.cache.keys().next().value);
-  }
-  this.cache.set(key, value);
-};
+  private moveToTail(curNode: IListNode) {
+    const tail = this.listTail;
+    if (tail === curNode) return;
 
-/**
- * Your LRUCache object will be instantiated and called as such:
- * var obj = new LRUCache(capacity)
- * var param_1 = obj.get(key)
- * obj.put(key,value)
- */
-const lRUCache = new LRUCache(2);
-lRUCache.put(1, 1); // 缓存是 {1=1}
-lRUCache.put(2, 2); // 缓存是 {1=1, 2=2}
-console.log(lRUCache, 'read');
-lRUCache.get(1); // 返回 1
-console.log(lRUCache, 'get 1');
-lRUCache.put(3, 3); // 该操作会使得关键字 2 作废，缓存是 {1=1, 3=3}
-console.log(lRUCache, 'put 3');
-lRUCache.get(2); // 返回 -1 (未找到)
-lRUCache.put(4, 4); // 该操作会使得关键字 1 作废，缓存是 {4=4, 3=3}
-console.log(lRUCache, 'put 4');
-lRUCache.get(1); // 返回 -1 (未找到)
-lRUCache.get(3); // 返回 3
-console.log(lRUCache, 'get 3');
-lRUCache.get(4); // 返回 4
-console.log(lRUCache, 'get 4');
-
-// console.log(lRUCache)
-// LRUCache { cache: Map(2) { 2 => 2, 1 => 1 }, max: 2 } get 1
-// LRUCache { cache: Map(2) { 1 => 1, 3 => 3 }, max: 2 } put 3
-// LRUCache { cache: Map(2) { 3 => 3, 4 => 4 }, max: 2 } put 4
-// LRUCache { cache: Map(2) { 4 => 4, 3 => 3 }, max: 2 } get 3
-// LRUCache { cache: Map(2) { 3 => 3, 4 => 4 }, max: 2 } get 4
-
-// const str = '{a(b[c]d)e}f'
-
-// 遇到左括号，入栈
-// 匹配到右括号，取出左括号，对比， 如果相同 pop 出来，不相同 返回false
-// 返回 stack 的 length ==== 0 为止
-
-function matchStr(str) {
-  if (str.length === 0) return;
-  let left = '{([';
-  let right = '})]';
-  const stack = [];
-  const length = str.length;
-  for (let i = 0; i < length; i++) {
-    const cur = str[i];
-    if (left.includes(cur)) {
-      stack.push(cur);
-    } else if (right.includes(cur)) {
-      const p = stack[stack.length - 1];
-      if (isMatch(cur, p)) {
-        stack.pop();
+    // -------------- 1. 让 prevNode nextNode 断绝与 curNode 的关系 --------------
+    const prevNode = curNode.prev;
+    const nextNode = curNode.next;
+    if (prevNode) {
+      if (nextNode) {
+        prevNode.next = nextNode;
       } else {
-        return false;
+        delete prevNode.next;
       }
     }
-  }
-  return stack.length === 0;
-}
+    if (nextNode) {
+      if (prevNode) {
+        nextNode.prev = prevNode;
+      } else {
+        delete nextNode.prev;
+      }
 
-// arr [1,2,3,4,5]
-// const obj = {
-//   value: 1,
-//   next: {
-//     value: 2,
-//     next: {
-//       value:3,
-//       next: ?
-//     }
-//   }
-function createLinkList(arr) {
-  const length = arr.length;
-  if (length === 0) throw new Error('arr is empty');
+      if (this.listHead === curNode) this.listHead = nextNode;
+    }
 
-  let curNode = {
-    value: arr[length - 1],
-  };
-  if (length === 1) return curNode;
+    // -------------- 2. 让 curNode 断绝与 prevNode nextNode 的关系 --------------
+    delete curNode.prev;
+    delete curNode.next;
 
-  for (let i = length - 2; i >= 0; i--) {
-    curNode = {
-      value: arr[i],
-      next: curNode,
-    };
+    // -------------- 3. 在 list 末尾重新建立 curNode 的新关系 --------------
+    if (tail) {
+      tail.next = curNode;
+      curNode.prev = tail;
+    }
+    this.listTail = curNode;
   }
 
-  return curNode;
+  private tryClean() {
+    while (this.dataLength > this.length) {
+      const head = this.listHead;
+      if (head == null) throw new Error('head is null');
+      const headNext = head.next;
+      if (headNext == null) throw new Error('headNext is null');
+
+      // 1. 断绝 head 和 next 的关系
+      delete headNext.prev;
+      delete head.next;
+
+      // 2. 重新赋值 listHead
+      this.listHead = headNext;
+
+      // 3. 清理 data ，重新计数
+      delete this.data[head.key];
+      this.dataLength = this.dataLength - 1;
+    }
+  }
+
+  get(key: string): any {
+    const data = this.data;
+    const curNode = data[key];
+
+    if (curNode == null) return null;
+
+    if (this.listTail === curNode) {
+      // 本身在末尾（最新鲜的位置），直接返回 value
+      return curNode.value;
+    }
+
+    // curNode 移动到末尾
+    this.moveToTail(curNode);
+
+    return curNode.value;
+  }
+
+  set(key: string, value: any) {
+    const data = this.data;
+    const curNode = data[key];
+
+    if (curNode == null) {
+      // 新增数据
+      const newNode: IListNode = { key, value };
+      // 移动到末尾
+      this.moveToTail(newNode);
+
+      data[key] = newNode;
+      this.dataLength++;
+
+      if (this.dataLength === 1) this.listHead = newNode;
+    } else {
+      // 修改现有数据
+      curNode.value = value;
+      // 移动到末尾
+      this.moveToTail(curNode);
+    }
+
+    // 尝试清理长度
+    this.tryClean();
+  }
 }
-console.log(createLinkList[(1, 2, 3, 4, 5)]);
+
+// const lruCache = new LRUCache(2)
+// lruCache.set('1', 1) // {1=1}
+// lruCache.set('2', 2) // {1=1, 2=2}
+// console.info(lruCache.get('1')) // 1 {2=2, 1=1}
+// lruCache.set('3', 3) // {1=1, 3=3}
+// console.info(lruCache.get('2')) // null
+// lruCache.set('4', 4) // {3=3, 4=4}
+// console.info(lruCache.get('1')) // null
+// console.info(lruCache.get('3')) // 3 {4=4, 3=3}
+// console.info(lruCache.get('4')) // 4 {3=3, 4=4}

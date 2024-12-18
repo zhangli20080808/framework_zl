@@ -235,3 +235,9 @@ const tasks = [
 priorityLimitConcurrency(tasks, 3).then((results) => {
   console.log(results);
 });
+
+const result = await PromiseQueue(filedList, 5, (filedItem) => {
+  return new Promise((resolve, reject) => {
+    resolve(filedItem);
+  });
+});
